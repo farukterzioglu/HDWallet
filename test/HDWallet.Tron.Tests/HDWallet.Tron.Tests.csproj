@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Nethereum.Web3" Version="3.8.0" />
+    <PackageReference Include="NBitcoin.Secp256k1" Version="1.0.1" />
+    <PackageReference Include="NBitcoin" Version="5.0.27" />
+    <PackageReference Include="nunit" Version="3.12.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.15.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\HDWallet\HDWallet.csproj" />
+    <ProjectReference Include="..\..\src\HDWallet.Tron\HDWallet.Tron.csproj" />
+  </ItemGroup>
+
+</Project>
