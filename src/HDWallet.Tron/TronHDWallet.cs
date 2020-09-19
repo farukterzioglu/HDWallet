@@ -8,7 +8,7 @@ namespace HDWallet.Tron
 {
     public class TronHDWallet : HDWallet
     {
-        private const string _path = "m/44'/195'/0'/0/x";
+        private static readonly Path _path = new Path(purpose: Purpose.BIP44, coinType: CoinType.Tron, account: 0);
 
         public TronHDWallet(string words, string seedPassword = "") : base(words, seedPassword, _path)
         {

@@ -1,3 +1,4 @@
+using System;
 using NBitcoin;
 
 namespace HDWallet
@@ -7,13 +8,14 @@ namespace HDWallet
         public readonly Key PrivateKey;
         public readonly PubKey PublicKey;
         public readonly int Index;
-        public string Address => _addressGenerator.GenerateAddress(PublicKey);
+        public string Address => AddressGenerator.GenerateAddress(PublicKey);
 
-        IAddressGenerator _addressGenerator;
+        private IAddressGenerator AddressGenerator;
         
         public Wallet(Key privateKey, IAddressGenerator addressGenerator, int index = -1)
         {
-            PrivateKey = privateKey;
+            AddressGenerator = addressGenerator ?? throw new NullReferenceException(nameof(addressGenerator));
+            PrivateKey = privateKey ?? throw new NullReferenceException(nameof(privateKey));
             PublicKey = privateKey.PubKey;
             Index = index;
         }
