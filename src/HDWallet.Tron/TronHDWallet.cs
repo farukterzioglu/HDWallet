@@ -8,20 +8,9 @@ namespace HDWallet.Tron
 {
     public class TronHDWallet : HDWallet
     {
-        // TODO: Set path
-        private const string _path = "";
+        private const string _path = "m/44'/195'/0'/0/x";
 
-        public TronHDWallet(Mnemonic mneumonic) : base(mneumonic, _path) 
-        {
-            base.AddressGenerator = new AddressGenerator();
-        }
-
-        public TronHDWallet(Mnemonic mneumonic, string passphrase) : base(mneumonic, passphrase, _path)
-        {
-            base.AddressGenerator = new AddressGenerator();
-        }
-
-        public TronHDWallet(string mnemonic) : base(mnemonic, _path)
+        public TronHDWallet(string words, string seedPassword = "") : base(words, seedPassword, _path)
         {
             base.AddressGenerator = new AddressGenerator();
         }

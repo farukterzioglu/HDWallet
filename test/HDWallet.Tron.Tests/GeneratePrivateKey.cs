@@ -12,28 +12,44 @@ namespace HDWallet.Tron.Tests
         }
 
         [Test]
-        public void Test1()
+        public void ShouldGenerateMasterPrivateKeys()
         {
             string words = "push wrong tribe amazing again cousin hill belt silent found sketch monitor";
             
-            IHdWallet wallet = new TronHDWallet(words);
-            var account = wallet.GetSeedAccount();
+            IHDWallet wallet = new TronHDWallet(words);
+            var account = wallet.GetMasterWallet();
 
             var privateKeyHex = account.PrivateKey.ToHex();
-            Assert.AreEqual("945ee333591e6a709ed574a7ceba0bc09f650a7822ba0c2b7f5c8a5ead295374", privateKeyHex);
-            
             var publicKeyHex = account.PublicKey.Decompress().ToHex();
-            Assert.AreEqual("043be47cf1c281f4843cb6cc991c91d9122dde87ac42ee8bc393ee0033988fc6f15372cb24f8885d5d29dba94a9f761c44a8bb0a5dd6f6856d925921a2c3386e6f", publicKeyHex);
+            
+            Assert.AreEqual("4065a841ab4fed510897ef5b47a7851b96428ac39081d3f88b9b3207a22b5383", privateKeyHex);
+            Assert.AreEqual("0485dd9d7cff0d74b6d7a96d7b266b29f1518253c186ae8e8cdca9d7bd9c84095fbd40aca6346577a2eb494de76f9e7cb3648110333ffc46ee17bef23974010462", publicKeyHex);
+            Assert.AreEqual("TQJCCht7HXJNDaU1ReVGTK5Fx3wWL8StZ2", account.Address);
+        }
 
-            Assert.AreEqual("TNzDgpvjv48DGMGrendez5LsCn4nwjgLHx", account.Address);
+        [TestCase("push wrong tribe amazing again cousin hill belt silent found sketch monitor", "TWroNNekzseGNC6x1BHGd5H7f9b9u6mdHE")]
+        [TestCase("treat nation math panel calm spy much obey moral hazard they sorry", "TEFccUNfgWyjuiiUo9LfNSb56jLhBo7pCV")]
+        [TestCase("million caught suspect silk lady pond tribe regret vacuum pigeon annual ordinary", "TMxPPqB7y7rhoLrUWp4JoMMsgBaeckJG66")]
+        public void ShouldGenerateFromSeed(string words, string address)
+        {
+            IHDWallet wallet = new TronHDWallet(words);
+            var wallet0 = wallet.GetWallet(0);
+            
+            Assert.AreEqual(address, wallet0.Address);
+        }
 
-            account = wallet.GetAccount(0);
-            privateKeyHex = account.PrivateKey.ToHex();
-            // TODO Assert
+        [Test]
+        public void ShouldGeneratePrivateKeys()
+        {
+            string words = "treat nation math panel calm spy much obey moral hazard they sorry";
+            IHDWallet tronWallet = new TronHDWallet(words);
 
-            publicKeyHex = account.PublicKey.ToHex();
-            // TODO Assert pubkey
-            // TODO Assert address
+            var wallet = tronWallet.GetWallet(0);
+            var privateKey = wallet.PrivateKey.ToHex();
+            var address = wallet.Address;
+
+            Assert.AreEqual("f017915411a0e7827e8f1f357c4ed2ccdcb1b1295cdb0fb0a5c13cbbd5da3734", privateKey);
+            Assert.AreEqual("TEFccUNfgWyjuiiUo9LfNSb56jLhBo7pCV", address);
         }
     }
 }

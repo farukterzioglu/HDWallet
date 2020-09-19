@@ -4,18 +4,18 @@ namespace HDWallet
 {
     public class Wallet
     {
-        protected ExtKey _masterKey;
-        
-        public Wallet(Mnemonic mneumonic)
-        {
-            byte[] seed = mneumonic.DeriveSeed();
-            _masterKey = new ExtKey(seed);
-        }
+        public readonly Key PrivateKey;
+        public readonly PubKey PublicKey;
+        public readonly int Index;
+        public string Address => _addressGenerator.GenerateAddress(PublicKey);
 
-        public Wallet(Mnemonic mneumonic, string passphrase)
+        IAddressGenerator _addressGenerator;
+        
+        public Wallet(Key privateKey, IAddressGenerator addressGenerator, int index = -1)
         {
-            byte[] seed = mneumonic.DeriveSeed(passphrase);
-            _masterKey = new ExtKey(seed);
+            PrivateKey = privateKey;
+            PublicKey = privateKey.PubKey;
+            Index = index;
         }
     }
 }
