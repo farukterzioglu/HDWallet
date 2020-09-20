@@ -9,7 +9,8 @@ namespace HDWallet
     {
         Wallet GetMasterDepositWallet();
 
-        Wallet GetWallet(bool isChange, uint index);
+        Wallet GetWallet(bool isExternal, uint index);
+        Account GetAccount(uint index);
     }
 
     public class HDWallet : IHDWallet
@@ -44,10 +45,25 @@ namespace HDWallet
             return new Wallet(privateKey, AddressGenerator);
         }
 
-        Wallet IHDWallet.GetWallet(bool isChange, uint index)
+        Wallet IHDWallet.GetWallet(bool isExternal, uint index)
         {
-            var privateKey = GetKey(isChange, index);
+            var privateKey = GetKey(isExternal, index);
             return new Wallet(privateKey, AddressGenerator, (int)index);
+        }
+
+        Account IHDWallet.GetAccount(uint index)
+        {
+            var externalKeyPath = new KeyPath(Path.AccountDerivation(isExternal: true));
+            var externalMasterKey = new ExtKey(Seed).Derive(externalKeyPath);
+
+            var internalKeyPath = new KeyPath(Path.AccountDerivation(isExternal: false));
+            var internalMasterKey = new ExtKey(Seed).Derive(internalKeyPath);
+
+            return new Account(){
+                ExternalChain = externalMasterKey,
+                InternalChain = internalMasterKey, 
+                AccountIndex = index
+            };
         }
 
         private Dictionary<int, ExtKey> nonHardenedKeys = new Dictionary<int, ExtKey>();
@@ -55,17 +71,17 @@ namespace HDWallet
 
         private ExtKey GetMasterExtKey()
         {
-            var keyPath = new KeyPath(Path.PublicDerivation(isChange: false));
+            var keyPath = new KeyPath(Path.AccountDerivation(isExternal: true));
             var masterKey = new ExtKey(Seed).Derive(keyPath);
            return masterKey;
         }
 
-        private ExtKey GetExtKey(bool isChange, int index, bool hardened = false)
+        private ExtKey GetExtKey(bool isExternal, int index, bool hardened = false)
         {
             if (!hardened && nonHardenedKeys.ContainsKey(index)) return nonHardenedKeys[index];
             if (hardened && hardenedKeys.ContainsKey(index)) return hardenedKeys[index];
 
-            var publicDerivationPath = Path.PublicDerivation(isChange); 
+            var publicDerivationPath = Path.AccountDerivation(isExternal); 
             var keyPath = new KeyPath(publicDerivationPath);
             var masterKey = new ExtKey(Seed).Derive(keyPath);
 
@@ -81,17 +97,17 @@ namespace HDWallet
             }   
         }
 
-        private Key GetPrivateKey(bool isChange, uint index)
+        private Key GetPrivateKey(bool isExternal, uint index)
         {
-            var key = GetExtKey(isChange, (int)index);
+            var key = GetExtKey(isExternal, (int)index);
             return key.PrivateKey;
         }
 
         private Dictionary<uint, Key> keys =  new Dictionary<uint, Key>();
-        private Key GetKey(bool isChange, uint index)
+        private Key GetKey(bool isExternal, uint index)
         {
             if (keys.ContainsKey(index)) return keys[index];
-            var privateKey = GetPrivateKey(isChange, index);
+            var privateKey = GetPrivateKey(isExternal, index);
             keys.Add(index, privateKey);
             return keys[index];
         }

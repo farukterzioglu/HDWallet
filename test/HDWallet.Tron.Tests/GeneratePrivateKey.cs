@@ -33,7 +33,7 @@ namespace HDWallet.Tron.Tests
         public void ShouldGenerateFromSeed(string words, string address)
         {
             IHDWallet wallet = new TronHDWallet(words);
-            var wallet0 = wallet.GetWallet(isChange: false, 0);
+            var wallet0 = wallet.GetWallet(isExternal: true, 0);
             
             Assert.AreEqual(address, wallet0.Address);
         }
@@ -44,7 +44,7 @@ namespace HDWallet.Tron.Tests
             string words = "treat nation math panel calm spy much obey moral hazard they sorry";
             IHDWallet tronWallet = new TronHDWallet(words);
 
-            var wallet = tronWallet.GetWallet(isChange: false, 0);
+            var wallet = tronWallet.GetWallet(isExternal: true, 0);
             var privateKey = wallet.PrivateKey.ToHex();
             var address = wallet.Address;
 

@@ -13,24 +13,24 @@ namespace HDWallet
             Account = account;
         }
 
-        public string PublicDerivation(bool isChange)
+        public string AccountDerivation(bool isExternal)
         {
-            return $"m/{(ushort)Purpose}'/{(uint)CoinType}'/{Account}'/{(isChange ? 1 : 0)}";
+            return $"m/{(ushort)Purpose}'/{(uint)CoinType}'/{Account}'/{(isExternal ? 0 : 1)}";
         }
 
-        private string PathString(bool isChange, uint addressIndex)
+        private string PathString(bool isExternal, uint addressIndex)
         {
-            return $"m/{(ushort)Purpose}'/{(uint)CoinType}'/{Account}'/{(isChange ? 1 : 0)}/{addressIndex}";
+            return $"m/{(ushort)Purpose}'/{(uint)CoinType}'/{Account}'/{(isExternal ? 0 : 1)}/{addressIndex}";
         }
 
         public string ChangePath(uint addressIndex)
         {
-            return PathString(isChange: true, addressIndex);
+            return PathString(isExternal: true, addressIndex);
         }
 
         public string DepositPath(uint addressIndex)
         {
-            return PathString(isChange: false, addressIndex);
+            return PathString(isExternal: false, addressIndex);
         }
     }
 
