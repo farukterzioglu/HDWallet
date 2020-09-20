@@ -59,7 +59,7 @@ namespace HDWallet
             var internalKeyPath = new KeyPath(Path.AccountDerivation(isExternal: false));
             var internalMasterKey = new ExtKey(Seed).Derive(internalKeyPath);
 
-            return new Account(){
+            return new Account(AddressGenerator){
                 ExternalChain = externalMasterKey,
                 InternalChain = internalMasterKey, 
                 AccountIndex = index
