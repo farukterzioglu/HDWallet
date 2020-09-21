@@ -76,6 +76,8 @@ namespace HDWallet.Tests.Signature
             // V from comapct signature
             var (r1, s1, v1) = sigR;
 
+            Assert.AreEqual(v1, 0);
+
             // Recoverable signature with Secp256k1 lib
             NBitcoin.Secp256k1.ECPrivKey privKey = Context.Instance.CreateECPrivKey(new Scalar(key.ToBytes()));
             Assert.AreEqual(key.PubKey.ToBytes(), privKey.CreatePubKey().ToBytes());
