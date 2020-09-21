@@ -33,7 +33,7 @@ namespace HDWallet.Tron.Tests
         public void ShouldGenerateFromSeed(string words, string address)
         {
             IHDWallet wallet = new TronHDWallet(words);
-            var wallet0 = wallet.GetWallet(isExternal: true, 0);
+            var wallet0 = wallet.GetAccount(0).GetExternalWallet(0);
             
             Assert.AreEqual(address, wallet0.Address);
         }
@@ -44,12 +44,36 @@ namespace HDWallet.Tron.Tests
             string words = "treat nation math panel calm spy much obey moral hazard they sorry";
             IHDWallet tronWallet = new TronHDWallet(words);
 
-            var wallet = tronWallet.GetWallet(isExternal: true, 0);
+            var wallet = tronWallet.GetAccount(0).GetExternalWallet(0);
             var privateKey = wallet.PrivateKey.ToHex();
             var address = wallet.Address;
 
             Assert.AreEqual("f017915411a0e7827e8f1f357c4ed2ccdcb1b1295cdb0fb0a5c13cbbd5da3734", privateKey);
             Assert.AreEqual("TEFccUNfgWyjuiiUo9LfNSb56jLhBo7pCV", address);
+        }
+
+        [Test]
+        public void ShouldGeneratePrivateKeysFromAccounts()
+        {
+            string words = "treat nation math panel calm spy much obey moral hazard they sorry";
+            IHDWallet tronWallet = new TronHDWallet(words);
+
+            var account0 = tronWallet.GetAccount(0);
+            var depositWallet00 = account0.GetExternalWallet(0);
+
+            var privateKey = depositWallet00.PrivateKey.ToHex();
+            var address00 = depositWallet00.Address;
+
+            Assert.AreEqual("f017915411a0e7827e8f1f357c4ed2ccdcb1b1295cdb0fb0a5c13cbbd5da3734", privateKey);
+            Assert.AreEqual("TEFccUNfgWyjuiiUo9LfNSb56jLhBo7pCV", address00);
+
+            var account1 = tronWallet.GetAccount(1);
+            var depositWallet10 = account1.GetExternalWallet(0);
+
+            var privateKey10 = depositWallet10.PrivateKey.ToHex();
+            var address10 = depositWallet10.Address;
+
+            Assert.AreEqual("TQYqPobCzY5sWpWF8wFYL9zmPsfzEESQ6Z", address10);
         }
     }
 }

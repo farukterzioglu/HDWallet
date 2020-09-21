@@ -1,5 +1,6 @@
 using System;
 using NBitcoin;
+using NBitcoin.Secp256k1;
 
 namespace HDWallet
 {
@@ -18,6 +19,26 @@ namespace HDWallet
             PrivateKey = privateKey ?? throw new NullReferenceException(nameof(privateKey));
             PublicKey = privateKey.PubKey;
             Index = index;
+        }
+
+        public Signature Sign(byte[] message)
+        {
+            if (message.Length != 32) throw new ArgumentException(paramName: nameof(message), message: "Message should be 32 bytes");
+
+            NBitcoin.Secp256k1.ECPrivKey privKey = Context.Instance.CreateECPrivKey(new Scalar(PrivateKey.ToBytes()));
+            if(!privKey.TrySignRecoverable(message, out SecpRecoverableECDSASignature sigRec))
+            {
+                throw new InvalidOperationException();
+            }
+
+            var (r, s, recId) = sigRec;
+
+            return new Signature()
+            {
+                R = r.ToBytes(),
+                S = s.ToBytes(),
+                RecId = recId
+            };
         }
     }
 }
