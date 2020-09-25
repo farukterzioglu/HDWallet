@@ -16,7 +16,7 @@ namespace HDWallet.Tron.Tests
         {
             string words = "push wrong tribe amazing again cousin hill belt silent found sketch monitor";
             
-            IHDWallet wallet = new TronHDWallet(words);
+            IHDWallet<TronWallet> wallet = new TronHDWallet(words);
             var account = wallet.GetMasterDepositWallet();
 
             var privateKeyHex = account.PrivateKey.ToHex();
@@ -32,7 +32,7 @@ namespace HDWallet.Tron.Tests
         [TestCase("million caught suspect silk lady pond tribe regret vacuum pigeon annual ordinary", "TMxPPqB7y7rhoLrUWp4JoMMsgBaeckJG66")]
         public void ShouldGenerateFromSeed(string words, string address)
         {
-            IHDWallet wallet = new TronHDWallet(words);
+            IHDWallet<TronWallet> wallet = new TronHDWallet(words);
             var wallet0 = wallet.GetAccount(0).GetExternalWallet(0);
             
             Assert.AreEqual(address, wallet0.Address);
@@ -42,7 +42,7 @@ namespace HDWallet.Tron.Tests
         public void ShouldGeneratePrivateKeys()
         {
             string words = "treat nation math panel calm spy much obey moral hazard they sorry";
-            IHDWallet tronWallet = new TronHDWallet(words);
+            IHDWallet<TronWallet> tronWallet = new TronHDWallet(words);
 
             var wallet = tronWallet.GetAccount(0).GetExternalWallet(0);
             var privateKey = wallet.PrivateKey.ToHex();
@@ -56,7 +56,7 @@ namespace HDWallet.Tron.Tests
         public void ShouldGeneratePrivateKeysFromAccounts()
         {
             string words = "treat nation math panel calm spy much obey moral hazard they sorry";
-            IHDWallet tronWallet = new TronHDWallet(words);
+            IHDWallet<TronWallet> tronWallet = new TronHDWallet(words);
 
             var account0 = tronWallet.GetAccount(0);
             var depositWallet00 = account0.GetExternalWallet(0);

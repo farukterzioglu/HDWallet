@@ -1,6 +1,6 @@
 namespace HDWallet.Sample
 {
-    public class BitcoinHDWallet : HDWallet
+    public class BitcoinHDWallet : HDWallet<BitcoinWallet>
     {
         private static readonly Path _path = new Path(purpose: Purpose.BIP44, coinType: CoinType.Bitcoin);
 

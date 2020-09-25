@@ -3,7 +3,7 @@ using NBitcoin;
 
 namespace HDWallet
 {
-    public class Account
+    public class Account<TWallet> where TWallet : Wallet, new()
     {
         public uint AccountIndex { get; set; }
         private ExtKey ExternalChain { get; set; }
@@ -19,22 +19,24 @@ namespace HDWallet
             AddressGenerator = addressGenerator ?? throw new NullReferenceException(nameof(addressGenerator));    
         }
 
-        private Wallet GetWallet(uint addressIndex, bool isInternal)
+        private TWallet GetWallet(uint addressIndex, bool isInternal)
         {
             var extKey  = isInternal ? InternalChain.Derive(addressIndex) : ExternalChain.Derive(addressIndex);
 
-            return new Wallet(
-                privateKey: extKey.PrivateKey, 
-                AddressGenerator, 
-                index: (int)addressIndex);
+            return new TWallet()
+            {
+                PrivateKey = extKey.PrivateKey, 
+                AddressGenerator = AddressGenerator,
+                Index = (int)addressIndex
+            };
         }
 
-        public Wallet GetInternalWallet(uint addressIndex)
+        public TWallet GetInternalWallet(uint addressIndex)
         {
             return GetWallet(addressIndex, isInternal: true);
         }
 
-        public Wallet GetExternalWallet(uint addressIndex)
+        public TWallet GetExternalWallet(uint addressIndex)
         {
             return GetWallet(addressIndex, isInternal: false);
         }

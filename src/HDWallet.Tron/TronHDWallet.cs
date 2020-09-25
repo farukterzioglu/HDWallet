@@ -6,7 +6,7 @@ using Nethereum.Util;
 
 namespace HDWallet.Tron
 {
-    public class TronHDWallet : HDWallet
+    public class TronHDWallet : HDWallet<TronWallet>
     {
         private static readonly Path _path = new Path(purpose: Purpose.BIP44, coinType: CoinType.Tron);
 

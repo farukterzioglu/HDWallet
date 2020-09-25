@@ -8,7 +8,7 @@ namespace HDWallet.Tests
         [Test]
         public void ShouldCreateAccount()
         {
-            IHDWallet bitcoinHDWallet = new BitcoinHDWallet("conduct stadium ask orange vast impose depend assume income sail chunk tomorrow life grape dutch", "");
+            IHDWallet<BitcoinWallet> bitcoinHDWallet = new BitcoinHDWallet("conduct stadium ask orange vast impose depend assume income sail chunk tomorrow life grape dutch", "");
 
             var account0 = bitcoinHDWallet.GetAccount(0);
 

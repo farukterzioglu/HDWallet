@@ -5,14 +5,14 @@ using Nethereum.Hex.HexConvertors.Extensions;
 
 namespace HDWallet
 {
-    public interface IHDWallet
+    public interface IHDWallet<TWallet> where TWallet : Wallet, new()
     {
-        Wallet GetMasterDepositWallet();
+        TWallet GetMasterDepositWallet();
 
-        Account GetAccount(uint index);
+        Account<TWallet> GetAccount(uint index);
     }
 
-    public class HDWallet : IHDWallet
+    public class HDWallet<TWallet> : IHDWallet<TWallet> where TWallet : Wallet, new()
     {
         // public string Path { get; }
         public readonly Path Path;
@@ -38,13 +38,16 @@ namespace HDWallet
             Seed = mneumonic.DeriveSeed(seedPassword).ToHex();
         }
 
-        Wallet IHDWallet.GetMasterDepositWallet()
+        TWallet IHDWallet<TWallet>.GetMasterDepositWallet()
         {
             var privateKey = GetMasterExtKey().PrivateKey;
-            return new Wallet(privateKey, AddressGenerator);
+            return new TWallet() {
+                PrivateKey = privateKey,
+                AddressGenerator = AddressGenerator
+            };
         }
 
-        Account IHDWallet.GetAccount(uint accountIndex)
+        Account<TWallet> IHDWallet<TWallet>.GetAccount(uint accountIndex)
         {
             var externalPath = Path.Account(accountIndex).External().Path;
             var externalKeyPath = new KeyPath(externalPath);
@@ -53,7 +56,7 @@ namespace HDWallet
             var internalKeyPath = new KeyPath(Path.Account(accountIndex).Internal().Path);
             var internalMasterKey = new ExtKey(Seed).Derive(internalKeyPath);
 
-            return new Account(accountIndex, AddressGenerator, externalChain: externalMasterKey, internalChain: internalMasterKey);
+            return new Account<TWallet>(accountIndex, AddressGenerator, externalChain: externalMasterKey, internalChain: internalMasterKey);
         }
 
         private Dictionary<uint, ExtKey> nonHardenedKeys = new Dictionary<uint, ExtKey>();
