@@ -14,27 +14,26 @@ namespace HDWallet
 
     public class HDWallet<TWallet> : IHDWallet<TWallet> where TWallet : Wallet, new()
     {
-        public readonly Coin Coin;
         public string Seed { get; private set; }
         protected IAddressGenerator AddressGenerator;
 
         ExtKey _masterKey;
+
+        // TODO: Test this
+        public HDWallet(ExtKey extKey)
+        {
+            _masterKey = extKey;
+        }
 
         public HDWallet(string words, string seedPassword, Coin path)
         {
             if( path == null) throw new NullReferenceException(nameof(path));
             if(string.IsNullOrEmpty(words)) throw new NullReferenceException(nameof(words));
 
-            Coin = path;
-            InitialiseSeed(words, seedPassword);
-        }
-
-        private void InitialiseSeed(string words, string seedPassword = null)
-        {
             var mneumonic = new Mnemonic(words);
             Seed = mneumonic.DeriveSeed(seedPassword).ToHex();
 
-            var masterKeyPath = new KeyPath(Coin.CurrentPath);
+            var masterKeyPath = new KeyPath(path.CurrentPath);
             _masterKey = new ExtKey(Seed).Derive(masterKeyPath);
         }
 
