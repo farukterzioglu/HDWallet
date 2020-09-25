@@ -14,21 +14,16 @@ namespace HDWallet
 
     public class HDWallet<TWallet> : IHDWallet<TWallet> where TWallet : Wallet, new()
     {
-        // public string Path { get; }
-        public readonly Path Path;
-
+        public readonly Coin Coin;
         public string Seed { get; private set; }
-
         protected IAddressGenerator AddressGenerator;
 
-        // private ExtKey _masterKey;
-
-        public HDWallet(string words, string seedPassword, Path path)
+        public HDWallet(string words, string seedPassword, Coin path)
         {
             if( path == null) throw new NullReferenceException(nameof(path));
             if(string.IsNullOrEmpty(words)) throw new NullReferenceException(nameof(words));
 
-            Path = path;
+            Coin = path;
             InitialiseSeed(words, seedPassword);
         }
 
@@ -49,11 +44,11 @@ namespace HDWallet
 
         Account<TWallet> IHDWallet<TWallet>.GetAccount(uint accountIndex)
         {
-            var externalPath = Path.Account(accountIndex).External().Path;
+            var externalPath = Coin.Account(accountIndex).ExternalPath().Path;
             var externalKeyPath = new KeyPath(externalPath);
             var externalMasterKey = new ExtKey(Seed).Derive(externalKeyPath);
 
-            var internalKeyPath = new KeyPath(Path.Account(accountIndex).Internal().Path);
+            var internalKeyPath = new KeyPath(Coin.Account(accountIndex).InternalPath().Path);
             var internalMasterKey = new ExtKey(Seed).Derive(internalKeyPath);
 
             return new Account<TWallet>(accountIndex, AddressGenerator, externalChain: externalMasterKey, internalChain: internalMasterKey);
@@ -64,7 +59,7 @@ namespace HDWallet
 
         private ExtKey GetMasterExtKey()
         {
-            var keyPath = new KeyPath(Path.Account(0).External().Path);
+            var keyPath = new KeyPath(Coin.Account(0).ExternalPath().Path);
             var masterKey = new ExtKey(Seed).Derive(keyPath);
            return masterKey;
         }
@@ -74,7 +69,7 @@ namespace HDWallet
             if (!hardened && nonHardenedKeys.ContainsKey(index)) return nonHardenedKeys[index];
             if (hardened && hardenedKeys.ContainsKey(index)) return hardenedKeys[index];
 
-            var publicDerivationPath = Path.Account(index).Change(isExternal).Path; 
+            var publicDerivationPath = Coin.Account(index).Change(isExternal).Path; 
             var keyPath = new KeyPath(publicDerivationPath);
             var masterKey = new ExtKey(Seed).Derive(keyPath);
 

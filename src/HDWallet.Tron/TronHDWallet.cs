@@ -8,7 +8,7 @@ namespace HDWallet.Tron
 {
     public class TronHDWallet : HDWallet<TronWallet>
     {
-        private static readonly Path _path = new Path(purpose: Purpose.BIP44, coinType: CoinType.Tron);
+        private static readonly Coin _path = Purpose.Create(PurposeNumber.BIP44).Coin(CoinType.Tron);
 
         public TronHDWallet(string words, string seedPassword = "") : base(words, seedPassword, _path)
         {

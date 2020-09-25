@@ -1,11 +1,30 @@
 namespace HDWallet
 {
-    public class Path
+    public class Purpose
     {
-        public readonly Purpose Purpose;
+        PurposeNumber _purposeNumber;
+        Purpose(PurposeNumber purposeNumber)
+        {
+            _purposeNumber = purposeNumber;
+        }
+
+        public static Purpose Create(PurposeNumber purposeNumber)
+        {
+            return new Purpose(purposeNumber);
+        }
+
+        public Coin Coin(CoinType coinType)
+        {
+            return new Coin(_purposeNumber, coinType);
+        }
+    }
+
+    public class Coin
+    {
+        public readonly PurposeNumber Purpose;
         public readonly CoinType CoinType;
 
-        public Path(Purpose purpose, CoinType coinType)
+        public Coin(PurposeNumber purpose, CoinType coinType)
         {
             Purpose = purpose;
             CoinType = coinType;
@@ -13,33 +32,37 @@ namespace HDWallet
 
         public AccountPath Account(uint index)
         {
-            return new AccountPath(this, index);
+            return new AccountPath(Purpose, CoinType, index);
         }
     }
 
     public class AccountPath 
     {
-        Path _path;
+        Coin _path;
         uint _accountIndex;
 
-        public AccountPath(Path path, uint accountIndex)
+        PurposeNumber _purpose;
+        CoinType _coinType;
+
+        public AccountPath(PurposeNumber purpose, CoinType coinType, uint accountIndex)
         {
-            _path = path;
+            _purpose = purpose;
+            _coinType = coinType;
+            _path = Purpose.Create(purpose).Coin(coinType);
             _accountIndex = accountIndex;
         }
 
         public ChangePath Change(bool isExternal)
         {
-
             return isExternal ? ((ChangePath) new InternalPath(_path, _accountIndex)) : ((ChangePath) new ExternalPath(_path, _accountIndex));
         }
 
-        public ChangePath Internal()
+        public ChangePath InternalPath()
         {
             return new InternalPath(_path, _accountIndex);
         }
 
-        public ChangePath External()
+        public ChangePath ExternalPath()
         {
             return new ExternalPath(_path, _accountIndex);
         }
@@ -47,11 +70,11 @@ namespace HDWallet
 
     public abstract class ChangePath
     {
-        Path _path;
+        Coin _path;
         bool _isInternal;
         uint _accountIndex;
 
-        public ChangePath(Path path, uint accountIndex, bool isInternal)
+        public ChangePath(Coin path, uint accountIndex, bool isInternal)
         {
             _isInternal = isInternal;
             _path = path;
@@ -68,22 +91,22 @@ namespace HDWallet
 
     public class InternalPath : ChangePath
     {
-        public InternalPath(Path path, uint accountIndex) : base(path, accountIndex, true) {}
+        public InternalPath(Coin path, uint accountIndex) : base(path, accountIndex, true) {}
     }
 
     public class ExternalPath : ChangePath
     {
-        public ExternalPath(Path path, uint accountIndex) : base(path, accountIndex, false) {}
+        public ExternalPath(Coin path, uint accountIndex) : base(path, accountIndex, false) {}
     }
 
     public class AddressPath
     {
-        Path _path;
+        Coin _path;
         bool _isInternal;
         uint _accountIndex;
         uint _addressIndex;
 
-        public AddressPath(Path path, uint accountIndex, bool isInternal, uint addressIndex)
+        public AddressPath(Coin path, uint accountIndex, bool isInternal, uint addressIndex)
         {
             _isInternal = isInternal;
             _path = path;
@@ -94,7 +117,7 @@ namespace HDWallet
         public string Path => $"m/{(ushort)_path.Purpose}'/{(uint)_path.CoinType}'/{_accountIndex}'/{(ushort)(_isInternal ? Change.Internal : Change.External)}/{_addressIndex}";
     }
 
-    public enum Purpose : ushort
+    public enum PurposeNumber : ushort
     {
         BIP44 = 44,
         BIP49 = 49,

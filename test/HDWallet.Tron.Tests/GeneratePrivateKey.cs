@@ -18,6 +18,7 @@ namespace HDWallet.Tron.Tests
             
             IHDWallet<TronWallet> wallet = new TronHDWallet(words);
             var account = wallet.GetMasterDepositWallet();
+            // var account = wallet.GetAccount(0).GetExternalWallet(0);
 
             var privateKeyHex = account.PrivateKey.ToHex();
             var publicKeyHex = account.PublicKey.Decompress().ToHex();
