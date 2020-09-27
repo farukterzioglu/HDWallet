@@ -1,3 +1,4 @@
+using HDWallet.Core;
 using NBitcoin;
 using NBitcoin.DataEncoders;
 using NUnit.Framework;
@@ -27,7 +28,7 @@ namespace HDWallet.Tron.Tests
             Key key = new Key(privKeyStr);
 
             IAddressGenerator addressGenerator =  new AddressGenerator();
-            var actulaAddress = addressGenerator.GenerateAddress(key.PubKey);
+            var actulaAddress = addressGenerator.GenerateAddress(key.PubKey.ToBytes());
 
             Assert.AreEqual(address, actulaAddress);
         }

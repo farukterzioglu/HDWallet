@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Text;
+using HDWallet.Core;
 using NBitcoin;
 using NBitcoin.DataEncoders;
 using Nethereum.Util;
@@ -9,7 +10,12 @@ namespace HDWallet.Tron
 {
     public class AddressGenerator : IAddressGenerator
     {
-        string IAddressGenerator.GenerateAddress(PubKey pubKey)
+        string IAddressGenerator.GenerateAddress(byte[] pubKeyBytes)
+        {
+            return GenerateAddress(new PubKey(pubKeyBytes));
+        }
+
+        string GenerateAddress(PubKey pubKey)
         {
             var publicKey = pubKey.Decompress();
             

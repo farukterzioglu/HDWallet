@@ -10,7 +10,7 @@ namespace HDWallet
         public Key PrivateKey;
         public PubKey PublicKey => PrivateKey.PubKey;
         public int Index;
-        public string Address => AddressGenerator.GenerateAddress(PublicKey);
+        public string Address => AddressGenerator.GenerateAddress(PublicKey.ToBytes());
 
         public IAddressGenerator AddressGenerator;
         

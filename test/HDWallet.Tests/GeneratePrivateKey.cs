@@ -2,6 +2,7 @@ using NUnit.Framework;
 using NBitcoin;
 using System;
 using HDWallet.Sample;
+using HDWallet.Core;
 
 namespace HDWallet.Tests
 {

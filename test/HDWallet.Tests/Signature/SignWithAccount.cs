@@ -1,3 +1,4 @@
+using HDWallet.Core;
 using NBitcoin.DataEncoders;
 using NUnit.Framework;
 

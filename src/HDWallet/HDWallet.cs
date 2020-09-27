@@ -1,50 +1,9 @@
 using System;
+using HDWallet.Core;
 using NBitcoin;
-using Nethereum.Hex.HexConvertors.Extensions;
 
 namespace HDWallet
 {
-    public interface IHDWallet<TWallet> where TWallet : Wallet, new()
-    {
-        TWallet GetMasterDepositWallet();
-
-        IAccount<TWallet> GetAccount(uint index);
-    }
-
-    public abstract class HdWalletBase
-    {
-        protected string Seed { get; private set; }
-        protected IAddressGenerator AddressGenerator;
-
-        public HdWalletBase(){}
-
-        public HdWalletBase(string words, string seedPassword, HDWallet.Core.Coin path)
-        {
-            if( path == null) throw new NullReferenceException(nameof(path));
-            if(string.IsNullOrEmpty(words)) throw new NullReferenceException(nameof(words));
-
-            var mneumonic = new Mnemonic(words);
-            Seed = mneumonic.DeriveSeed(seedPassword).ToHex();
-        }
-    }
-
-    public class HdWalletEd<TWallet> : HdWalletBase, IHDWallet<TWallet> where TWallet : Wallet, new()
-    {
-        public HdWalletEd(string words, string seedPassword, HDWallet.Core.Coin path) : base(words, seedPassword, path)
-        {
-        }
-
-        IAccount<TWallet> IHDWallet<TWallet>.GetAccount(uint index)
-        {
-            throw new NotImplementedException();
-        }
-
-        TWallet IHDWallet<TWallet>.GetMasterDepositWallet()
-        {
-            throw new NotImplementedException();
-        }
-    }
-
     public class HDWallet<TWallet> : HdWalletBase, IHDWallet<TWallet> where TWallet : Wallet, new()
     {
         ExtKey _masterKey;
