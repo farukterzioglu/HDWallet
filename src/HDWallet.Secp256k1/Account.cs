@@ -2,7 +2,7 @@ using System;
 using HDWallet.Core;
 using NBitcoin;
 
-namespace HDWallet
+namespace HDWallet.Secp256k1
 {
     /// <summary>
     /// Account generated with Elliptic Curve

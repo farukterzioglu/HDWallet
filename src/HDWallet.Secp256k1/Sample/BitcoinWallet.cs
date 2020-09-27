@@ -1,6 +1,6 @@
 using HDWallet.Core;
 
-namespace HDWallet.Sample
+namespace HDWallet.Secp256k1.Sample
 {
     public class BitcoinWallet : Wallet, IWallet {}
 }

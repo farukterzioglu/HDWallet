@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\HDWallet\HDWallet.csproj" />
+    <ProjectReference Include="..\..\src\HDWallet.Secp256k1\HDWallet.Secp256k1.csproj" />
   </ItemGroup>
 
 </Project>

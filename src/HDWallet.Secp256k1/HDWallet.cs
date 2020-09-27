@@ -2,7 +2,7 @@ using System;
 using HDWallet.Core;
 using NBitcoin;
 
-namespace HDWallet
+namespace HDWallet.Secp256k1
 {
     public class HDWallet<TWallet> : HdWalletBase, IHDWallet<TWallet> where TWallet : Wallet, new()
     {

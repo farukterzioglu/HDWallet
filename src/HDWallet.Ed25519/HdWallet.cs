@@ -1,8 +1,11 @@
+using System;
+using HDWallet.Core;
+
 namespace HDWallet.Ed25519
 {
-    public class HdWalletEd<TWallet> : HdWalletBase, IHDWallet<TWallet> where TWallet : Wallet, new()
+    public class HdWallet<TWallet> : HdWalletBase, IHDWallet<TWallet> where TWallet : Wallet, new()
     {
-        public HdWalletEd(string words, string seedPassword, HDWallet.Core.Coin path) : base(words, seedPassword, path)
+        public HdWallet(string words, string seedPassword, HDWallet.Core.Coin path) : base(words, seedPassword, path)
         {
         }
 

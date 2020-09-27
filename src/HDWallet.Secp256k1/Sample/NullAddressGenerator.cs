@@ -1,7 +1,7 @@
 using HDWallet.Core;
 using NBitcoin;
 
-namespace HDWallet.Sample
+namespace HDWallet.Secp256k1.Sample
 {
     public class NullAddressGenerator : IAddressGenerator
     {

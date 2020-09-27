@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{587DF704-BD3F-41FF-A468-289BB83BBEF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HDWallet", "src\HDWallet\HDWallet.csproj", "{7B79A3A5-689E-4E37-B0D1-E4C11420646B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HDWallet.Secp256k1", "src\HDWallet.Secp256k1\HDWallet.Secp256k1.csproj", "{7B79A3A5-689E-4E37-B0D1-E4C11420646B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HDWallet.Tron", "src\HDWallet.Tron\HDWallet.Tron.csproj", "{73AF8395-DC87-4639-8701-A29D0A4058CC}"
 EndProject

@@ -3,7 +3,7 @@ using HDWallet.Core;
 using NBitcoin;
 using NBitcoin.Secp256k1;
 
-namespace HDWallet
+namespace HDWallet.Secp256k1
 {
     public class Wallet : IWallet
     {
