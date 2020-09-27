@@ -19,13 +19,6 @@ namespace HDWallet.Ed25519
             if (message.Length != 32) throw new ArgumentException(paramName: nameof(message), message: "Message should be 32 bytes");
 
             throw new NotImplementedException();
-            
-            return new Signature()
-            {
-                // R = r.ToBytes(),
-                // S = s.ToBytes(),
-                // RecId = recId
-            };
         }
     }
 }
