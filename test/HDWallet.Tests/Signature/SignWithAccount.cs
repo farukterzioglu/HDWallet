@@ -1,8 +1,4 @@
-using System;
-using NBitcoin;
-using NBitcoin.Crypto;
 using NBitcoin.DataEncoders;
-using NBitcoin.Secp256k1;
 using NUnit.Framework;
 
 namespace HDWallet.Tests.Signature

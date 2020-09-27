@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using NBitcoin;
 using Nethereum.Hex.HexConvertors.Extensions;
 
@@ -9,14 +8,45 @@ namespace HDWallet
     {
         TWallet GetMasterDepositWallet();
 
-        Account<TWallet> GetAccount(uint index);
+        IAccount<TWallet> GetAccount(uint index);
     }
 
-    public class HDWallet<TWallet> : IHDWallet<TWallet> where TWallet : Wallet, new()
+    public abstract class HdWalletBase
     {
-        public string Seed { get; private set; }
+        protected string Seed { get; private set; }
         protected IAddressGenerator AddressGenerator;
 
+        public HdWalletBase(){}
+
+        public HdWalletBase(string words, string seedPassword, HDWallet.Core.Coin path)
+        {
+            if( path == null) throw new NullReferenceException(nameof(path));
+            if(string.IsNullOrEmpty(words)) throw new NullReferenceException(nameof(words));
+
+            var mneumonic = new Mnemonic(words);
+            Seed = mneumonic.DeriveSeed(seedPassword).ToHex();
+        }
+    }
+
+    public class HdWalletEd<TWallet> : HdWalletBase, IHDWallet<TWallet> where TWallet : Wallet, new()
+    {
+        public HdWalletEd(string words, string seedPassword, HDWallet.Core.Coin path) : base(words, seedPassword, path)
+        {
+        }
+
+        IAccount<TWallet> IHDWallet<TWallet>.GetAccount(uint index)
+        {
+            throw new NotImplementedException();
+        }
+
+        TWallet IHDWallet<TWallet>.GetMasterDepositWallet()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class HDWallet<TWallet> : HdWalletBase, IHDWallet<TWallet> where TWallet : Wallet, new()
+    {
         ExtKey _masterKey;
 
         // TODO: Test this
@@ -25,14 +55,8 @@ namespace HDWallet
             _masterKey = extKey;
         }
 
-        public HDWallet(string words, string seedPassword, Coin path)
+        public HDWallet(string words, string seedPassword, HDWallet.Core.Coin path) : base(words, seedPassword, path)
         {
-            if( path == null) throw new NullReferenceException(nameof(path));
-            if(string.IsNullOrEmpty(words)) throw new NullReferenceException(nameof(words));
-
-            var mneumonic = new Mnemonic(words);
-            Seed = mneumonic.DeriveSeed(seedPassword).ToHex();
-
             var masterKeyPath = new KeyPath(path.CurrentPath);
             _masterKey = new ExtKey(Seed).Derive(masterKeyPath);
         }
@@ -48,7 +72,7 @@ namespace HDWallet
             };
         }
 
-        Account<TWallet> IHDWallet<TWallet>.GetAccount(uint accountIndex)
+        IAccount<TWallet> IHDWallet<TWallet>.GetAccount(uint accountIndex)
         {
             var externalKeyPath = new KeyPath($"{accountIndex}'/0");
             var externalMasterKey = _masterKey.Derive(externalKeyPath);

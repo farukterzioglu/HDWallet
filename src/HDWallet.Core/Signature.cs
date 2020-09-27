@@ -1,4 +1,4 @@
-namespace HDWallet
+namespace HDWallet.Core
 {
     public class Signature
     {

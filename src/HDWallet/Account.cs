@@ -3,7 +3,17 @@ using NBitcoin;
 
 namespace HDWallet
 {
-    public class Account<TWallet> where TWallet : Wallet, new()
+    public interface IAccount<TWallet> where TWallet : Wallet, new()
+    {
+        TWallet GetInternalWallet(uint addressIndex);
+        TWallet GetExternalWallet(uint addressIndex);
+    }
+
+    /// <summary>
+    /// Account generated with Elliptic Curve
+    /// </summary>
+    /// <typeparam name="TWallet"></typeparam>
+    public class Account<TWallet> : IAccount<TWallet> where TWallet : Wallet, new()
     {
         public uint AccountIndex { get; set; }
         private ExtKey ExternalChain { get; set; }
@@ -31,12 +41,12 @@ namespace HDWallet
             };
         }
 
-        public TWallet GetInternalWallet(uint addressIndex)
+        TWallet IAccount<TWallet>.GetInternalWallet(uint addressIndex)
         {
             return GetWallet(addressIndex, isInternal: true);
         }
 
-        public TWallet GetExternalWallet(uint addressIndex)
+        TWallet IAccount<TWallet>.GetExternalWallet(uint addressIndex)
         {
             return GetWallet(addressIndex, isInternal: false);
         }

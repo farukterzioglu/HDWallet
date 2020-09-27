@@ -12,6 +12,7 @@
 
  <ItemGroup>
    <ProjectReference Include="..\HDWallet\HDWallet.csproj" />
+   <ProjectReference Include="..\HDWallet.Core\HDWallet.Core.csproj" />
  </ItemGroup>
   
 </Project>
