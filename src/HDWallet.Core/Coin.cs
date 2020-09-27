@@ -1,16 +1,21 @@
 namespace HDWallet.Core
 {
-    public class Coin
+    public class CoinPath
     {
-        public string CurrentPath => $"m/{(ushort)Purpose}'/{(uint)CoinType}'";
+        string _path => $"m/{(ushort)Purpose}'/{(uint)CoinType}'";
         
         public readonly PurposeNumber Purpose;
         public readonly CoinType CoinType;
 
-        public Coin(PurposeNumber purpose, CoinType coinType)
+        public CoinPath(PurposeNumber purpose, CoinType coinType)
         {
             Purpose = purpose;
             CoinType = coinType;
+        }
+
+        public override string ToString()
+        {
+            return _path;
         }
     }
 }

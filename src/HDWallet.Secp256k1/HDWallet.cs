@@ -14,9 +14,9 @@ namespace HDWallet.Secp256k1
             _masterKey = extKey;
         }
 
-        public HDWallet(string words, string seedPassword, HDWallet.Core.Coin path) : base(words, seedPassword, path)
+        public HDWallet(string words, string seedPassword, CoinPath path) : base(words, seedPassword)
         {
-            var masterKeyPath = new KeyPath(path.CurrentPath);
+            var masterKeyPath = new KeyPath(path.ToString());
             _masterKey = new ExtKey(Seed).Derive(masterKeyPath);
         }
 

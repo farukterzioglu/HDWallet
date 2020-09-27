@@ -13,9 +13,9 @@ namespace HDWallet.Core
             return new Purpose(purposeNumber);
         }
 
-        public Coin Coin(CoinType coinType)
+        public CoinPath Coin(CoinType coinType)
         {
-            return new Coin(_purposeNumber, coinType);
+            return new CoinPath(_purposeNumber, coinType);
         }
     }
 }

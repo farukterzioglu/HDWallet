@@ -11,9 +11,8 @@ namespace HDWallet.Core
 
         public HdWalletBase(){}
 
-        public HdWalletBase(string words, string seedPassword, HDWallet.Core.Coin path)
+        public HdWalletBase(string words, string seedPassword)
         {
-            if( path == null) throw new NullReferenceException(nameof(path));
             if(string.IsNullOrEmpty(words)) throw new NullReferenceException(nameof(words));
 
             var mneumonic = new Mnemonic(words);
