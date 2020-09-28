@@ -2,6 +2,9 @@ using NUnit.Framework;
 using HDWallet.Core;
 using HDWallet.Ed25519.Sample;
 using Nethereum.Hex.HexConvertors.Extensions;
+using System.Text;
+using Ed25519;
+using Nethereum.Util;
 
 namespace HDWallet.Ed25519.Tests
 {
@@ -21,10 +24,14 @@ namespace HDWallet.Ed25519.Tests
             var account = wallet.GetMasterDepositWallet();
 
             var privateKeyBytes = account.PrivateKey;
-            var privateKeyHex = account.PrivateKey.ToHex();
-            // var publicKeyHex = account.PublicKey.Decompress().ToHex();
+            var privateKeyHex = account.PrivateKey.ToHexString();
             
-            // Assert.AreEqual("17454e5aed7c41c1a16bd79f0fd0ae50c309f94278830cff96bc75a5dcb74778", privateKeyHex);
+            var message = Encoding.UTF8.GetBytes("159817a085f113d099d3d93c051410e9bfe043cc5c20e43aa9a083bf73660145");
+            var messageHash = new Sha3Keccack().CalculateHash(message);
+            var signature = account.Sign(messageHash);
+            var validationResult = Signer.Validate(signature.SignatureBytes, messageHash, account.PublicKey);
+
+            Assert.That(validationResult, Is.True);
         }
     }
 }

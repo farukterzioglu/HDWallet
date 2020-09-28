@@ -39,13 +39,18 @@ namespace HDWallet.Ed25519
             var signature = Signer.Sign(message, this.PrivateKey, this.PublicKey);
             var signatureHex = signature.ToArray().ToHexString();
 
-            // TODO: 
+            
+            var rsigPad = new byte[32];
+            Array.Copy(signature.ToArray(), 0, rsigPad, rsigPad.Length - 32, 32);
+
+            var ssigPad = new byte[32];
+            Array.Copy(signature.ToArray(), 32, ssigPad, ssigPad.Length - 32, 32);
+
             return new Signature()
             {
                 SignatureHex = signatureHex,
-                // R = r.ToBytes(),
-                // S = s.ToBytes(),
-                // RecId = recId
+                R = rsigPad,
+                S = ssigPad
             };
         }
     }
