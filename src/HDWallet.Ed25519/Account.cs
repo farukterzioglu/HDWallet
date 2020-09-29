@@ -1,9 +1,14 @@
 using System;
+using HDWallet.Core;
 using NBitcoin;
 
-namespace HDWallet
+namespace HDWallet.Ed25519
 {
-    public class Account<TWallet> where TWallet : Wallet, new()
+    /// <summary>
+    /// Account generated with Elliptic Curve
+    /// </summary>
+    /// <typeparam name="TWallet"></typeparam>
+    public class Account<TWallet> : IAccount<TWallet> where TWallet : Wallet, IWallet, new()
     {
         public uint AccountIndex { get; set; }
         private ExtKey ExternalChain { get; set; }
@@ -25,18 +30,18 @@ namespace HDWallet
 
             return new TWallet()
             {
-                PrivateKey = extKey.PrivateKey, 
+                PrivateKey = extKey.PrivateKey.ToBytes(), 
                 AddressGenerator = AddressGenerator,
                 Index = (int)addressIndex
             };
         }
 
-        public TWallet GetInternalWallet(uint addressIndex)
+        TWallet IAccount<TWallet>.GetInternalWallet(uint addressIndex)
         {
             return GetWallet(addressIndex, isInternal: true);
         }
 
-        public TWallet GetExternalWallet(uint addressIndex)
+        TWallet IAccount<TWallet>.GetExternalWallet(uint addressIndex)
         {
             return GetWallet(addressIndex, isInternal: false);
         }

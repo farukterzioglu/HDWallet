@@ -1,22 +1,11 @@
 using System;
-using System.Collections.Generic;
+using HDWallet.Core;
 using NBitcoin;
-using Nethereum.Hex.HexConvertors.Extensions;
 
-namespace HDWallet
+namespace HDWallet.Secp256k1
 {
-    public interface IHDWallet<TWallet> where TWallet : Wallet, new()
+    public class HDWallet<TWallet> : HdWalletBase, IHDWallet<TWallet> where TWallet : Wallet, new()
     {
-        TWallet GetMasterDepositWallet();
-
-        Account<TWallet> GetAccount(uint index);
-    }
-
-    public class HDWallet<TWallet> : IHDWallet<TWallet> where TWallet : Wallet, new()
-    {
-        public string Seed { get; private set; }
-        protected IAddressGenerator AddressGenerator;
-
         ExtKey _masterKey;
 
         // TODO: Test this
@@ -25,15 +14,9 @@ namespace HDWallet
             _masterKey = extKey;
         }
 
-        public HDWallet(string words, string seedPassword, Coin path)
+        public HDWallet(string words, string seedPassword, CoinPath path) : base(words, seedPassword)
         {
-            if( path == null) throw new NullReferenceException(nameof(path));
-            if(string.IsNullOrEmpty(words)) throw new NullReferenceException(nameof(words));
-
-            var mneumonic = new Mnemonic(words);
-            Seed = mneumonic.DeriveSeed(seedPassword).ToHex();
-
-            var masterKeyPath = new KeyPath(path.CurrentPath);
+            var masterKeyPath = new KeyPath(path.ToString());
             _masterKey = new ExtKey(Seed).Derive(masterKeyPath);
         }
 
@@ -48,7 +31,7 @@ namespace HDWallet
             };
         }
 
-        Account<TWallet> IHDWallet<TWallet>.GetAccount(uint accountIndex)
+        IAccount<TWallet> IHDWallet<TWallet>.GetAccount(uint accountIndex)
         {
             var externalKeyPath = new KeyPath($"{accountIndex}'/0");
             var externalMasterKey = _masterKey.Derive(externalKeyPath);

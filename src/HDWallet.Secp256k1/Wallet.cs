@@ -1,15 +1,16 @@
 using System;
+using HDWallet.Core;
 using NBitcoin;
 using NBitcoin.Secp256k1;
 
-namespace HDWallet
+namespace HDWallet.Secp256k1
 {
-    public class Wallet
+    public class Wallet : IWallet
     {
         public Key PrivateKey;
         public PubKey PublicKey => PrivateKey.PubKey;
         public int Index;
-        public string Address => AddressGenerator.GenerateAddress(PublicKey);
+        public string Address => AddressGenerator.GenerateAddress(PublicKey.ToBytes());
 
         public IAddressGenerator AddressGenerator;
         

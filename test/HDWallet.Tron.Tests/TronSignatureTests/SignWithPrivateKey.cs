@@ -1,18 +1,16 @@
 using System.Threading.Tasks;
 using NUnit.Framework;
-using HDWallet.Tron;
+using HDWallet.Core;
 
 namespace HDWallet.Tron.Tests.TronSignatureTests
 {
     public class SignWithPrivateKey
     {
         [SetUp]
-        public void Setup()
-        {
-        }
+        public void Setup() {}
 
         [Test]
-        public async Task ShouldSignWithWallet()
+        public void ShouldSignWithWallet()
         {
             IHDWallet<TronWallet> wallet = new TronHDWallet("push wrong tribe amazing again cousin hill belt silent found sketch monitor");
             TronWallet wallet0 = wallet.GetAccount(0).GetExternalWallet(0);

@@ -4,10 +4,15 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
- <ItemGroup>
+  <ItemGroup>
+      <PackageReference Include="Ed25519" Version="1.0.0" />
       <PackageReference Include="Nethereum.Web3" Version="3.8.0" />
       <PackageReference Include="NBitcoin.Secp256k1" Version="1.0.1" />
       <PackageReference Include="NBitcoin" Version="5.0.27" />
   </ItemGroup>
-  
+
+ <ItemGroup>
+   <ProjectReference Include="..\HDWallet.Core\HDWallet.Core.csproj" />
+ </ItemGroup>
+
 </Project>
