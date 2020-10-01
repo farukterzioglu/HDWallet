@@ -4,7 +4,7 @@ namespace HDWallet.Core.Tests
 {
     class SampleWallet : HdWalletBase
     {
-        public SampleWallet(string words, string seedPassword = "") : base(words, seedPassword) {}
+        public SampleWallet(string words, string seedPassword) : base(words, seedPassword, new NullAddressGenerator()) {}
     }
 
     public class HdWalletBaseTests
@@ -17,7 +17,7 @@ namespace HDWallet.Core.Tests
         [Test]
         public void ShouldCreateFromMnemonic()
         {
-            var wallet = new SampleWallet("push wrong tribe amazing again cousin hill belt silent found sketch monitor");
+            var wallet = new SampleWallet("push wrong tribe amazing again cousin hill belt silent found sketch monitor", "");
             Assert.AreEqual("3d977063d3e2ee074f8d6806d1fb73d1b3884d29ab032aa1c7121cfddb0467a99330647652bbe6a244074bccaed63dc08a67286dc1fbf1b8aa36e8aa7bfce909", wallet.BIP39Seed);
         }
 
