@@ -25,6 +25,19 @@ namespace HDWallet.Ed25519
             };
         }
 
+        TWallet IHDWallet<TWallet>.GetAccountWallet(uint accountIndex)
+        {
+            var externalKeyPath = new KeyPath($"{accountIndex}'");
+            var externalMasterKey = _masterKey.Derive(externalKeyPath);
+
+            return new TWallet()
+            {
+                PrivateKey = _masterKey.PrivateKey.ToBytes(), 
+                AddressGenerator = AddressGenerator,
+                Index = accountIndex
+            };
+        }
+
         IAccount<TWallet> IHDWallet<TWallet>.GetAccount(uint index)
         {
             var externalKeyPath = new KeyPath($"{index}'/0");

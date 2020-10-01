@@ -35,5 +35,13 @@ namespace HDWallet.Tests
             var changeWallet11 = account1.GetInternalWallet(1);
             Assert.AreEqual("02786e8b010eaeb52f22ce7a59c98741299847f1fa9d2bd3ba0bf10a48d613e35e", changeWallet11.PublicKey.ToHex());
         }
+
+        [Test]
+        public void ShouldCreateAccountWallet()
+        {
+            IHDWallet<BitcoinWallet> bitcoinHDWallet = new BitcoinHDWallet("conduct stadium ask orange vast impose depend assume income sail chunk tomorrow life grape dutch", "");
+            var accountWallet = bitcoinHDWallet.GetAccountWallet(0);
+            // TODO: Get xpiv and assert in unit test
+        }
     }
 }

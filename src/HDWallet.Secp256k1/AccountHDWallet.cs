@@ -9,12 +9,22 @@ namespace HDWallet.Secp256k1
         uint _accountIndex;
         IAddressGenerator _addressGenerator;
 
-        public AccountHDWallet(string masterKey, uint accountIndex, IAddressGenerator addressGenerator)
+        public AccountHDWallet(string accountMasterKey, uint accountIndex, IAddressGenerator addressGenerator)
         {
-            BitcoinExtKey bitcoinExtKey = new BitcoinExtKey(masterKey);
+            BitcoinExtKey bitcoinExtKey = new BitcoinExtKey(accountMasterKey);
             _masterKey = bitcoinExtKey.ExtKey;
             _accountIndex = accountIndex;
             _addressGenerator = addressGenerator;
+        }
+
+        TWallet IAccountHDWallet<TWallet>.GetMasterWallet()
+        {
+            return new TWallet()
+            {
+                PrivateKey = _masterKey.PrivateKey, 
+                AddressGenerator = _addressGenerator,
+                Index = _accountIndex
+            };
         }
 
         IAccount<TWallet> IAccountHDWallet<TWallet>.GetAccount()
