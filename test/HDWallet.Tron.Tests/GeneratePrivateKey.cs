@@ -18,15 +18,14 @@ namespace HDWallet.Tron.Tests
             string words = "push wrong tribe amazing again cousin hill belt silent found sketch monitor";
             
             IHDWallet<TronWallet> wallet = new TronHDWallet(words);
-            var account = wallet.GetMasterDepositWallet();
-            // var account = wallet.GetAccount(0).GetExternalWallet(0);
+            var account = wallet.GetMasterWallet();
 
             var privateKeyHex = account.PrivateKey.ToHex();
             var publicKeyHex = account.PublicKey.Decompress().ToHex();
             
-            Assert.AreEqual("4065a841ab4fed510897ef5b47a7851b96428ac39081d3f88b9b3207a22b5383", privateKeyHex);
-            Assert.AreEqual("0485dd9d7cff0d74b6d7a96d7b266b29f1518253c186ae8e8cdca9d7bd9c84095fbd40aca6346577a2eb494de76f9e7cb3648110333ffc46ee17bef23974010462", publicKeyHex);
-            Assert.AreEqual("TQJCCht7HXJNDaU1ReVGTK5Fx3wWL8StZ2", account.Address);
+            Assert.AreEqual("945ee333591e6a709ed574a7ceba0bc09f650a7822ba0c2b7f5c8a5ead295374", privateKeyHex);
+            Assert.AreEqual("043be47cf1c281f4843cb6cc991c91d9122dde87ac42ee8bc393ee0033988fc6f15372cb24f8885d5d29dba94a9f761c44a8bb0a5dd6f6856d925921a2c3386e6f", publicKeyHex);
+            Assert.AreEqual("TNzDgpvjv48DGMGrendez5LsCn4nwjgLHx", account.Address);
         }
 
         [TestCase("push wrong tribe amazing again cousin hill belt silent found sketch monitor", "TWroNNekzseGNC6x1BHGd5H7f9b9u6mdHE")]

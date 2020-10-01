@@ -2,7 +2,7 @@ namespace HDWallet.Core
 {
     public interface IHDWallet<TWallet> where TWallet : IWallet, new()
     {
-        TWallet GetMasterDepositWallet();
+        TWallet GetMasterWallet();
 
         IAccount<TWallet> GetAccount(uint index);
     }

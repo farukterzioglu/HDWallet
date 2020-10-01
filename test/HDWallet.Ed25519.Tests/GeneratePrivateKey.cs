@@ -21,7 +21,7 @@ namespace HDWallet.Ed25519.Tests
             string words = "push wrong tribe amazing again cousin hill belt silent found sketch monitor";
             
             IHDWallet<CardanoWallet> wallet = new CardanoHDWallet(words);
-            var account = wallet.GetMasterDepositWallet();
+            var account = wallet.GetMasterWallet();
 
             var privateKeyBytes = account.PrivateKey;
             var privateKeyHex = account.PrivateKey.ToHexString();

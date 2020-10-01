@@ -6,7 +6,7 @@ namespace HDWallet.Core
 {
     public abstract class HdWalletBase
     {
-        protected string Seed { get; private set; }
+        public string BIP39Seed { get; private set; }
         protected IAddressGenerator AddressGenerator;
 
         public HdWalletBase(){}
@@ -16,7 +16,7 @@ namespace HDWallet.Core
             if(string.IsNullOrEmpty(words)) throw new NullReferenceException(nameof(words));
 
             var mneumonic = new Mnemonic(words);
-            Seed = mneumonic.DeriveSeed(seedPassword).ToHex();
+            BIP39Seed = mneumonic.DeriveSeed(seedPassword).ToHex();
         }
     }
 }
