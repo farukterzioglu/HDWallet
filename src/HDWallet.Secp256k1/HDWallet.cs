@@ -25,6 +25,22 @@ namespace HDWallet.Secp256k1
             };
         }
 
+        TWallet IHDWallet<TWallet>.GetAccountWallet(uint accountIndex)
+        {
+            var externalKeyPath = new KeyPath($"{accountIndex}'");
+            var externalMasterKey = _masterKey.Derive(externalKeyPath);
+
+            BitcoinExtKey bitcoinExtKey = new BitcoinExtKey(externalMasterKey, Network.Main);
+            // TODO: Get xpiv and assert in unit test
+
+            return new TWallet()
+            {
+                PrivateKey = _masterKey.PrivateKey, 
+                AddressGenerator = AddressGenerator,
+                Index = accountIndex
+            };
+        }
+
         IAccount<TWallet> IHDWallet<TWallet>.GetAccount(uint accountIndex)
         {
             var externalKeyPath = new KeyPath($"{accountIndex}'/0");

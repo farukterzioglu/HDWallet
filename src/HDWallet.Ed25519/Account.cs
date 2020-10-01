@@ -32,7 +32,7 @@ namespace HDWallet.Ed25519
             {
                 PrivateKey = extKey.PrivateKey.ToBytes(), 
                 AddressGenerator = AddressGenerator,
-                Index = (int)addressIndex
+                Index = addressIndex
             };
         }
 

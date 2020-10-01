@@ -32,7 +32,7 @@ namespace HDWallet.Secp256k1
             {
                 PrivateKey = extKey.PrivateKey, 
                 AddressGenerator = AddressGenerator,
-                Index = (int)addressIndex
+                Index = addressIndex
             };
         }
 

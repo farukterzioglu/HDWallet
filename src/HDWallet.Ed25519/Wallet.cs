@@ -25,7 +25,7 @@ namespace HDWallet.Ed25519
             }
         }
         public byte[] PublicKey;
-        public int Index;
+        public uint Index;
         public string Address => AddressGenerator.GenerateAddress(PublicKey);
 
         public IAddressGenerator AddressGenerator;

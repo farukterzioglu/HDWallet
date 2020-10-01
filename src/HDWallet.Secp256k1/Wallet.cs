@@ -9,7 +9,7 @@ namespace HDWallet.Secp256k1
     {
         public Key PrivateKey;
         public PubKey PublicKey => PrivateKey.PubKey;
-        public int Index;
+        public uint Index;
         public string Address => AddressGenerator.GenerateAddress(PublicKey.ToBytes());
 
         public IAddressGenerator AddressGenerator;
