@@ -17,13 +17,12 @@ namespace HDWallet.Tests
             string words = "push wrong tribe amazing again cousin hill belt silent found sketch monitor";
             
             IHDWallet<BitcoinWallet> wallet = new BitcoinHDWallet(words);
-            var account = wallet.GetMasterDepositWallet();
-            // var account = wallet.GetAccount(0).GetExternalWallet(0);
+            var account = wallet.GetMasterWallet();
 
             var privateKeyHex = account.PrivateKey.ToHex();
             var publicKeyHex = account.PublicKey.Decompress().ToHex();
             
-            Assert.AreEqual("17454e5aed7c41c1a16bd79f0fd0ae50c309f94278830cff96bc75a5dcb74778", privateKeyHex);
+            Assert.AreEqual("945ee333591e6a709ed574a7ceba0bc09f650a7822ba0c2b7f5c8a5ead295374", privateKeyHex);
         }
     }
 }

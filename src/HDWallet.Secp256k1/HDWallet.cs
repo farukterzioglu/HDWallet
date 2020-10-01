@@ -4,25 +4,19 @@ using NBitcoin;
 
 namespace HDWallet.Secp256k1
 {
-    public class HDWallet<TWallet> : HdWalletBase, IHDWallet<TWallet> where TWallet : Wallet, new()
+    public abstract class HDWallet<TWallet> : HdWalletBase, IHDWallet<TWallet> where TWallet : Wallet, new()
     {
         ExtKey _masterKey;
 
-        // TODO: Test this
-        public HDWallet(ExtKey extKey)
-        {
-            _masterKey = extKey;
-        }
-
-        public HDWallet(string words, string seedPassword, CoinPath path) : base(words, seedPassword)
+        public HDWallet(string words, string seedPassword, CoinPath path, IAddressGenerator addressGenerator) : base(words, seedPassword, addressGenerator)
         {
             var masterKeyPath = new KeyPath(path.ToString());
-            _masterKey = new ExtKey(Seed).Derive(masterKeyPath);
+            _masterKey = new ExtKey(BIP39Seed).Derive(masterKeyPath);
         }
 
-        TWallet IHDWallet<TWallet>.GetMasterDepositWallet()
+        TWallet IHDWallet<TWallet>.GetMasterWallet()
         {
-            var masterKey = _masterKey.Derive(new KeyPath("0'/0"));
+            var masterKey = new ExtKey(BIP39Seed);
 
             var privateKey = masterKey.PrivateKey;
             return new TWallet() {

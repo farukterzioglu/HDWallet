@@ -7,9 +7,6 @@ namespace HDWallet.Tron
     {
         private static readonly HDWallet.Core.CoinPath _path = Purpose.Create(PurposeNumber.BIP44).Coin(CoinType.Tron);
 
-        public TronHDWallet(string words, string seedPassword = "") : base(words, seedPassword, _path)
-        {
-            base.AddressGenerator = new AddressGenerator();
-        }
+        public TronHDWallet(string words, string seedPassword = "") : base(words, seedPassword, _path, new AddressGenerator()) {}
     }
 }
