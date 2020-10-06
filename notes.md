@@ -44,3 +44,8 @@ https://github.com/peteroupc/CBOR
 
 Chimeric HD Wallets for Shelley
 https://github.com/input-output-hk/implementation-decisions/blob/e2d1bed5e617f0907bc5e12cf1c3f3302a4a7c42/text/1852-hd-chimeric.md
+
+cardano-serialization-lib
+https://github.com/Emurgo/cardano-serialization-lib/blob/master/example/index.spec.ts
+Generating Keys and Addresses
+https://docs.cardano.org/projects/cardano-serialization-lib/en/latest/getting-started/generating-keys.html
