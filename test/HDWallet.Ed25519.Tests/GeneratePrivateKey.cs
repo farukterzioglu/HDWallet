@@ -29,7 +29,9 @@ namespace HDWallet.Ed25519.Tests
             var message = Encoding.UTF8.GetBytes("159817a085f113d099d3d93c051410e9bfe043cc5c20e43aa9a083bf73660145");
             var messageHash = new Sha3Keccack().CalculateHash(message);
             var signature = account.Sign(messageHash);
-            var validationResult = Signer.Validate(signature.SignatureBytes, messageHash, account.PublicKey);
+
+            var signatureBytes = Helper.Concat(signature.R, signature.S);
+            var validationResult = Signer.Validate(signatureBytes, messageHash, account.PublicKey);
 
             Assert.That(validationResult, Is.True);
         }

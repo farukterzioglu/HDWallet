@@ -48,7 +48,6 @@ namespace HDWallet.Ed25519
 
             return new Signature()
             {
-                SignatureHex = signatureHex,
                 R = rsigPad,
                 S = ssigPad
             };
