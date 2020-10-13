@@ -18,7 +18,7 @@ namespace HDWallet.Tron
         public static IAccount<TronWallet> GetAccountFromMasterKey(string accountMasterKey, uint accountIndexInfo)
         {
             IAccountHDWallet<TronWallet> accountHDWallet = new AccountHDWallet<TronWallet>(accountMasterKey, accountIndexInfo);
-            return accountHDWallet.GetAccount();
+            return accountHDWallet.Account;
         }
     }
 }
