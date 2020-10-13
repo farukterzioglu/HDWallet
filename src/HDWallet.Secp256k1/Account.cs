@@ -14,14 +14,12 @@ namespace HDWallet.Secp256k1
         private ExtKey ExternalChain { get; set; }
         private ExtKey InternalChain { get; set; }
 
-        private IAddressGenerator AddressGenerator;
 
-        public Account(uint accountIndex, IAddressGenerator addressGenerator, ExtKey externalChain, ExtKey internalChain)
+        public Account(uint accountIndex, ExtKey externalChain, ExtKey internalChain)
         {
             ExternalChain = externalChain;
             InternalChain = internalChain;
             AccountIndex = accountIndex;
-            AddressGenerator = addressGenerator ?? throw new NullReferenceException(nameof(addressGenerator));    
         }
 
         private TWallet GetWallet(uint addressIndex, bool isInternal)
@@ -31,7 +29,6 @@ namespace HDWallet.Secp256k1
             return new TWallet()
             {
                 PrivateKey = extKey.PrivateKey, 
-                AddressGenerator = AddressGenerator,
                 Index = addressIndex
             };
         }

@@ -7,14 +7,12 @@ namespace HDWallet.Secp256k1
     {
         ExtKey _masterKey;
         uint _accountIndex;
-        IAddressGenerator _addressGenerator;
 
-        public AccountHDWallet(string accountMasterKey, uint accountIndex, IAddressGenerator addressGenerator)
+        public AccountHDWallet(string accountMasterKey, uint accountIndex)
         {
             BitcoinExtKey bitcoinExtKey = new BitcoinExtKey(accountMasterKey);
             _masterKey = bitcoinExtKey.ExtKey;
             _accountIndex = accountIndex;
-            _addressGenerator = addressGenerator;
         }
 
         TWallet IAccountHDWallet<TWallet>.GetMasterWallet()
@@ -22,7 +20,6 @@ namespace HDWallet.Secp256k1
             return new TWallet()
             {
                 PrivateKey = _masterKey.PrivateKey, 
-                AddressGenerator = _addressGenerator,
                 Index = _accountIndex
             };
         }
@@ -35,7 +32,7 @@ namespace HDWallet.Secp256k1
             var internalKeyPath = new KeyPath("1");
             var internalMasterKey = _masterKey.Derive(internalKeyPath);
 
-            return new Account<TWallet>(_accountIndex, _addressGenerator, externalChain: externalMasterKey, internalChain: internalMasterKey);
+            return new Account<TWallet>(_accountIndex, externalChain: externalMasterKey, internalChain: internalMasterKey);
         }
     }
 }

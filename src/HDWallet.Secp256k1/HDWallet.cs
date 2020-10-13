@@ -8,7 +8,7 @@ namespace HDWallet.Secp256k1
     {
         ExtKey _masterKey;
 
-        public HDWallet(string words, string seedPassword, CoinPath path, IAddressGenerator addressGenerator) : base(words, seedPassword, addressGenerator)
+        public HDWallet(string words, string seedPassword, CoinPath path) : base(words, seedPassword)
         {
             var masterKeyPath = new KeyPath(path.ToString());
             _masterKey = new ExtKey(BIP39Seed).Derive(masterKeyPath);
@@ -20,8 +20,7 @@ namespace HDWallet.Secp256k1
 
             var privateKey = masterKey.PrivateKey;
             return new TWallet() {
-                PrivateKey = privateKey,
-                AddressGenerator = AddressGenerator
+                PrivateKey = privateKey
             };
         }
 
@@ -30,13 +29,9 @@ namespace HDWallet.Secp256k1
             var externalKeyPath = new KeyPath($"{accountIndex}'");
             var externalMasterKey = _masterKey.Derive(externalKeyPath);
 
-            BitcoinExtKey bitcoinExtKey = new BitcoinExtKey(externalMasterKey, Network.Main);
-            // TODO: Get xpiv and assert in unit test
-
             return new TWallet()
             {
                 PrivateKey = _masterKey.PrivateKey, 
-                AddressGenerator = AddressGenerator,
                 Index = accountIndex
             };
         }
@@ -49,7 +44,7 @@ namespace HDWallet.Secp256k1
             var internalKeyPath = new KeyPath($"{accountIndex}'/1");
             var internalMasterKey = _masterKey.Derive(internalKeyPath);
 
-            return new Account<TWallet>(accountIndex, AddressGenerator, externalChain: externalMasterKey, internalChain: internalMasterKey);
+            return new Account<TWallet>(accountIndex, externalChain: externalMasterKey, internalChain: internalMasterKey);
         }
     }
 }

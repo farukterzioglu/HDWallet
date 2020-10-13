@@ -14,14 +14,11 @@ namespace HDWallet.Ed25519
         private ExtKey ExternalChain { get; set; }
         private ExtKey InternalChain { get; set; }
 
-        private IAddressGenerator AddressGenerator;
-
-        public Account(uint accountIndex, IAddressGenerator addressGenerator, ExtKey externalChain, ExtKey internalChain)
+        public Account(uint accountIndex, ExtKey externalChain, ExtKey internalChain)
         {
             ExternalChain = externalChain;
             InternalChain = internalChain;
             AccountIndex = accountIndex;
-            AddressGenerator = addressGenerator ?? throw new NullReferenceException(nameof(addressGenerator));    
         }
 
         private TWallet GetWallet(uint addressIndex, bool isInternal)
@@ -30,8 +27,7 @@ namespace HDWallet.Ed25519
 
             return new TWallet()
             {
-                PrivateKey = extKey.PrivateKey.ToBytes(), 
-                AddressGenerator = AddressGenerator,
+                PrivateKey = extKey.PrivateKey.ToBytes(),
                 Index = addressIndex
             };
         }

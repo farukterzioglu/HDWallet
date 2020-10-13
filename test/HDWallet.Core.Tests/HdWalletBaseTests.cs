@@ -4,7 +4,7 @@ namespace HDWallet.Core.Tests
 {
     class SampleWallet : HdWalletBase
     {
-        public SampleWallet(string words, string seedPassword) : base(words, seedPassword, new NullAddressGenerator()) {}
+        public SampleWallet(string words, string seedPassword) : base(words, seedPassword) {}
     }
 
     public class HdWalletBaseTests

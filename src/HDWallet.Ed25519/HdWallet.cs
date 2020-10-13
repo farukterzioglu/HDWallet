@@ -8,7 +8,7 @@ namespace HDWallet.Ed25519
     {
         ExtKey _masterKey;
         
-        public HDWallet(string words, string seedPassword, CoinPath path, IAddressGenerator addressGenerator) : base(words, seedPassword, addressGenerator)
+        public HDWallet(string words, string seedPassword, CoinPath path) : base(words, seedPassword)
         {
             var masterKeyPath = new KeyPath(path.ToString());
             _masterKey = new ExtKey(BIP39Seed).Derive(masterKeyPath);
@@ -20,8 +20,7 @@ namespace HDWallet.Ed25519
 
             var privateKey = masterKey.PrivateKey;
             return new TWallet() {
-                PrivateKey = privateKey.ToBytes(),
-                AddressGenerator = AddressGenerator
+                PrivateKey = privateKey.ToBytes()
             };
         }
 
@@ -32,8 +31,7 @@ namespace HDWallet.Ed25519
 
             return new TWallet()
             {
-                PrivateKey = _masterKey.PrivateKey.ToBytes(), 
-                AddressGenerator = AddressGenerator,
+                PrivateKey = _masterKey.PrivateKey.ToBytes(),
                 Index = accountIndex
             };
         }
@@ -46,7 +44,7 @@ namespace HDWallet.Ed25519
             var internalKeyPath = new KeyPath($"{index}'/1");
             var internalMasterKey = _masterKey.Derive(internalKeyPath);
 
-            return new Account<TWallet>(index, AddressGenerator, externalChain: externalMasterKey, internalChain: internalMasterKey);
+            return new Account<TWallet>(index, externalChain: externalMasterKey, internalChain: internalMasterKey);
         }
     }
 }
