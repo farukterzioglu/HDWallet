@@ -18,11 +18,11 @@ namespace HDWallet.Secp256k1.Tests
             IAccountHDWallet<BitcoinWallet> accountHDWallet = new AccountHDWallet<BitcoinWallet>(accountExtendedPrivateKey, 0);
             
             // m/44'/0'/0'/0/0
-            var depositWallet0 = accountHDWallet.GetAccount().GetExternalWallet(0);
+            var depositWallet0 = accountHDWallet.Account.GetExternalWallet(0);
             Assert.AreEqual("0374c393e8f757fa4b6af5aba4545fd984eae28ab84bda09df93d32562123b7a1c", depositWallet0.PublicKey.ToHex());
 
             // m/44'/0'/0'/0/1
-            var depositWallet1 = accountHDWallet.GetAccount().GetExternalWallet(1);
+            var depositWallet1 = accountHDWallet.Account.GetExternalWallet(1);
             Assert.AreEqual("025166e4e70b4ae6fd0deab416ab1c3704f2aa5dbf451be7639ca48fe6d273773c", depositWallet1.PublicKey.ToHex());
         }
     }

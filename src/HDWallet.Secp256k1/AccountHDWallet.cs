@@ -15,16 +15,9 @@ namespace HDWallet.Secp256k1
             _accountIndex = accountIndex;
         }
 
-        TWallet IAccountHDWallet<TWallet>.GetMasterWallet()
-        {
-            return new TWallet()
-            {
-                PrivateKey = _masterKey.PrivateKey, 
-                Index = _accountIndex
-            };
-        }
-
-        IAccount<TWallet> IAccountHDWallet<TWallet>.GetAccount()
+        IAccount<TWallet> IAccountHDWallet<TWallet>.Account => GetAccount();
+        
+        IAccount<TWallet> GetAccount()
         {
             var externalKeyPath = new KeyPath("0");
             var externalMasterKey = _masterKey.Derive(externalKeyPath);
