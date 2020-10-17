@@ -1,13 +1,13 @@
 using System;
 using HDWallet.Core;
 using Ed25519;
+using NBitcoin.DataEncoders;
 
 namespace HDWallet.Ed25519
 {
-    public class Wallet : IWallet
+    public abstract class Wallet : IWallet
     {
         byte[] privateKey;
-        
         public byte[] PrivateKey {
             get {
                 return privateKey;
@@ -28,13 +28,24 @@ namespace HDWallet.Ed25519
         public uint Index;
         public string Address => AddressGenerator.GenerateAddress(PublicKey);
 
-        public IAddressGenerator AddressGenerator;
+        public IAddressGenerator AddressGenerator {get; private set; }
         
-        public Wallet(){}
+        public Wallet(){
+            AddressGenerator = GetAddressGenerator();
+        }
+
+        public Wallet(byte[] privateKey) : this()
+        {
+            var privateKeySpan = new Span<byte>(privateKey);
+        }
+
+        public Wallet(string privateKeyHex) : this(Encoders.Hex.DecodeData(privateKeyHex)){}
+
+        protected abstract IAddressGenerator GetAddressGenerator();
 
         public Signature Sign(byte[] message)
         {
-            if (message.Length != 32) throw new ArgumentException(paramName: nameof(message), message: "Message should be 32 bytes");
+            // if (message.Length != 32) throw new ArgumentException(paramName: nameof(message), message: "Message should be 32 bytes");
 
             var signature = Signer.Sign(message, this.PrivateKey, this.PublicKey);
             var signatureHex = signature.ToArray().ToHexString();

@@ -13,6 +13,7 @@
 
  <ItemGroup>
    <ProjectReference Include="..\HDWallet.Core\HDWallet.Core.csproj" />
+   <ProjectReference Include="..\Dependencies\dotnetstandard-bip32\dotnetstandard-bip32\dotnetstandard-bip32.csproj" />
  </ItemGroup>
 
 </Project>

@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\HDWallet.Ed25519\HDWallet.Ed25519.csproj" />
+    <ProjectReference Include="..\..\src\Dependencies\dotnetstandard-bip32\dotnetstandard-bip32\dotnetstandard-bip32.csproj" />
   </ItemGroup>
 
 </Project>
