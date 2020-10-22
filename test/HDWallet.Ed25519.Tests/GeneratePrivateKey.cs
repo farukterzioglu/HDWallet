@@ -20,7 +20,7 @@ namespace HDWallet.Ed25519.Tests
         {
             string words = "push wrong tribe amazing again cousin hill belt silent found sketch monitor";
             
-            IHDWallet<CardanoWallet> wallet = new CardanoHDWallet(words);
+            IHDWallet<CardanoWallet> wallet = new _CardanoHDWallet(words);
             var account = wallet.GetMasterWallet();
 
             var privateKeyBytes = account.PrivateKey;
@@ -41,7 +41,7 @@ namespace HDWallet.Ed25519.Tests
         {
             string words = "push wrong tribe amazing again cousin hill belt silent found sketch monitor";
             
-            IHDWallet<CardanoWallet> wallet = new CardanoHDWallet(words);
+            IHDWallet<CardanoWallet> wallet = new _CardanoHDWallet(words);
             var account = wallet.GetMasterWallet();
             
             var message = Encoding.UTF8.GetBytes("159817a085f113d099d3d93c051410e9bfe043cc5c20e43aa9a083bf73660145");
@@ -61,7 +61,7 @@ namespace HDWallet.Ed25519.Tests
 
             string words = "push wrong tribe amazing again cousin hill belt silent found sketch monitor";
             
-            IHDWallet<CardanoWallet> wallet = new CardanoHDWallet(words);
+            IHDWallet<CardanoWallet> wallet = new _CardanoHDWallet(words);
             CardanoWallet account = wallet.GetMasterWallet();
 
             var signature = account.Sign(message);

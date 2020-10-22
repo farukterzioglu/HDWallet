@@ -4,11 +4,11 @@ using NBitcoin;
 
 namespace HDWallet.Ed25519
 {
-    public abstract class HDWallet<TWallet> : HdWalletBase, IHDWallet<TWallet> where TWallet : Wallet, new()
+    public abstract class _HDWallet<TWallet> : HdWalletBase, IHDWallet<TWallet> where TWallet : Wallet, new()
     {
         ExtKey _masterKey;
         
-        public HDWallet(string words, string seedPassword, CoinPath path) : base(words, seedPassword)
+        public _HDWallet(string words, string seedPassword, CoinPath path) : base(words, seedPassword)
         {
             var masterKeyPath = new KeyPath(path.ToString());
             _masterKey = new ExtKey(BIP39Seed).Derive(masterKeyPath);
@@ -44,7 +44,7 @@ namespace HDWallet.Ed25519
             var internalKeyPath = new KeyPath($"{index}'/1");
             var internalMasterKey = _masterKey.Derive(internalKeyPath);
 
-            return new Account<TWallet>(index, externalChain: externalMasterKey, internalChain: internalMasterKey);
+            return new _Account<TWallet>(index, externalChain: externalMasterKey, internalChain: internalMasterKey);
         }
     }
 }
