@@ -15,7 +15,7 @@ namespace NEd25519.Tests
         {
             NEd25519.ExtKey testMasterKeyFromSeed = new NEd25519.ExtKey(Vector1Seed);
 
-            Assert.AreEqual(Vector1KeyHexExpected, testMasterKeyFromSeed.PrivateKey.ToStringHex());
+            Assert.AreEqual(Vector1KeyHexExpected, testMasterKeyFromSeed.PrivateKey.ToBytes().ToStringHex());
             Assert.AreEqual(Vector1ChainCodeExpected, testMasterKeyFromSeed.ChainCode.ToStringHex());
         }
     }

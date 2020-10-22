@@ -4,6 +4,7 @@ namespace HDWallet.Core
     {
         Bitcoin = 0,
         Tron = 195,
-        Cardano = 1852
+        Cardano = 1852,
+        Tezos = 1729
     }
 }

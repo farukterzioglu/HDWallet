@@ -1,6 +1,5 @@
-using System;
 using HDWallet.Core;
-using NBitcoin;
+using NEd25519;
 
 namespace HDWallet.Ed25519
 {
@@ -8,13 +7,13 @@ namespace HDWallet.Ed25519
     /// Account generated with Elliptic Curve
     /// </summary>
     /// <typeparam name="TWallet"></typeparam>
-    public class _Account<TWallet> : IAccount<TWallet> where TWallet : Wallet, IWallet, new()
+    public class AccountEd25519<TWallet> : IAccount<TWallet> where TWallet : Wallet, IWallet, new()
     {
         public uint AccountIndex { get; set; }
         private ExtKey ExternalChain { get; set; }
         private ExtKey InternalChain { get; set; }
 
-        public _Account(uint accountIndex, ExtKey externalChain, ExtKey internalChain)
+        public AccountEd25519(uint accountIndex, ExtKey externalChain, ExtKey internalChain)
         {
             ExternalChain = externalChain;
             InternalChain = internalChain;

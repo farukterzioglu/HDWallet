@@ -1,7 +1,7 @@
 using System;
-namespace NBitcoin
+namespace NBitcoin.Base
 {
-    public abstract class ExtKeyBase
+    public abstract class ExtKeyBase<TKey> where TKey : Key
     {
         private const int ChainCodeLength = 32;
         protected byte[] vchChainCode = new byte[ChainCodeLength];
@@ -16,12 +16,12 @@ namespace NBitcoin
 			}
 		}
 
-        protected byte[] key; 
+        protected TKey key; 
 		
 		/// <summary>
 		/// Get the private key of this extended key.
 		/// </summary>
-		public byte[] PrivateKey
+		public TKey PrivateKey
 		{
 			get
 			{
@@ -37,6 +37,6 @@ namespace NBitcoin
 			(key, vchChainCode) = SetMaster();
 		}
 
-        protected abstract (byte[] Key, byte[] ChainCode) SetMaster();
+        protected abstract (TKey Key, byte[] ChainCode) SetMaster();
     }
 }
