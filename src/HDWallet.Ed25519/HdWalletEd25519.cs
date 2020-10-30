@@ -1,7 +1,6 @@
 using System;
 using dotnetstandard_bip32;
 using HDWallet.Core;
-using NBitcoin;
 
 namespace HDWallet.Ed25519
 {
@@ -10,20 +9,41 @@ namespace HDWallet.Ed25519
         BIP32 bip32 = new BIP32();
         TWallet _coinTypeWallet;
 
-        protected HdWalletEd25519(string seed, CoinPath path) : base(seed)
+        string _path;
+
+        protected HdWalletEd25519(string seed) : base(seed) {}
+
+        protected HdWalletEd25519(string seed, string path) : base(seed)
         {
-            var masterKeyPath = new KeyPath(path.ToString());
+            _path = path;
+
             var derivePath = bip32.DerivePath(path.ToString(), this.BIP39Seed);
 
             _coinTypeWallet = new TWallet() {
                 PrivateKey = derivePath.Key
             };
         }
+        protected HdWalletEd25519(string seed, CoinPath path) : this(seed, path.ToString()) {}
 
-        protected HdWalletEd25519(string words, string seedPassword, CoinPath path) : base(words, seedPassword)
+        /// <summary>
+        /// Not implemented yet
+        /// </summary>
+        /// <param name="words"></param>
+        /// <param name="seedPassword"></param>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        protected HdWalletEd25519(string words, string seedPassword, string path) : base(words, seedPassword)
         {
             throw new NotImplementedException();
         }
+        /// <summary>
+        /// Not implemented yet
+        /// </summary>
+        /// <param name="words"></param>
+        /// <param name="seedPassword"></param>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        protected HdWalletEd25519(string words, string seedPassword, CoinPath path) : this(words, seedPassword, path.ToString()) {}
 
         /// <summary>
         /// Returns wallet for m/[PURPOSE]'/[COINTYPE]' for constructor parameter 'path' (CoinPath)
@@ -31,12 +51,23 @@ namespace HDWallet.Ed25519
         /// <returns>TWallet</returns>
         public TWallet GetCoinTypeWallet()
         {
+            if(_coinTypeWallet == null) throw new NullReferenceException(nameof(_coinTypeWallet));
             return _coinTypeWallet;
         }
 
-        public TWallet GetWallet(string path)
+        public TWallet GetWalletFromPath(string path)
         {
             var derivePath = bip32.DerivePath(path, this.BIP39Seed);
+
+            return new TWallet() {
+                PrivateKey = derivePath.Key
+            };
+        }
+
+        public TWallet GetSubWallet(string subPath)
+        {
+            var keyPath = $"{_path}/{subPath}";
+            var derivePath = bip32.DerivePath(keyPath, this.BIP39Seed);
 
             return new TWallet() {
                 PrivateKey = derivePath.Key
@@ -53,9 +84,11 @@ namespace HDWallet.Ed25519
             throw new NotImplementedException();
         }
 
-        IAccount<TWallet> IHDWallet<TWallet>.GetAccount(uint index)
+        IAccount<TWallet> IHDWallet<TWallet>.GetAccount(uint accountIndex)
         {
-            throw new NotImplementedException();
+            Func<string, TWallet> deriveFunction = GetWalletFromPath;
+
+            return new Account<TWallet>(accountIndex, GetSubWallet );
         }
     }
 }

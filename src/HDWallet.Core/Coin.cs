@@ -7,6 +7,11 @@ namespace HDWallet.Core
         readonly PurposeNumber Purpose;
         readonly CoinType CoinType;
 
+        public CoinPath(string path)
+        {
+            _path = path;
+        }
+        
         public CoinPath(PurposeNumber purpose, CoinType coinType)
         {
             Purpose = purpose;
