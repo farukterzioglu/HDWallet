@@ -1,9 +1,9 @@
 namespace NBitcoin.Base
 {
-    public class Key
+    public abstract class KeyBase<TKey> where TKey: KeyBase<TKey>
     {
         byte[] vch = new byte[0];
-        public Key(byte[] data)
+        public KeyBase(byte[] data)
         {
             vch = data;
         }
@@ -15,5 +15,7 @@ namespace NBitcoin.Base
         {
             return vch;
         }
+
+        public abstract TKey Derivate(byte[] chainCode, uint nChild, out byte[] chainCodeChild);
     }
 }

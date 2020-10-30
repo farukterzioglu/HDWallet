@@ -6,7 +6,7 @@ namespace HDWallet.Ed25519.Tests
 {
     public class GenerateEd25519HDWallet
     {
-        private const string Vector1Seed = "000102030405060708090a0b0c0d0e0f";
+        private const string ReferenceSeed = "000102030405060708090a0b0c0d0e0f";
 
         // Test vector 1 for ed25519
         // https://github.com/satoshilabs/slips/blob/master/slip-0010.md#test-vector-1-for-ed25519
@@ -17,14 +17,14 @@ namespace HDWallet.Ed25519.Tests
         [TestCase("m/0'/1'/2'/2'/1000000000'", "8f94d394a8e8fd6b1bc2f3f49f5c47e385281d5c17e65324b0f62483e37e8793", "003c24da049451555d51a7014a37337aa4e12d41e485abccfa46b47dfb2af54b7a")]
         public void ShouldGenerateFromSeed1(string path, string privateKey, string publicKey)
         {
-            CardanoHDWalletEd25519 hdWallet = new CardanoHDWalletEd25519(Vector1Seed);
-            var account0 = hdWallet.GetWallet(path);
+            TestHDWalletEd25519 hdWallet = new TestHDWalletEd25519(ReferenceSeed);
+            var account0 = hdWallet.GetWalletFromPath(path);
 
             Assert.AreEqual(privateKey, account0.PrivateKey.ToHexString());
             Assert.AreEqual(publicKey, $"00{account0.PublicKey.ToHexString()}");
         }
 
-        private const string Vector2Seed = "fffcf9f6f3f0edeae7e4e1dedbd8d5d2cfccc9c6c3c0bdbab7b4b1aeaba8a5a29f9c999693908d8a8784817e7b7875726f6c696663605d5a5754514e4b484542";
+        private const string ReferenceSeed2 = "fffcf9f6f3f0edeae7e4e1dedbd8d5d2cfccc9c6c3c0bdbab7b4b1aeaba8a5a29f9c999693908d8a8784817e7b7875726f6c696663605d5a5754514e4b484542";
 
         // Test vector 2 for ed25519
         // https://github.com/satoshilabs/slips/blob/master/slip-0010.md#test-vector-2-for-ed25519
@@ -35,8 +35,8 @@ namespace HDWallet.Ed25519.Tests
         [TestCase("m/0'/2147483647'/1'/2147483646'/2'", "551d333177df541ad876a60ea71f00447931c0a9da16f227c11ea080d7391b8d", "0047150c75db263559a70d5778bf36abbab30fb061ad69f69ece61a72b0cfa4fc0")]
         public void ShouldGenerateFromSeed2(string path, string privateKey, string publicKey)
         {
-            CardanoHDWalletEd25519 hdWallet = new CardanoHDWalletEd25519(Vector2Seed);
-            var account0 = hdWallet.GetWallet(path);
+            TestHDWalletEd25519 hdWallet = new TestHDWalletEd25519(ReferenceSeed2);
+            var account0 = hdWallet.GetWalletFromPath(path);
 
             Assert.AreEqual(privateKey, account0.PrivateKey.ToHexString());
             Assert.AreEqual(publicKey, $"00{account0.PublicKey.ToHexString()}");
@@ -45,21 +45,35 @@ namespace HDWallet.Ed25519.Tests
         [TestCase("m/44'/1852'", "762843f584c04573608a9b11a5ef4d4a4ef9864c6374044920f5d90b463d94e8", "00bab81ed6a545a7e8ece6ee5601b2e50be8943f3daaf988a145a99a3d0da27d30")]
         public void ShouldGenerateCardanoFromSeedAndPath(string path, string privateKey, string publicKey)
         {
-            CardanoHDWalletEd25519 hdWallet = new CardanoHDWalletEd25519(Vector2Seed);
-            CardanoWallet wallet = hdWallet.GetWallet(path);
+            TestHDWalletEd25519 hdWallet = new TestHDWalletEd25519(ReferenceSeed2);
+            CardanoWallet wallet = hdWallet.GetWalletFromPath(path);
 
             Assert.AreEqual(privateKey, wallet.PrivateKey.ToHexString());
             Assert.AreEqual(publicKey, $"00{wallet.PublicKey.ToHexString()}");
         }
 
-        [TestCase("762843f584c04573608a9b11a5ef4d4a4ef9864c6374044920f5d90b463d94e8", "00bab81ed6a545a7e8ece6ee5601b2e50be8943f3daaf988a145a99a3d0da27d30")]
-        public void ShouldGenerateCardanoFromSeed(string privateKey, string publicKey)
+        [TestCase("m/0'/1'", "b1d0bad404bf35da785a64ca1ac54b2617211d2777696fbffaf208f746ae84f2", "001932a5270f335bed617d5b935c80aedb1a35bd9fc1e31acafd5372c30f5c1187")]
+        public void ShouldGenerateMasterWalletFromPurposeAndPath(string path, string privateKey, string publicKey)
         {
-            CardanoHDWalletEd25519 hdWallet = new CardanoHDWalletEd25519(Vector2Seed);
-            CardanoWallet wallet = hdWallet.GetCoinTypeWallet();
+            IHDWallet<CardanoWallet> hdWallet = new PathTestHDWalletEd25519(ReferenceSeed);
+            var masterWallet = hdWallet.GetMasterWallet();
 
-            Assert.AreEqual(privateKey, wallet.PrivateKey.ToHexString());
-            Assert.AreEqual(publicKey, $"00{wallet.PublicKey.ToHexString()}");
+            Assert.AreEqual(expected: path, actual: masterWallet.Path);
+
+            Assert.AreEqual(privateKey, masterWallet.PrivateKey.ToHexString());
+            Assert.AreEqual(publicKey, $"00{masterWallet.PublicKey.ToHexString()}");
+        }
+
+        [TestCase("m/0'/1'/2'", "92a5b23c0b8a99e37d07df3fb9966917f5d06e02ddbd909c7e184371463e9fc9", "00ae98736566d30ed0e9d2f4486a64bc95740d89c7db33f52121f8ea8f76ff0fc1")]
+        public void ShouldGenerateAccountFromPurposeAndPath(string path, string privateKey, string publicKey)
+        {
+            IHDWallet<CardanoWallet> hdWallet = new PathTestHDWalletEd25519(ReferenceSeed);
+            var accountWallet = hdWallet.GetAccountWallet(2);
+
+            Assert.AreEqual(expected: path, actual: accountWallet.Path);
+
+            Assert.AreEqual(privateKey, accountWallet.PrivateKey.ToHexString());
+            Assert.AreEqual(publicKey, $"00{accountWallet.PublicKey.ToHexString()}");
         }
     }
 }

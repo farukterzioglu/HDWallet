@@ -7,6 +7,8 @@ namespace HDWallet.Ed25519
 {
     public abstract class Wallet : IWallet
     {
+        public string Path {get; set;}
+        
         byte[] privateKey;
         public byte[] PrivateKey {
             get {
