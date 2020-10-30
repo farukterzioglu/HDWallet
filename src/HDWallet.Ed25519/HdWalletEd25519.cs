@@ -76,12 +76,24 @@ namespace HDWallet.Ed25519
 
         TWallet IHDWallet<TWallet>.GetMasterWallet()
         {
-            throw new NotImplementedException();
+            var keyPath = $"{_path}";
+            var derivePath = bip32.DerivePath(keyPath, this.BIP39Seed);
+
+            return new TWallet() {
+                Path = keyPath,
+                PrivateKey = derivePath.Key
+            };
         }
 
         TWallet IHDWallet<TWallet>.GetAccountWallet(uint accountIndex)
         {
-            throw new NotImplementedException();
+            var keyPath = $"{_path}/{accountIndex}'";
+            var derivePath = bip32.DerivePath(keyPath, this.BIP39Seed);
+
+            return new TWallet() {
+                Path = keyPath,
+                PrivateKey = derivePath.Key
+            };
         }
 
         IAccount<TWallet> IHDWallet<TWallet>.GetAccount(uint accountIndex)
