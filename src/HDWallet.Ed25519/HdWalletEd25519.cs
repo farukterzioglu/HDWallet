@@ -17,7 +17,7 @@ namespace HDWallet.Ed25519
         {
             _path = path;
 
-            var derivePath = bip32.DerivePath(path.ToString(), this.BIP39Seed);
+            var derivePath = bip32.DerivePath(path, this.BIP39Seed);
 
             _coinTypeWallet = new TWallet() {
                 PrivateKey = derivePath.Key
@@ -25,24 +25,16 @@ namespace HDWallet.Ed25519
         }
         protected HdWalletEd25519(string seed, CoinPath path) : this(seed, path.ToString()) {}
 
-        /// <summary>
-        /// Not implemented yet
-        /// </summary>
-        /// <param name="words"></param>
-        /// <param name="seedPassword"></param>
-        /// <param name="path"></param>
-        /// <returns></returns>
         protected HdWalletEd25519(string words, string seedPassword, string path) : base(words, seedPassword)
         {
-            throw new NotImplementedException();
+            _path = path;
+
+            var derivePath = bip32.DerivePath(path, this.BIP39Seed);
+
+            _coinTypeWallet = new TWallet() {
+                PrivateKey = derivePath.Key
+            };
         }
-        /// <summary>
-        /// Not implemented yet
-        /// </summary>
-        /// <param name="words"></param>
-        /// <param name="seedPassword"></param>
-        /// <param name="path"></param>
-        /// <returns></returns>
         protected HdWalletEd25519(string words, string seedPassword, CoinPath path) : this(words, seedPassword, path.ToString()) {}
 
         /// <summary>
@@ -60,6 +52,7 @@ namespace HDWallet.Ed25519
             var derivePath = bip32.DerivePath(path, this.BIP39Seed);
 
             return new TWallet() {
+                Path = path,
                 PrivateKey = derivePath.Key
             };
         }
@@ -67,40 +60,24 @@ namespace HDWallet.Ed25519
         public TWallet GetSubWallet(string subPath)
         {
             var keyPath = $"{_path}/{subPath}";
-            var derivePath = bip32.DerivePath(keyPath, this.BIP39Seed);
-
-            return new TWallet() {
-                PrivateKey = derivePath.Key
-            };
+            return GetWalletFromPath(keyPath);
         }
 
         TWallet IHDWallet<TWallet>.GetMasterWallet()
         {
-            var keyPath = $"{_path}";
-            var derivePath = bip32.DerivePath(keyPath, this.BIP39Seed);
-
-            return new TWallet() {
-                Path = keyPath,
-                PrivateKey = derivePath.Key
-            };
+            return GetWalletFromPath(_path);
         }
 
         TWallet IHDWallet<TWallet>.GetAccountWallet(uint accountIndex)
         {
             var keyPath = $"{_path}/{accountIndex}'";
-            var derivePath = bip32.DerivePath(keyPath, this.BIP39Seed);
-
-            return new TWallet() {
-                Path = keyPath,
-                PrivateKey = derivePath.Key
-            };
+            return GetWalletFromPath(keyPath);
         }
 
         IAccount<TWallet> IHDWallet<TWallet>.GetAccount(uint accountIndex)
         {
             Func<string, TWallet> deriveFunction = GetWalletFromPath;
-
-            return new Account<TWallet>(accountIndex, GetSubWallet );
+            return new Account<TWallet>(accountIndex, GetSubWallet);
         }
     }
 }
