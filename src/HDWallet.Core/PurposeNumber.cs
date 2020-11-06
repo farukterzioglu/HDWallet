@@ -6,5 +6,6 @@ namespace HDWallet.Core
         BIP44 = 44,
         BIP49 = 49,
         BIP84 = 84,
+        CARDANO = 1852
     }
 }
