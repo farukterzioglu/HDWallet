@@ -20,7 +20,7 @@ namespace HDWallet.Ed25519
 
         TWallet IAccount<TWallet>.GetInternalWallet(uint addressIndex)
         {
-            var internalKeyPath = $"{AccountIndex}'/1'";
+            var internalKeyPath = $"{AccountIndex}'/1'/{addressIndex}'";
             var internalWallet = _deriveFunction(internalKeyPath);
 
             internalWallet.Index = addressIndex;
@@ -30,7 +30,7 @@ namespace HDWallet.Ed25519
 
         TWallet IAccount<TWallet>.GetExternalWallet(uint addressIndex)
         {
-            var externalKeyPath = $"{AccountIndex}'/0'";
+            var externalKeyPath = $"{AccountIndex}'/0'/{addressIndex}'";
             var externalWallet = _deriveFunction(externalKeyPath);
 
             externalWallet.Index = addressIndex;
