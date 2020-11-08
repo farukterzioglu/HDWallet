@@ -5,7 +5,7 @@ namespace HDWallet.Ed25519.Sample
     /// <summary>
     /// Test HD Wallet with purpose=0 & coinType = 1
     /// </summary>
-    public class PathTestHDWalletEd25519 : HdWalletEd25519<CardanoWallet>
+    public class PathTestHDWalletEd25519 : HdWalletEd25519<CardanoSampleWallet>
     {
         private static readonly HDWallet.Core.CoinPath _path = Purpose.Create(PurposeNumber.PURPOSE0).Coin(CoinType.CoinType1);
 

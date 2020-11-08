@@ -16,7 +16,7 @@ namespace HDWallet.Ed25519.Tests
         public void ShouldGenerateMasterWalletFromPurposeAndPath(string path)
         {
             TestHDWalletEd25519 hdWallet = new TestHDWalletEd25519(ReferenceSeed);
-            CardanoWallet wallet = hdWallet.GetWalletFromPath(path);
+            CardanoSampleWallet wallet = hdWallet.GetWalletFromPath(path);
 
             Assert.AreEqual(ReferencePrivateKey, wallet.PrivateKey.ToHexString());
             Assert.AreEqual(ReferencePubKey, $"00{wallet.PublicKey.ToHexString()}");
@@ -30,7 +30,7 @@ namespace HDWallet.Ed25519.Tests
             CardanoHDWalletEd25519 hdWallet = new CardanoHDWalletEd25519(mnemonic, string.Empty);
             Assert.AreEqual(ReferenceSeed, hdWallet.BIP39Seed);
 
-            CardanoWallet wallet = hdWallet.GetCoinTypeWallet();
+            CardanoSampleWallet wallet = hdWallet.GetCoinTypeWallet();
 
             Assert.AreEqual(ReferencePrivateKey, wallet.PrivateKey.ToHexString());
             Assert.AreEqual(ReferencePubKey, $"00{wallet.PublicKey.ToHexString()}");
@@ -43,8 +43,8 @@ namespace HDWallet.Ed25519.Tests
         [TestCase(1, 1, "369b169900ca50db4af1d5677cdd6ead164b732fd77ccac4c810d1459b625a26", "00be5ff2fdb41b12d08cffe965efb9dfc9bb1ca63e9e86c5ae8a34f312617f0105")]
         public void ShouldGenerateExternalFromMnemonic(int accountIndex, int walletIndex, string expectedPrivateKey, string expectedPublicKey)
         {
-            IHDWallet<CardanoWallet> hdWallet = new CardanoHDWalletEd25519(mnemonic, string.Empty);
-            CardanoWallet wallet = hdWallet.GetAccount((uint)accountIndex).GetExternalWallet((uint)walletIndex);
+            IHDWallet<CardanoSampleWallet> hdWallet = new CardanoHDWalletEd25519(mnemonic, string.Empty);
+            CardanoSampleWallet wallet = hdWallet.GetAccount((uint)accountIndex).GetExternalWallet((uint)walletIndex);
 
             string pubKey = $"00{wallet.PublicKey.ToHexString()}";
             string privKey = wallet.PrivateKey.ToHexString();
@@ -59,8 +59,8 @@ namespace HDWallet.Ed25519.Tests
         [TestCase(1, 1, "487dc9609545a8d35bb55d99cd6cd915aaa6b52c059a6a71ae0acc0322ae7d79", "003e3e493e4376ce65ccbecac8f18f4c051d2484cee8c751ff71bcece3a913c7c3")]
         public void ShouldGenerateInternalFromMnemonic(int accountIndex, int walletIndex, string expectedPrivateKey, string expectedPublicKey)
         {
-            IHDWallet<CardanoWallet> hdWallet = new CardanoHDWalletEd25519(mnemonic, string.Empty);
-            CardanoWallet wallet = hdWallet.GetAccount((uint)accountIndex).GetInternalWallet((uint)walletIndex);
+            IHDWallet<CardanoSampleWallet> hdWallet = new CardanoHDWalletEd25519(mnemonic, string.Empty);
+            CardanoSampleWallet wallet = hdWallet.GetAccount((uint)accountIndex).GetInternalWallet((uint)walletIndex);
 
             string pubKey = $"00{wallet.PublicKey.ToHexString()}";
             string privKey = wallet.PrivateKey.ToHexString();
