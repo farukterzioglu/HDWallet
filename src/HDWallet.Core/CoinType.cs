@@ -6,7 +6,7 @@ namespace HDWallet.Core
         BitcoinTestnet = 1,
         CoinType1 = 1,
         Tron = 195,
-        Cardano = 1852,
+        Cardano = 1815,
         Tezos = 1729
     }
 }

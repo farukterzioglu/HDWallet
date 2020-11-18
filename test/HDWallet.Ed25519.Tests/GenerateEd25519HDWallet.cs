@@ -46,7 +46,7 @@ namespace HDWallet.Ed25519.Tests
         public void ShouldGenerateCardanoFromSeedAndPath(string path, string privateKey, string publicKey)
         {
             TestHDWalletEd25519 hdWallet = new TestHDWalletEd25519(ReferenceSeed2);
-            CardanoWallet wallet = hdWallet.GetWalletFromPath(path);
+            CardanoSampleWallet wallet = hdWallet.GetWalletFromPath(path);
 
             Assert.AreEqual(privateKey, wallet.PrivateKey.ToHexString());
             Assert.AreEqual(publicKey, $"00{wallet.PublicKey.ToHexString()}");
