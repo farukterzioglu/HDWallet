@@ -6,7 +6,7 @@ namespace HDWallet.Cardano
 {
     public class CardanoHDWallet : HdWalletEd25519<CardanoWallet>
     {
-        private static readonly HDWallet.Core.CoinPath _path = Purpose.Create(PurposeNumber.BIP44).Coin(CoinType.Cardano);
+        private static readonly HDWallet.Core.CoinPath _path = Purpose.Create(PurposeNumber.CIP1852).Coin(CoinType.Cardano);
 
         internal CardanoHDWallet(string seed, HDWallet.Core.CoinPath path) : base(seed, _path) {}
         public CardanoHDWallet(string words, string seedPassword) : base(words, seedPassword, _path) {}
