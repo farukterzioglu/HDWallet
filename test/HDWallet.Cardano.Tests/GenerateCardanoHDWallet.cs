@@ -3,40 +3,21 @@ using HDWallet.Core;
 using HDWallet.Ed25519.Sample;
 using NUnit.Framework;
 
-namespace HDWallet.Ed25519.Tests
+namespace HDWallet.Cardano.Tests
 {
     public class GenerateCardanoHDWallet
     {
         private const string mnemonic = "rapid apart clip require dragon property hurry ensure coil ship torch include squirrel jewel window";
-        /// <summary>
-        /// Seed from mnemonic above
-        /// </summary>
         private const string ReferenceSeed = "ba78b733ffe929e400f844751a48dded5ebc7c62635a1590e97b066e3b9e8b890741602a69279c45ed5d17dfd6e8703e3c575de4ea4712868df5f1997e2b97b2";
         private const string ReferencePrivateKey = "879c41fc84768094f57418dfc96910e81c010f7f522b2ac7bc5abe8360e9e650";
         private const string ReferencePubKey = "000d16c4f4d82c55a54855c53b39c6d9cc7b13f724b9175fbeb11555544c67b72e";
 
-        /// <summary>
-        /// A test to take as a reference for tests below
-        /// </summary>
-        /// <param name="path"></param>
-
-        [TestCase("m/1852'/1815'")]
-        public void ShouldGenerateMasterWalletFromPurposeAndPath(string path)
-        {
-            TestHDWalletEd25519 hdWallet = new TestHDWalletEd25519(ReferenceSeed);
-            CardanoSampleWallet wallet = hdWallet.GetWalletFromPath(path);
-
-            Assert.AreEqual(ReferencePrivateKey, wallet.PrivateKey.ToHexString());
-            Assert.AreEqual(ReferencePubKey, $"00{wallet.PublicKey.ToHexString()}");
-        }
-        
         [Test]
         public void ShouldGenerateFromMnemonic()
         {
             CardanoHDWalletEd25519 hdWallet = new CardanoHDWalletEd25519(mnemonic, string.Empty);
             Assert.AreEqual(ReferenceSeed, hdWallet.BIP39Seed);
 
-            // m/1852'/1815'
             CardanoSampleWallet wallet = hdWallet.GetCoinTypeWallet();
 
             Assert.AreEqual(ReferencePrivateKey, wallet.PrivateKey.ToHexString());
