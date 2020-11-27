@@ -5,6 +5,12 @@
     <ProjectReference Include="..\HDWallet.Ed25519\HDWallet.Ed25519.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Blake2Core" Version="1.0.0" />
+    <PackageReference Include="SimpleBase" Version="2.1.0" />
+    <PackageReference Include="Extensions.Data.xxHash.core20" Version="1.0.2.1" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
 

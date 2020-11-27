@@ -2,6 +2,7 @@ using System;
 using HDWallet.Core;
 using Ed25519;
 using NBitcoin.DataEncoders;
+using dotnetstandard_bip32;
 
 namespace HDWallet.Ed25519
 {
@@ -24,6 +25,12 @@ namespace HDWallet.Ed25519
                 var publicKey = privateKeySpan.ExtractPublicKey();
 
                 PublicKey = publicKey.ToArray();
+            }
+        }
+        public byte[] ExpandedPrivateKey {
+            get {
+                BIP32 bip32 = new BIP32();
+                return bip32.GetExpandedPrivateKey(PrivateKey);
             }
         }
         public byte[] PublicKey;

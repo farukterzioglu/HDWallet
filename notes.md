@@ -53,3 +53,6 @@ https://docs.cardano.org/projects/cardano-serialization-lib/en/latest/getting-st
 
 Path Levels  
 https://github.com/input-output-hk/cardano-wallet/wiki/Wallet-Cryptography-and-Encoding#path-levels  
+
+Registered coin types for BIP-0044  
+https://github.com/satoshilabs/slips/blob/master/slip-0044.md  

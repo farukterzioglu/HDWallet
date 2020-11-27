@@ -6,7 +6,7 @@ namespace HDWallet.Core
         BitcoinTestnet = 1,
         CoinType1 = 1,
         Tron = 195,
-        Polkadot = 359, // Not sure about path, source : https://github.com/projectmeka/meka-identity/blob/master/README.md
+        Polkadot = 354,
         Cardano = 1815,
         Tezos = 1729
     }
