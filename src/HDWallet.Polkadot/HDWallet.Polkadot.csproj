@@ -5,7 +5,7 @@
     <PackageReference Include="SimpleBase" Version="2.1.0" />
     <PackageReference Include="Extensions.Data.xxHash.core20" Version="1.0.2.1" />
     <PackageReference Include="HDWallet.Core" Version="0.1.5" />
-    <PackageReference Include="HDWallet.Ed25519" Version="0.1.0" />
+    <PackageReference Include="HDWallet.Ed25519" Version="0.1.2" />
   </ItemGroup>
 
   <PropertyGroup>

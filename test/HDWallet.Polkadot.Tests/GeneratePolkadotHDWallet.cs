@@ -1,6 +1,5 @@
 using System;
 using HDWallet.Core;
-using HDWallet.Ed25519.Sample;
 using HDWallet.Polkadot;
 using NUnit.Framework;
 
