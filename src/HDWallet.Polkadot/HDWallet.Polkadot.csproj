@@ -1,14 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\HDWallet.Core\HDWallet.Core.csproj" />
-    <ProjectReference Include="..\HDWallet.Ed25519\HDWallet.Ed25519.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Blake2Core" Version="1.0.0" />
     <PackageReference Include="SimpleBase" Version="2.1.0" />
     <PackageReference Include="Extensions.Data.xxHash.core20" Version="1.0.2.1" />
+    <PackageReference Include="HDWallet.Core" Version="0.1.5" />
+    <PackageReference Include="HDWallet.Ed25519" Version="0.1.0" />
   </ItemGroup>
 
   <PropertyGroup>
@@ -23,7 +20,7 @@
     <PackageProjectUrl>https://github.com/farukterzioglu/HDWallet</PackageProjectUrl>
     
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageTags>HDWallet;Polkadit;Blockchain;Ed25519</PackageTags>
+    <PackageTags>HDWallet;Polkadot;Blockchain;Ed25519</PackageTags>
     <PackageId>HDWallet.Polkadot</PackageId>
     
     <Authors>Faruk Terzioglu</Authors>

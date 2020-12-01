@@ -13,8 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\HDWallet.Polkadot\HDWallet.Polkadot.csproj" />
-    <ProjectReference Include="..\..\src\HDWallet.Ed25519\HDWallet.Ed25519.csproj" />
+    <PackageReference Include="HDWallet.Ed25519" Version="0.1.0" />
+    <PackageReference Include="HDWallet.Polkadot" Version="0.1.0" />
   </ItemGroup>
 
 </Project>
