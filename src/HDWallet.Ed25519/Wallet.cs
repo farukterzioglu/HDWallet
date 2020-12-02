@@ -29,10 +29,22 @@ namespace HDWallet.Ed25519
         }
         public byte[] ExpandedPrivateKey {
             get {
-                BIP32 bip32 = new BIP32();
-                return bip32.GetExpandedPrivateKey(PrivateKey);
+                return GetExpandedPrivateKey(PrivateKey);
             }
         }
+
+        public byte[] GetExpandedPrivateKey(byte[] privateKey)
+        {
+            Chaos.NaCl.Ed25519.KeyPairFromSeed(out _, out var expandedPrivateKey, privateKey);
+
+            var zero = new byte[] { 0 };
+
+            var buffer = new BigEndianBuffer();
+
+            buffer.Write(expandedPrivateKey);
+            return buffer.ToArray();
+        }
+
         public byte[] PublicKey;
         public uint Index;
         public string Address => AddressGenerator.GenerateAddress(PublicKey);
