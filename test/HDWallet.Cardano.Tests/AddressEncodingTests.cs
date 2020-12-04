@@ -7,7 +7,10 @@ using PeterO.Cbor;
 
 namespace HDWallet.Cardano.Tests
 {
-    public class Tests
+    /// <summary>
+    /// WIP
+    /// </summary>
+    public class AddressEncodingTests
     {
         [SetUp]
         public void Setup()

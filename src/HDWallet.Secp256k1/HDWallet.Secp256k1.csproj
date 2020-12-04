@@ -5,7 +5,7 @@
 
     <Title>HDWallet.Secp256k1</Title>
     <Description></Description>
-    <Version>0.2.1</Version>
+    <Version>0.2.2</Version>
 
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/farukterzioglu/HDWallet</RepositoryUrl> 
@@ -21,7 +21,7 @@
   </PropertyGroup>
 
  <ItemGroup>
-      <PackageReference Include="HDWallet.Core" Version="0.1.3" />
+      <PackageReference Include="HDWallet.Core" Version="0.1.4" />
       <PackageReference Include="Nethereum.Web3" Version="3.8.0" />
       <PackageReference Include="NBitcoin.Secp256k1" Version="1.0.1" />
       <PackageReference Include="NBitcoin" Version="5.0.27" />

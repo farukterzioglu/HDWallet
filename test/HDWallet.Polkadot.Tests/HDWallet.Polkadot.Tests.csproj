@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\HDWallet.Ed25519\HDWallet.Ed25519.csproj" />
+    <ProjectReference Include="..\..\src\HDWallet.Polkadot\HDWallet.Polkadot.csproj" />
   </ItemGroup>
 
 </Project>

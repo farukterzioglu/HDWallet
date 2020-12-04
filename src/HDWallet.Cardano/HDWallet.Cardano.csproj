@@ -1,29 +1,28 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+  <ItemGroup>
+    <PackageReference Include="HDWallet.Core" Version="0.1.5" />
+    <PackageReference Include="HDWallet.Ed25519" Version="0.1.0" />
+  </ItemGroup>
 
-    <Title>HDWallet.Core</Title>
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+
+    <Title></Title>
     <Description></Description>
-    <Version>0.1.5</Version>
+    <Version>0.1.0</Version>
 
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/farukterzioglu/HDWallet</RepositoryUrl> 
     <PackageProjectUrl>https://github.com/farukterzioglu/HDWallet</PackageProjectUrl>
     
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageTags>HDWallet;Bitcoin;Blockchain</PackageTags>
-    <PackageId>HDWallet.Core</PackageId>
+    <PackageTags>HDWallet;Cardano;Blockchain;Ed25519</PackageTags>
+    <PackageId>HDWallet.Cardano</PackageId>
     
     <Authors>Faruk Terzioglu</Authors>
     <Company></Company>
 
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Nethereum.Web3" Version="3.8.0" />
-      <PackageReference Include="NBitcoin.Secp256k1" Version="1.0.1" />
-      <PackageReference Include="NBitcoin" Version="5.0.27" />
-  </ItemGroup>
 
 </Project>
