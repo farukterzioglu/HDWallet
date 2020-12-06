@@ -7,6 +7,11 @@ using HDWallet.Core;
 
 namespace HDWallet.Polkadot
 {
+    public static class AddressPrefixes
+    {
+        public static byte PolkadotLive = 0x00;
+    }
+
     public class AddressGenerator : IAddressGenerator
     {
         string IAddressGenerator.GenerateAddress(byte[] pubKeyBytes)
@@ -24,7 +29,7 @@ namespace HDWallet.Polkadot
             int PUBLIC_KEY_LENGTH = 32;
 
             var plainAddr = Enumerable
-                .Repeat((byte)0x2A, 35)
+                .Repeat(AddressPrefixes.PolkadotLive, 35)
                 .ToArray();
 
             bytes.CopyTo(plainAddr.AsMemory(1));
