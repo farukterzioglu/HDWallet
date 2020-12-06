@@ -11,6 +11,7 @@ namespace HDWallet.Ed25519
 
         string _path;
 
+        [Obsolete("Only for testing")]
         protected HdWalletEd25519(string seed) : base(seed) {}
 
         protected HdWalletEd25519(string seed, string path) : base(seed)

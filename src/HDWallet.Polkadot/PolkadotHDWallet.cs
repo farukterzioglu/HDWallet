@@ -8,7 +8,7 @@ namespace HDWallet.Polkadot
     {
         private static readonly HDWallet.Core.CoinPath _path = Purpose.Create(PurposeNumber.BIP44).Coin(CoinType.Polkadot);
 
-        internal PolkadotHDWallet(string seed, HDWallet.Core.CoinPath path) : base(seed, _path) {}
+        public PolkadotHDWallet(string seed) : base(seed, _path) {}
         public PolkadotHDWallet(string words, string seedPassword) : base(words, seedPassword, _path) {}
     }
 }
