@@ -10,26 +10,32 @@ namespace HDWallet.Polkadot
     public static class AddressPrefixes
     {
         public static byte PolkadotLive = 0x00;
+        public static byte GenericSubstrate = 0x42;
     }
 
     public class AddressGenerator : IAddressGenerator
     {
         string IAddressGenerator.GenerateAddress(byte[] pubKeyBytes)
         {
-            return GetAddressFrom(pubKeyBytes);
+            return GetAddressFrom(pubKeyBytes, AddressType.GenericSubstrate);
+        }
+
+        public string GenerateAddress(byte[] pubKeyBytes, AddressType addressType)
+        {
+            return GetAddressFrom(pubKeyBytes, addressType);
         }
 
         /// <summary> Gets address from. </summary>
         /// <remarks> 19.09.2020. </remarks>
         /// <param name="bytes"> The bytes. </param>
         /// <returns> The address from. </returns>
-        public static string GetAddressFrom(byte[] bytes)
+        public static string GetAddressFrom(byte[] bytes, AddressType addressType)
         {
             int SR25519_PUBLIC_SIZE = 32;
             int PUBLIC_KEY_LENGTH = 32;
 
             var plainAddr = Enumerable
-                .Repeat(AddressPrefixes.PolkadotLive, 35)
+                .Repeat((byte) addressType, 35)
                 .ToArray();
 
             bytes.CopyTo(plainAddr.AsMemory(1));

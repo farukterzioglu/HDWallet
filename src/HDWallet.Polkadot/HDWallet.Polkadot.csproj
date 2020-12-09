@@ -13,7 +13,7 @@
 
     <Title></Title>
     <Description></Description>
-    <Version>0.3.2</Version>
+    <Version>0.4.0</Version>
 
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/farukterzioglu/HDWallet</RepositoryUrl> 
