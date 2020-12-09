@@ -14,5 +14,10 @@ namespace HDWallet.Polkadot
         {
             return new AddressGenerator();
         }
+
+        public PolkadotSignature SignMessage(byte[] message)
+        {
+            return new PolkadotSignature(base.Sign(message));
+        }
     }
 }

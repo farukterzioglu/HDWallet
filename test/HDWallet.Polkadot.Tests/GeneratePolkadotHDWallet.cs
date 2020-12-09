@@ -33,6 +33,18 @@ namespace HDWallet.Cardano.Tests
         }
 
         [Test]
+        public void ShouldGenerateKusamaFromMnemonic()
+        {
+            var kusamaMne = "identify fatal close west parent myself awake impact shoot wide wrong derive ship doctor mushroom weather absent vacant armed chuckle swarm hip music wing";
+            IHDWallet<PolkadotWallet> hdWallet = new KusamaHDWallet(kusamaMne,"");
+
+            var wallet = hdWallet.GetAccount(0).GetExternalWallet(0);
+            var address = wallet.Address;
+
+            Assert.AreEqual(expected: "15fn3g9Ehu9FYTBUSzWPihcVfHnfm2AfFNtMtPNMHGkoWTEg", actual: address);
+        }
+
+        [Test]
         public void ShouldGenerateFromSeed()
         {
             var seed = "ba78b733ffe929e400f844751a48dded5ebc7c62635a1590e97b066e3b9e8b890741602a69279c45ed5d17dfd6e8703e3c575de4ea4712868df5f1997e2b97b2";

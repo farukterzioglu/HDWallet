@@ -4,7 +4,7 @@
     <PackageReference Include="Blake2Core" Version="1.0.0" />
     <PackageReference Include="SimpleBase" Version="2.1.0" />
     <PackageReference Include="Extensions.Data.xxHash.core20" Version="1.0.2.1" />
-    <PackageReference Include="HDWallet.Core" Version="0.1.5" />
+    <PackageReference Include="HDWallet.Core" Version="0.1.6" />
     <PackageReference Include="HDWallet.Ed25519" Version="0.2.0" />
   </ItemGroup>
 
@@ -13,7 +13,7 @@
 
     <Title></Title>
     <Description></Description>
-    <Version>0.3.0</Version>
+    <Version>0.3.2</Version>
 
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/farukterzioglu/HDWallet</RepositoryUrl> 
