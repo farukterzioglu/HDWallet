@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Base58Check" Version="0.2.0" />
+    <PackageReference Include="HDWallet.Secp256k1" Version="0.2.2" />
+    <PackageReference Include="Konscious.Security.Cryptography.Blake2" Version="1.0.9" />
+    <PackageReference Include="Nethereum.Web3" Version="3.8.0" />
+    <PackageReference Include="NBitcoin.Secp256k1" Version="1.0.1" />
+    <PackageReference Include="NBitcoin" Version="5.0.27" />
+  </ItemGroup>
+
+</Project>
