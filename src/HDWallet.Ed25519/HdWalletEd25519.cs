@@ -4,9 +4,27 @@ using HDWallet.Core;
 
 namespace HDWallet.Ed25519
 {
-    public abstract class HdWalletEd25519<TWallet> : HdWalletBase, IHDWallet<TWallet> where TWallet : Wallet, new()
-    {   
-        BIP32 bip32 = new BIP32();
+    public abstract class HdWalletEd25519Base : HdWalletBase
+    {
+        protected BIP32 bip32 = new BIP32();
+
+        protected HdWalletEd25519Base(string seed) : base(seed){}
+        protected HdWalletEd25519Base(string words, string seedPassword) : base(words, seedPassword){}
+
+        public TWallet GetWalletFromPath<TWallet>(string path) where TWallet : Wallet, new()
+        {
+            var derivePath = bip32.DerivePath(path, this.BIP39Seed);
+
+            return new TWallet() {
+                Path = path,
+                PrivateKey = derivePath.Key
+            };
+        }
+
+    }
+
+    public abstract class HdWalletEd25519<TWallet> : HdWalletEd25519Base, IHDWallet<TWallet> where TWallet : Wallet, new()
+    {
         TWallet _coinTypeWallet;
 
         string _path;
@@ -48,36 +66,26 @@ namespace HDWallet.Ed25519
             return _coinTypeWallet;
         }
 
-        public TWallet GetWalletFromPath(string path)
-        {
-            var derivePath = bip32.DerivePath(path, this.BIP39Seed);
-
-            return new TWallet() {
-                Path = path,
-                PrivateKey = derivePath.Key
-            };
-        }
-
         public TWallet GetSubWallet(string subPath)
         {
             var keyPath = $"{_path}/{subPath}";
-            return GetWalletFromPath(keyPath);
+            return GetWalletFromPath<TWallet>(keyPath);
         }
 
         TWallet IHDWallet<TWallet>.GetMasterWallet()
         {
-            return GetWalletFromPath(_path);
+            return GetWalletFromPath<TWallet>(_path);
         }
 
         TWallet IHDWallet<TWallet>.GetAccountWallet(uint accountIndex)
         {
             var keyPath = $"{_path}/{accountIndex}'";
-            return GetWalletFromPath(keyPath);
+            return GetWalletFromPath<TWallet>(keyPath);
         }
 
         IAccount<TWallet> IHDWallet<TWallet>.GetAccount(uint accountIndex)
         {
-            Func<string, TWallet> deriveFunction = GetWalletFromPath;
+            Func<string, TWallet> deriveFunction = GetWalletFromPath<TWallet>;
             return new Account<TWallet>(accountIndex, GetSubWallet);
         }
     }

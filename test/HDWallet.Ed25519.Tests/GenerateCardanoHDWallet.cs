@@ -24,7 +24,7 @@ namespace HDWallet.Ed25519.Tests
         public void ShouldGenerateMasterWalletFromPurposeAndPath(string path)
         {
             TestHDWalletEd25519 hdWallet = new TestHDWalletEd25519(ReferenceSeed);
-            CardanoSampleWallet wallet = hdWallet.GetWalletFromPath(path);
+            CardanoSampleWallet wallet = hdWallet.GetWalletFromPath<CardanoSampleWallet>(path);
 
             Assert.AreEqual(ReferencePrivateKey, wallet.PrivateKey.ToHexString());
             Assert.AreEqual(ReferencePubKey, $"00{wallet.PublicKey.ToHexString()}");

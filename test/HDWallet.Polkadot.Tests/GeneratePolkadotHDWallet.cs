@@ -1,5 +1,6 @@
 using System;
 using HDWallet.Core;
+using HDWallet.Ed25519.Sample;
 using HDWallet.Polkadot;
 using NUnit.Framework;
 
@@ -8,6 +9,20 @@ namespace HDWallet.Cardano.Tests
     public class GeneratePolkadotHDWallet
     {
         private const string mnemonic = "rapid apart clip require dragon property hurry ensure coil ship torch include squirrel jewel window";
+        
+        [Test]
+        public void ShouldGenerateMasterWalletFromPurposeAndPath()
+        {
+            var testMne = "identify fatal close west parent myself awake impact shoot wide wrong derive ship doctor mushroom weather absent vacant armed chuckle swarm hip music wing";
+            
+            TestHDWalletEd25519 hdWallet = new TestHDWalletEd25519(mnemonic, testMne);
+            var coinTypeWallet = hdWallet.GetWalletFromPath<PolkadotWallet>("44'/355'/0'/0'/1'");
+            var address = coinTypeWallet.GetNetworkAddress(AddressType.PolkadotLive);
+
+            Console.WriteLine($"Address: {address}");
+            Console.WriteLine($"Public key: {coinTypeWallet.PublicKey.ToHexString()}");
+            Console.WriteLine($"Private key: {coinTypeWallet.PrivateKey.ToHexString()}");
+        }
         
         [Test]
         public void ShouldGenerateFromMnemonic()

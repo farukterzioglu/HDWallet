@@ -10,11 +10,11 @@ namespace HDWallet.Ed25519.Tests
         private const string mnemonic = "rapid apart clip require dragon property hurry ensure coil ship torch include squirrel jewel window";
         
 
-        [TestCase("m/0'/1'")]
-        public void ShouldGenerateMasterWalletFromPurposeAndPath(string path)
+        [Test]
+        public void ShouldGenerateMasterWalletFromPurposeAndPath()
         {
-            TestHDWalletEd25519 hdWallet = new TestHDWalletEd25519(mnemonic, "", path);
-            var coinTypeWallet = hdWallet.GetCoinTypeWallet();
+            TestHDWalletEd25519 hdWallet = new TestHDWalletEd25519(mnemonic, "");
+            var coinTypeWallet = hdWallet.GetWalletFromPath<SampleWallet>("44'/355'/0'/0'/1'");
 
             Console.WriteLine($"Public key: {coinTypeWallet.PublicKey.ToHexString()}");
             Console.WriteLine($"Private key: {coinTypeWallet.PrivateKey.ToHexString()}");
