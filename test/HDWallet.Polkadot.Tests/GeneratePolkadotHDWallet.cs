@@ -15,8 +15,8 @@ namespace HDWallet.Cardano.Tests
         {
             var testMne = "identify fatal close west parent myself awake impact shoot wide wrong derive ship doctor mushroom weather absent vacant armed chuckle swarm hip music wing";
             
-            TestHDWalletEd25519 hdWallet = new TestHDWalletEd25519(mnemonic, testMne);
-            var coinTypeWallet = hdWallet.GetWalletFromPath<PolkadotWallet>("44'/355'/0'/0'/1'");
+            TestHDWalletEd25519 hdWallet = new TestHDWalletEd25519(testMne, "");
+            var coinTypeWallet = hdWallet.GetWalletFromPath<PolkadotWallet>("m/44'/354'/0'/0'/1'");
             var address = coinTypeWallet.GetNetworkAddress(AddressType.PolkadotLive);
 
             Console.WriteLine($"Address: {address}");
@@ -93,6 +93,24 @@ namespace HDWallet.Cardano.Tests
 
             var polkadotAddress = wallet.GetNetworkAddress(AddressType.PolkadotLive);
             Assert.AreEqual(expected: "153BfYunVob3vDHNuPEg8KeUHpkoZXdYzgVVm11HKGaarp6Y", actual: polkadotAddress);
+        }
+
+        IHDWallet<PolkadotWallet> hdWallet = new PolkadotHDWallet("ba78b733ffe929e400f844751a48dded5ebc7c62635a1590e97b066e3b9e8b890741602a69279c45ed5d17dfd6e8703e3c575de4ea4712868df5f1997e2b97b2");
+
+        [TestCase(0, "5G6tXDeie2KaUgGrwkBfzApKSCm9sE5QvBm1bi1vmBZ4gcCN")]
+        [TestCase(1, "5HYh1vCkCGa7gyPYnpcXbBqEtTgL2WQ7cMZjPmenLuQo6Kmw")]
+        [TestCase(2, "5CAaEUL5YXPLRTSjPqB5JKJLaErdD7r8HaH6H7LPmgbsqfR9")]
+        [TestCase(3, "5DGM7NVVLhqTcrXVtDbmUkXqxKK2TMLk2owPEHhKULb2vNcA")]
+        [TestCase(4, "5CdedS14L983sVc7TwocWh1L2e2JPke8Mi1tSQsdsS4YZqsC")]
+        [TestCase(100, "5DBnYvo59GcybxhTsQwTfTLhQKLKJU2ZGisxW2zRF11GdFaA")]
+        [TestCase(1000, "5Gmq6VAK4LMmMG64tNSCxxUmTBCRbN6GvFcBfuEvTAeHT32m")]
+        [TestCase(10000, "5D85aX1XMTyLUrGYK3wTFVypxJxSKgGQmnTjLEDKuk2ajbKX")]
+        [TestCase(100000, "5GFPkx8fTfsS36EWmgENVEMuqvbDyu2juWh3abWXtwZeaMgK")]
+        public void ShouldGenerateMultipleFromSeed(int index, string expectedAddress)
+        {
+            var wallet = hdWallet.GetAccount(0).GetExternalWallet((uint)index);
+
+            Assert.AreEqual(expected: expectedAddress, actual: wallet.Address);
         }
     }
 }

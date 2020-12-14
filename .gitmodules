@@ -1,0 +1,3 @@
+[submodule "src/Dependencies/dotnetstandard-bip32"]
+	path = src/Dependencies/dotnetstandard-bip32
+	url = https://github.com/BlockForks/dotnetstandard-bip32.git
