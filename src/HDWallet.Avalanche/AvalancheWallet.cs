@@ -14,4 +14,19 @@ namespace HDWallet.Avalanche
             return new AddressGenerator();
         }
     }
+
+    public class FujiWallet : Wallet, IWallet
+    {
+        public FujiWallet(){}
+
+        public FujiWallet(string privateKey) : base(privateKey) {}
+
+        protected override IAddressGenerator GetAddressGenerator()
+        {
+            var addressGenerator = new AddressGenerator();
+            addressGenerator.HRP = "fuji";
+
+            return addressGenerator;
+        }
+    }
 }

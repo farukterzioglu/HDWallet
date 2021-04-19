@@ -37,6 +37,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HDWallet.Ed25519", "src\HDW
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HDWallet.Avalanche", "src\HDWallet.Avalanche\HDWallet.Avalanche.csproj", "{7E9717DB-199F-479F-84C2-CC916B84DE81}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HDWallet.Avalanche.Tests", "test\HDWallet.Avalanche.Tests\HDWallet.Avalanche.Tests.csproj", "{5D900FEE-0AF8-4609-8D7E-F82A28551E11}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -227,6 +229,18 @@ Global
 		{7E9717DB-199F-479F-84C2-CC916B84DE81}.Release|x64.Build.0 = Release|Any CPU
 		{7E9717DB-199F-479F-84C2-CC916B84DE81}.Release|x86.ActiveCfg = Release|Any CPU
 		{7E9717DB-199F-479F-84C2-CC916B84DE81}.Release|x86.Build.0 = Release|Any CPU
+		{5D900FEE-0AF8-4609-8D7E-F82A28551E11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D900FEE-0AF8-4609-8D7E-F82A28551E11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D900FEE-0AF8-4609-8D7E-F82A28551E11}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5D900FEE-0AF8-4609-8D7E-F82A28551E11}.Debug|x64.Build.0 = Debug|Any CPU
+		{5D900FEE-0AF8-4609-8D7E-F82A28551E11}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5D900FEE-0AF8-4609-8D7E-F82A28551E11}.Debug|x86.Build.0 = Debug|Any CPU
+		{5D900FEE-0AF8-4609-8D7E-F82A28551E11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D900FEE-0AF8-4609-8D7E-F82A28551E11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D900FEE-0AF8-4609-8D7E-F82A28551E11}.Release|x64.ActiveCfg = Release|Any CPU
+		{5D900FEE-0AF8-4609-8D7E-F82A28551E11}.Release|x64.Build.0 = Release|Any CPU
+		{5D900FEE-0AF8-4609-8D7E-F82A28551E11}.Release|x86.ActiveCfg = Release|Any CPU
+		{5D900FEE-0AF8-4609-8D7E-F82A28551E11}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -247,6 +261,7 @@ Global
 		{A2609FFA-CA7C-4631-B12E-07F464AA9C6A} = {587DF704-BD3F-41FF-A468-289BB83BBEF7}
 		{545D3A5F-5086-46B2-AAEC-B635B37B1507} = {587DF704-BD3F-41FF-A468-289BB83BBEF7}
 		{7E9717DB-199F-479F-84C2-CC916B84DE81} = {587DF704-BD3F-41FF-A468-289BB83BBEF7}
+		{5D900FEE-0AF8-4609-8D7E-F82A28551E11} = {73CF8F5A-07F9-477C-8F47-507158E4C68C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A8055563-076B-434F-9578-B8CAA10E458E}
