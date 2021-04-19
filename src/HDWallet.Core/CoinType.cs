@@ -9,6 +9,7 @@ namespace HDWallet.Core
         Polkadot = 354,
         Kusama = 434,
         Cardano = 1815,
-        Tezos = 1729
+        Tezos = 1729,
+        Avalanche = 9000
     }
 }
