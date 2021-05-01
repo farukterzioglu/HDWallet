@@ -12,11 +12,11 @@ IHDWallet<AvalancheWallet> wallet = new AvalancheHDWallet("conduct stadium ask o
 var account0 = wallet.GetAccount(0);
 var wallet0 = account0.GetExternalWallet(0);
 
-Assert.AreEqual("X-avax1wn9s0qlpeur87pk2ccxajlj68d5wt3tw3tts8z",wallet0.Address);
+Assert.AreEqual("X-avax1wn9s0qlpeur87pk2ccxajlj68d5wt3tw3tts8z",wallet0.GetAddress(Networks.Mainnet, Chain.X));
 ```  
 
 Sample for generating a wallet (non-hd) from private key;  
 ```csharp
 var wallet = new AvalancheWallet("c878c962bdebe816addda5dd12aff7f54f5bf1173c32e91dcb4441980ecd3123");
-Assert.AreEqual("X-avax1wn9s0qlpeur87pk2ccxajlj68d5wt3tw3tts8z",wallet.Address );
+Assert.AreEqual("X-avax1wn9s0qlpeur87pk2ccxajlj68d5wt3tw3tts8z",wallet.GetAddress(Networks.Mainnet, Chain.X) );
 ```

@@ -1,3 +1,4 @@
+using System;
 using HDWallet.Core;
 using HDWallet.Secp256k1;
 
@@ -5,6 +6,12 @@ namespace HDWallet.Avalanche
 {
     public class AvalancheWallet : Wallet, IWallet
     {
+        /// <summary>
+        /// Returns address for Mainnet and X-Chain 
+        /// To get address for other networks (e.g. Fuji) or other chains (e.g. P-Chain) use 'GetAddress(Networks, Chain)'
+        /// </summary>
+        public new string Address => base.Address;
+        
         public AvalancheWallet(){}
 
         public AvalancheWallet(string privateKey) : base(privateKey) {}
@@ -13,20 +20,10 @@ namespace HDWallet.Avalanche
         {
             return new AddressGenerator();
         }
-    }
 
-    public class FujiWallet : Wallet, IWallet
-    {
-        public FujiWallet(){}
-
-        public FujiWallet(string privateKey) : base(privateKey) {}
-
-        protected override IAddressGenerator GetAddressGenerator()
+        public string GetAddress(Networks network = Networks.Mainnet, Chain chain = Chain.X)
         {
-            var addressGenerator = new AddressGenerator();
-            addressGenerator.HRP = "fuji";
-
-            return addressGenerator;
+            return new AddressGenerator().GenerateAddress(base.PublicKey.ToBytes(), network, chain);
         }
     }
 }

@@ -10,11 +10,4 @@ namespace HDWallet.Avalanche
 
         public AvalancheHDWallet(string words, string seedPassword = "") : base(words, seedPassword, _path) {}
     }
-
-    public class FujiHDWallet : HDWallet<FujiWallet>
-    {
-        private static readonly HDWallet.Core.CoinPath _path = Purpose.Create(PurposeNumber.BIP44).Coin(CoinType.Avalanche);
-
-        public FujiHDWallet(string words, string seedPassword = "") : base(words, seedPassword, _path) {}
-    }
 }
