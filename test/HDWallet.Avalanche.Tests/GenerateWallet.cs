@@ -1,16 +1,16 @@
 using System;
 using HDWallet.Core;
-using HDWallet.Secp256k1.Sample;
 using NUnit.Framework;
 
 namespace HDWallet.Avalanche.Tests
 {
     public class GenerateWallet
     {
+
         [Test]
         public void ShouldGenerateWalletFromMnemonic()
         {
-            IHDWallet<AvalancheWallet> avaxHDWallet = new AvalancheHDWallet("wire sort once settle balcony bright awkward pottery derive noodle absorb combine quick account cluster dash material yard people layer fold royal add learn", "");
+            IHDWallet<AvalancheWallet> avaxHDWallet = new AvalancheHDWallet("wire sort once settle balcony bright awkward pottery derive noodle absorb combine quick account cluster dash material yard people layer fold royal add learn");
             var account0 = avaxHDWallet.GetAccount(0);
             AvalancheWallet wallet0 = account0.GetExternalWallet(0);
 
@@ -26,7 +26,7 @@ namespace HDWallet.Avalanche.Tests
             for (var i = 0; i < 10; i++)
             {
                 AvalancheWallet wallet = account.GetExternalWallet((uint)i);
-                Console.WriteLine(wallet.Address);
+                Console.WriteLine($"{wallet.PrivateKey.ToHex()} - {wallet.Address}");
             }
         }
 

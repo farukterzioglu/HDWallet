@@ -46,5 +46,17 @@ namespace HDWallet.Secp256k1
 
             return new Account<TWallet>(accountIndex, externalChain: externalMasterKey, internalChain: internalMasterKey);
         }
+
+        /// <summary>
+        /// Generates Account from master. Doesn't derive new path by accountIndexInfo
+        /// </summary>
+        /// <param name="accountMasterKey">Used to generate wallet</param>
+        /// <param name="accountIndexInfo">Used only to store information</param>
+        /// <returns></returns>
+        public static IAccount<TWallet> GetAccountFromMasterKey(string accountMasterKey, uint accountIndexInfo)
+        {
+            IAccountHDWallet<TWallet> accountHDWallet = new AccountHDWallet<TWallet>(accountMasterKey, accountIndexInfo);
+            return accountHDWallet.Account;
+        }
     }
 }

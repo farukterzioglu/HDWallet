@@ -5,14 +5,14 @@
 
     <Title>HDWallet.Secp256k1</Title>
     <Description></Description>
-    <Version>0.2.2</Version>
+    <Version>0.2.3</Version>
 
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/farukterzioglu/HDWallet</RepositoryUrl> 
     <PackageProjectUrl>https://github.com/farukterzioglu/HDWallet</PackageProjectUrl>
     
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageTags>HDWallet;Secp256k1;Bitcoin;Ethereum;Tron;Blockchain</PackageTags>
+    <PackageTags>HDWallet;Secp256k1;Bitcoin;Ethereum;Tron;Avalanche;Blockchain</PackageTags>
     <PackageId>HDWallet.Secp256k1</PackageId>
     
     <Authors>Faruk Terzioglu</Authors>
