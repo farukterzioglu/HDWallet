@@ -56,3 +56,5 @@ https://github.com/input-output-hk/cardano-wallet/wiki/Wallet-Cryptography-and-E
 
 Registered coin types for BIP-0044  
 https://github.com/satoshilabs/slips/blob/master/slip-0044.md  
+
+dotnet nuget locals all --clear

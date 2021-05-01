@@ -7,7 +7,9 @@ namespace HDWallet.Core
         CoinType1 = 1,
         Tron = 195,
         Polkadot = 354,
+        Kusama = 434,
         Cardano = 1815,
-        Tezos = 1729
+        Tezos = 1729,
+        Avalanche = 9000
     }
 }

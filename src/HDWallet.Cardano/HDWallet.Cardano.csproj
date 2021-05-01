@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\HDWallet.Core\HDWallet.Core.csproj" />
-    <ProjectReference Include="..\HDWallet.Ed25519\HDWallet.Ed25519.csproj" />
+    <PackageReference Include="HDWallet.Core" Version="0.1.5" />
+    <PackageReference Include="HDWallet.Ed25519" Version="0.1.0" />
   </ItemGroup>
 
   <PropertyGroup>
