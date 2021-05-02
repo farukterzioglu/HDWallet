@@ -31,7 +31,10 @@
             "cwd": "${workspaceFolder}/src/HDWallet.Api",
             "stopAtEntry": false,
             "console": "internalConsole",
-            "env": {}
+            "env": {
+                "AccountHDKey":"xprv9xyvwx1jBEBKwjZtXYogBwDyfXTyTa3Af6urV2dU843CyBxLu9J5GLQL4vMWvaW4q3skqAtarUvdGmBoWQZnU2RBLnmJdCM4FnbMa72xWNy",
+                "AccountNumber": "0"
+            }
         }
     ]
 }

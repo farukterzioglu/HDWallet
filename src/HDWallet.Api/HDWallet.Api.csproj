@@ -10,4 +10,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\HDWallet.Tron\HDWallet.Tron.csproj" />
+    <ProjectReference Include="..\HDWallet.Core\HDWallet.Core.csproj" />
+    <ProjectReference Include="..\HDWallet.Secp256k1\HDWallet.Secp256k1.csproj" />
+  </ItemGroup>
+
 </Project>

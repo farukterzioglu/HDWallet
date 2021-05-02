@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HDWallet.Core;
+using HDWallet.Secp256k1;
+using HDWallet.Tron;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -42,6 +45,26 @@ namespace HDWallet.Api
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HDWallet.Api", Version = "v1" });
                 c.SwaggerDoc("v2", new OpenApiInfo { Title = "HDWallet.Api", Version = "v2" });
             });
+
+            var settings = new Settings();
+            Configuration.Bind(settings);
+            settings.Validate();
+            services.AddSingleton<Settings>(settings);
+
+            // TODO: Implement for all blockchains
+            IAccountHDWallet<TronWallet> accountHDWallet = null;
+            if(string.IsNullOrWhiteSpace(settings.AccountHDKey) == false)
+            {
+                accountHDWallet = new AccountHDWallet<TronWallet>(settings.AccountHDKey, settings.AccountNumber.Value);
+            }
+            services.AddSingleton<Func<IAccountHDWallet<TronWallet>>>( () => accountHDWallet);
+            
+            IHDWallet<TronWallet> tronHDWallet = null;
+            if(string.IsNullOrWhiteSpace(settings.Mnemonic) == false) 
+            {
+                tronHDWallet = new TronHDWallet(settings.Mnemonic, settings.Passphrase);
+            }
+            services.AddSingleton<Func<IHDWallet<TronWallet>>>( () => tronHDWallet);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
