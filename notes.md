@@ -58,3 +58,5 @@ Registered coin types for BIP-0044
 https://github.com/satoshilabs/slips/blob/master/slip-0044.md  
 
 dotnet nuget locals all --clear
+
+https://www.c-sharpcorner.com/article/maintaine-multiple-versions-of-api-code-base-using/
