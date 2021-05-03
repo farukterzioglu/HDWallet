@@ -55,7 +55,7 @@ namespace HDWallet.Api
             IAccountHDWallet<TronWallet> accountHDWallet = null;
             if(string.IsNullOrWhiteSpace(settings.AccountHDKey) == false)
             {
-                accountHDWallet = new AccountHDWallet<TronWallet>(settings.AccountHDKey, settings.AccountNumber.Value);
+                accountHDWallet = new AccountHDWallet<TronWallet>(settings.AccountHDKey, settings.AccountNumber);
             }
             services.AddSingleton<Func<IAccountHDWallet<TronWallet>>>( () => accountHDWallet);
             
