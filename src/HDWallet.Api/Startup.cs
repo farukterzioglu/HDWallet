@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HDWallet.Avalanche;
 using HDWallet.Core;
 using HDWallet.Secp256k1;
 using HDWallet.Tron;
@@ -52,6 +53,7 @@ namespace HDWallet.Api
             services.AddSingleton<Settings>(settings);
 
             // TODO: Implement for all blockchains
+            // TRON
             IAccountHDWallet<TronWallet> accountHDWallet = null;
             if(string.IsNullOrWhiteSpace(settings.AccountHDKey) == false)
             {
@@ -65,6 +67,21 @@ namespace HDWallet.Api
                 tronHDWallet = new TronHDWallet(settings.Mnemonic, settings.Passphrase);
             }
             services.AddSingleton<Func<IHDWallet<TronWallet>>>( () => tronHDWallet);
+
+            // AVALANCHE
+            IAccountHDWallet<AvalancheWallet> avaxAccountHDWallet = null;
+            if(string.IsNullOrWhiteSpace(settings.AccountHDKey) == false)
+            {
+                avaxAccountHDWallet = new AccountHDWallet<AvalancheWallet>(settings.AccountHDKey, settings.AccountNumber);
+            }
+            services.AddSingleton<Func<IAccountHDWallet<AvalancheWallet>>>( () => avaxAccountHDWallet);
+            
+            IHDWallet<AvalancheWallet> avalancheHDWallet = null;
+            if(string.IsNullOrWhiteSpace(settings.Mnemonic) == false) 
+            {
+                avalancheHDWallet = new AvalancheHDWallet(settings.Mnemonic, settings.Passphrase);
+            }
+            services.AddSingleton<Func<IHDWallet<AvalancheWallet>>>( () => avalancheHDWallet);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

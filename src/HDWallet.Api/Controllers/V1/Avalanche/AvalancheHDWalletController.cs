@@ -2,24 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HDWallet.Avalanche;
 using HDWallet.Core;
 using HDWallet.Tron;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace HDWallet.Api.Controllers.V1.Tron
+namespace HDWallet.Api.Controllers.V1.Avalanche
 {
     [ApiController]
     [ApiVersion( "1.0" ), ApiVersion("2.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
-    public class TronHDWalletController : ControllerBase
+    public class AvalancheHDWalletController : ControllerBase
     {
-        private readonly ILogger<TronHDWalletController> _logger;
-        private readonly IHDWallet<TronWallet> _hDWallet;
+        private readonly ILogger<AvalancheHDWalletController> _logger;
+        private readonly IHDWallet<AvalancheWallet> _hDWallet;
 
-        public TronHDWalletController(
-            ILogger<TronHDWalletController> logger,
-            Func<IHDWallet<TronWallet>> hDWallet)
+        public AvalancheHDWalletController(
+            ILogger<AvalancheHDWalletController> logger,
+            Func<IHDWallet<AvalancheWallet>> hDWallet)
         {
             _logger = logger;
             _hDWallet= hDWallet();

@@ -14,6 +14,7 @@
     <ProjectReference Include="..\HDWallet.Tron\HDWallet.Tron.csproj" />
     <ProjectReference Include="..\HDWallet.Core\HDWallet.Core.csproj" />
     <ProjectReference Include="..\HDWallet.Secp256k1\HDWallet.Secp256k1.csproj" />
+    <ProjectReference Include="..\HDWallet.Avalanche\HDWallet.Avalanche.csproj" />
   </ItemGroup>
 
 </Project>
