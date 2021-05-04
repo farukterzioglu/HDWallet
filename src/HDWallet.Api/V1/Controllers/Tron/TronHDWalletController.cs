@@ -7,7 +7,7 @@ using HDWallet.Tron;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace HDWallet.Api.Controllers.V1.Tron
+namespace HDWallet.Api.V1.Controllers.Tron
 {
     [ApiController]
     [ApiVersion( "1.0" ), ApiVersion("2.0")]
