@@ -23,7 +23,7 @@ namespace HDWallet.Ed25519
 
     }
 
-    public abstract class HdWalletEd25519<TWallet> : HdWalletEd25519Base, IHDWallet<TWallet> where TWallet : Wallet, new()
+    public abstract class HdWalletEd25519<TWallet> : HdWalletEd25519Base, IHDWallet<TWallet> where TWallet : Wallet, IWallet, new()
     {
         TWallet _coinTypeWallet;
 
@@ -72,18 +72,18 @@ namespace HDWallet.Ed25519
             return GetWalletFromPath<TWallet>(keyPath);
         }
 
-        TWallet IHDWallet<TWallet>.GetMasterWallet()
+        public TWallet GetMasterWallet()
         {
             return GetWalletFromPath<TWallet>(_path);
         }
 
-        TWallet IHDWallet<TWallet>.GetAccountWallet(uint accountIndex)
+        public TWallet GetAccountWallet(uint accountIndex)
         {
             var keyPath = $"{_path}/{accountIndex}'";
             return GetWalletFromPath<TWallet>(keyPath);
         }
 
-        IAccount<TWallet> IHDWallet<TWallet>.GetAccount(uint accountIndex)
+        public IAccount<TWallet> GetAccount(uint accountIndex)
         {
             Func<string, TWallet> deriveFunction = GetWalletFromPath<TWallet>;
             return new Account<TWallet>(accountIndex, GetSubWallet);

@@ -11,7 +11,7 @@ namespace HDWallet.Api.V1.Controllers.Tron
 {
     [ApiController]
     [ApiVersion( "1.0" ), ApiVersion("2.0")]
-    [Route("api/v{version:apiVersion}/[controller]")]
+    [Route("api/v{version:apiVersion}/Tron")]
     public class TronHDWalletController : ControllerBase
     {
         private readonly ILogger<TronHDWalletController> _logger;

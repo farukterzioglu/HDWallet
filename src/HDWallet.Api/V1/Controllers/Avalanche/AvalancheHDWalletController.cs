@@ -12,7 +12,7 @@ namespace HDWallet.Api.V1.Controllers.Avalanche
 {
     [ApiController]
     [ApiVersion( "1.0" ), ApiVersion("2.0")]
-    [Route("api/v{version:apiVersion}/[controller]")]
+    [Route("api/v{version:apiVersion}")]
     public class AvalancheHDWalletController : ControllerBase
     {
         private readonly ILogger<AvalancheHDWalletController> _logger;
@@ -26,7 +26,7 @@ namespace HDWallet.Api.V1.Controllers.Avalanche
             _hDWallet= hDWallet();
         }
 
-        [HttpGet("/account/{accountNumber}/deposit/{addressIndex}")]
+        [HttpGet("/Avalanche/account/{accountNumber}/deposit/{addressIndex}")]
         public ActionResult<string> GetDeposit(uint accountNumber, uint addressIndex)
         {
             if(_hDWallet == null) 
@@ -38,7 +38,7 @@ namespace HDWallet.Api.V1.Controllers.Avalanche
             return wallet.Address;
         }
 
-        [HttpGet("/account/{accountNumber}/change/{addressIndex}")]
+        [HttpGet("/Avalanche/account/{accountNumber}/change/{addressIndex}")]
         public ActionResult<string> GetChange(uint accountNumber, uint addressIndex)
         {
             if(_hDWallet == null) 

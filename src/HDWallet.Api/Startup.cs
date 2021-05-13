@@ -21,6 +21,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Microsoft.Extensions.PlatformAbstractions;
+using HDWallet.Polkadot;
 
 namespace HDWallet.Api
 {
@@ -98,6 +99,36 @@ namespace HDWallet.Api
                 avalancheHDWallet = new AvalancheHDWallet(settings.Mnemonic, settings.Passphrase);
             }
             services.AddSingleton<Func<IHDWallet<AvalancheWallet>>>( () => avalancheHDWallet);
+
+            // IHDWallet<PolkadotWallet> polkadotHDWallet = null;
+            IHDWallet<PolkadotWallet> polkadotHDWallet = null;
+            if(string.IsNullOrWhiteSpace(settings.Mnemonic) == false) 
+            {
+                polkadotHDWallet = new PolkadotHDWallet(settings.Mnemonic, settings.Passphrase);
+            }
+            services.AddSingleton<Func<IHDWallet<PolkadotWallet>>>( () => polkadotHDWallet);
+
+            services.AddSingleton<Func<string, IHDWallet<HDWallet.Secp256k1.Wallet>>>( (string coin) => {
+                switch (coin.ToLower())
+                {
+                    case "tron":
+                        return tronHDWallet as IHDWallet<HDWallet.Secp256k1.Wallet>;
+                    default:
+                        throw new NotImplementedException();
+                }
+            });
+
+            services.AddSingleton<Func<string, IHDWallet<IWallet>>>( (string coin) => {
+                switch (coin.ToLower())
+                {
+                    case "polkadot":
+                        return (IHDWallet<IWallet>) polkadotHDWallet;
+                    default:
+                        throw new NotImplementedException();
+                }
+            });
+
+            
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
