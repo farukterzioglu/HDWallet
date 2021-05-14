@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using HDWallet.Core;
 using HDWallet.Tron;
 using Microsoft.AspNetCore.Mvc;
@@ -10,43 +7,24 @@ using Microsoft.Extensions.Logging;
 namespace HDWallet.Api.V1.Controllers.Tron
 {
     [ApiController]
-    [ApiVersion( "1.0" ), ApiVersion("2.0")]
-    [Route("api/v{version:apiVersion}/Tron")]
-    public class TronWalletController : ControllerBase
+    [ApiVersion( "1.0" )]
+    [Route("api/v{version:apiVersion}")]
+    public class TronWalletController : Secp256k1WalletController<TronWallet>
     {
-        private readonly ILogger<TronWalletController> _logger;
-        private readonly IAccountHDWallet<TronWallet> _accountHDWallet;
-
         public TronWalletController(
             ILogger<TronWalletController> logger,
-            Func<IAccountHDWallet<TronWallet>> accountHDWallet)
-        {
-            _logger = logger;
-            _accountHDWallet = accountHDWallet();
-        }
+            Func<IAccountHDWallet<TronWallet>> accountHDWallet) : base(logger, accountHDWallet) {}
 
-        [HttpGet("/deposit/{addressIndex}")]
+        [HttpGet("/Tron/external/{index}")]
         public ActionResult<string> GetAccountDeposit(uint addressIndex)
         {
-            if(_accountHDWallet == null) 
-            {
-                return BadRequest("Wallet wasn't initialized with master key! Use hd wallet.");
-            }
-
-            var wallet = _accountHDWallet.Account.GetExternalWallet(addressIndex);
-            return wallet.Address;
+            return base.DepositWallet(addressIndex);
         }
 
-        [HttpGet("/change/{addressIndex}")]
+        [HttpGet("/Tron/internal/{index}")]
         public ActionResult<string> GetAccountChange(uint addressIndex)
         {
-            if(_accountHDWallet == null) 
-            {
-                return BadRequest("Wallet wasn't initialized with master key! Use hd wallet.");
-            }
-
-            var wallet = _accountHDWallet.Account.GetInternalWallet(addressIndex);
-            return wallet.Address;
+            return base.Accepted(addressIndex);
         }
     }
 }

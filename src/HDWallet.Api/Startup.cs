@@ -58,77 +58,16 @@ namespace HDWallet.Api
                     // integrate xml comments
                     options.IncludeXmlComments( XmlCommentsFilePath );
                 } );
-            // services.AddSwaggerGen(c =>
-            // {
-            //     c.SwaggerDoc("v1", new OpenApiInfo { Title = "HDWallet.Api", Version = "v1" });
-            //     c.SwaggerDoc("v2", new OpenApiInfo { Title = "HDWallet.Api", Version = "v2" });
-            // });
 
             var settings = new Settings();
             Configuration.Bind(settings);
             settings.Validate();
             services.AddSingleton<Settings>(settings);
 
-            // TODO: Implement for all blockchains
-            // TRON
-            IAccountHDWallet<TronWallet> accountHDWallet = null;
-            if(string.IsNullOrWhiteSpace(settings.AccountHDKey) == false)
-            {
-                accountHDWallet = new AccountHDWallet<TronWallet>(settings.AccountHDKey, settings.AccountNumber);
-            }
-            services.AddSingleton<Func<IAccountHDWallet<TronWallet>>>( () => accountHDWallet);
-            
-            IHDWallet<TronWallet> tronHDWallet = null;
-            if(string.IsNullOrWhiteSpace(settings.Mnemonic) == false) 
-            {
-                tronHDWallet = new TronHDWallet(settings.Mnemonic, settings.Passphrase);
-            }
-            services.AddSingleton<Func<IHDWallet<TronWallet>>>( () => tronHDWallet);
-
-            // AVALANCHE
-            IAccountHDWallet<AvalancheWallet> avaxAccountHDWallet = null;
-            if(string.IsNullOrWhiteSpace(settings.AccountHDKey) == false)
-            {
-                avaxAccountHDWallet = new AccountHDWallet<AvalancheWallet>(settings.AccountHDKey, settings.AccountNumber);
-            }
-            services.AddSingleton<Func<IAccountHDWallet<AvalancheWallet>>>( () => avaxAccountHDWallet);
-            
-            IHDWallet<AvalancheWallet> avalancheHDWallet = null;
-            if(string.IsNullOrWhiteSpace(settings.Mnemonic) == false) 
-            {
-                avalancheHDWallet = new AvalancheHDWallet(settings.Mnemonic, settings.Passphrase);
-            }
-            services.AddSingleton<Func<IHDWallet<AvalancheWallet>>>( () => avalancheHDWallet);
-
-            // IHDWallet<PolkadotWallet> polkadotHDWallet = null;
-            IHDWallet<PolkadotWallet> polkadotHDWallet = null;
-            if(string.IsNullOrWhiteSpace(settings.Mnemonic) == false) 
-            {
-                polkadotHDWallet = new PolkadotHDWallet(settings.Mnemonic, settings.Passphrase);
-            }
-            services.AddSingleton<Func<IHDWallet<PolkadotWallet>>>( () => polkadotHDWallet);
-
-            services.AddSingleton<Func<string, IHDWallet<HDWallet.Secp256k1.Wallet>>>( (string coin) => {
-                switch (coin.ToLower())
-                {
-                    case "tron":
-                        return tronHDWallet as IHDWallet<HDWallet.Secp256k1.Wallet>;
-                    default:
-                        throw new NotImplementedException();
-                }
-            });
-
-            services.AddSingleton<Func<string, IHDWallet<IWallet>>>( (string coin) => {
-                switch (coin.ToLower())
-                {
-                    case "polkadot":
-                        return (IHDWallet<IWallet>) polkadotHDWallet;
-                    default:
-                        throw new NotImplementedException();
-                }
-            });
-
-            
+            services
+                .AddAvalanche(settings)
+                .AddPolkadot(settings)
+                .AddTron(settings);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
@@ -174,6 +113,59 @@ namespace HDWallet.Api
                 var fileName = typeof( Startup ).GetTypeInfo().Assembly.GetName().Name + ".xml";
                 return Path.Combine( basePath, fileName );
             }
+        }
+    }
+
+    public static class Extensions 
+    {
+        public static IServiceCollection AddAvalanche(this IServiceCollection services, Settings settings)
+        {
+            IAccountHDWallet<AvalancheWallet> accountHDWallet = null;
+            if(string.IsNullOrWhiteSpace(settings.AccountHDKey) == false)
+            {
+                accountHDWallet = new AccountHDWallet<AvalancheWallet>(settings.AccountHDKey, settings.AccountNumber);
+            }
+            services.AddSingleton<Func<IAccountHDWallet<AvalancheWallet>>>( () => accountHDWallet);
+            
+            IHDWallet<AvalancheWallet> hdWallet = null;
+            if(string.IsNullOrWhiteSpace(settings.Mnemonic) == false) 
+            {
+                hdWallet = new AvalancheHDWallet(settings.Mnemonic, settings.Passphrase);
+            }
+            services.AddSingleton<Func<IHDWallet<AvalancheWallet>>>( () => hdWallet);
+
+            return services;
+        }
+
+        public static IServiceCollection AddPolkadot(this IServiceCollection services, Settings settings)
+        {
+            IHDWallet<PolkadotWallet> hdWallet = null;
+            if(string.IsNullOrWhiteSpace(settings.Mnemonic) == false) 
+            {
+                hdWallet = new PolkadotHDWallet(settings.Mnemonic, settings.Passphrase);
+            }
+            services.AddSingleton<Func<IHDWallet<PolkadotWallet>>>( () => hdWallet);
+
+            return services;       
+        }
+
+        public static IServiceCollection AddTron(this IServiceCollection services, Settings settings)
+        {
+            IAccountHDWallet<TronWallet> accountHDWallet = null;
+            if(string.IsNullOrWhiteSpace(settings.AccountHDKey) == false)
+            {
+                accountHDWallet = new AccountHDWallet<TronWallet>(settings.AccountHDKey, settings.AccountNumber);
+            }
+            services.AddSingleton<Func<IAccountHDWallet<TronWallet>>>( () => accountHDWallet);
+            
+            IHDWallet<TronWallet> hdWallet = null;
+            if(string.IsNullOrWhiteSpace(settings.Mnemonic) == false) 
+            {
+                hdWallet = new TronHDWallet(settings.Mnemonic, settings.Passphrase);
+            }
+            services.AddSingleton<Func<IHDWallet<TronWallet>>>( () => hdWallet);
+
+            return services;
         }
     }
 }

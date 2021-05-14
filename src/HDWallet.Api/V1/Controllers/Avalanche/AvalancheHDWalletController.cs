@@ -1,53 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using HDWallet.Avalanche;
 using HDWallet.Core;
-using HDWallet.Tron;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace HDWallet.Api.V1.Controllers.Avalanche
 {
     [ApiController]
-    [ApiVersion( "1.0" ), ApiVersion("2.0")]
+    [ApiVersion( "1.0" )]
     [Route("api/v{version:apiVersion}")]
-    public class AvalancheHDWalletController : ControllerBase
+    public class AvalancheHDWalletController : Secp256k1HDWalletController<AvalancheWallet>
     {
-        private readonly ILogger<AvalancheHDWalletController> _logger;
-        private readonly IHDWallet<AvalancheWallet> _hDWallet;
-
         public AvalancheHDWalletController(
             ILogger<AvalancheHDWalletController> logger,
-            Func<IHDWallet<AvalancheWallet>> hDWallet)
+            Func<IHDWallet<AvalancheWallet>> hDWallet) : base(logger, hDWallet) {}
+
+        [HttpGet("/Avalanche/{account}/external/{index}")]
+        public ActionResult<string> GetDeposit(uint account, uint index)
         {
-            _logger = logger;
-            _hDWallet= hDWallet();
+            return base.DepositWallet(account, index);
         }
 
-        [HttpGet("/Avalanche/account/{accountNumber}/deposit/{addressIndex}")]
-        public ActionResult<string> GetDeposit(uint accountNumber, uint addressIndex)
+        [HttpGet("/Avalanche/{account}/internal/{index}")]
+        public ActionResult<string> GetChange(uint account, uint index)
         {
-            if(_hDWallet == null) 
-            {
-                return BadRequest("Wallet wasn't initialized with Mnemonic! Hd Wallet is not available.");
-            }
-
-            var wallet = _hDWallet.GetAccount(accountNumber).GetExternalWallet(addressIndex);
-            return wallet.Address;
-        }
-
-        [HttpGet("/Avalanche/account/{accountNumber}/change/{addressIndex}")]
-        public ActionResult<string> GetChange(uint accountNumber, uint addressIndex)
-        {
-            if(_hDWallet == null) 
-            {
-                return BadRequest("Wallet wasn't initialized with Mnemonic! Hd Wallet is not available.");
-            }
-
-            var wallet = _hDWallet.GetAccount(accountNumber).GetInternalWallet(addressIndex);
-            return wallet.Address;
+            return base.ChangeWallet(account, index);
         }
     }
 }
