@@ -1,32 +1,27 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <PackageReference Include="SimpleBase" Version="2.1.0" />    
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\HDWallet.Core\HDWallet.Core.csproj" />
-    <ProjectReference Include="..\HDWallet.Ed25519\HDWallet.Ed25519.csproj" />
+    <ProjectReference Include="..\HDWallet.Secp256k1\HDWallet.Secp256k1.csproj" />
+    <PackageReference Include="SimpleBase" Version="2.1.0" />
   </ItemGroup>
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
 
-    <Title></Title>
+    <Title>HDWallet.FileCoin</Title>
     <Description></Description>
-    <Version>0.4.1</Version>
+    <Version>0.0.1</Version>
 
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/farukterzioglu/HDWallet</RepositoryUrl> 
     <PackageProjectUrl>https://github.com/farukterzioglu/HDWallet</PackageProjectUrl>
     
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageTags>HDWallet;Polkadot;Blockchain;Ed25519</PackageTags>
-    <PackageId>HDWallet.Polkadot</PackageId>
+    <PackageTags>HDWallet;Secp256k1;FileCoin;Blockchain</PackageTags>
+    <PackageId>HDWallet.FileCoin</PackageId>
     
     <Authors>Faruk Terzioglu</Authors>
     <Company></Company>
-
   </PropertyGroup>
 
 </Project>

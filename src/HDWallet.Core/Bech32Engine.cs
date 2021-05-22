@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace HDWallet.Avalanche
+namespace HDWallet.Core
 {
     public static class Bech32Engine
     {

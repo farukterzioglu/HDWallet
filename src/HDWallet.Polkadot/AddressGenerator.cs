@@ -1,8 +1,5 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Extensions.Data;
 using HDWallet.Core;
 
 namespace HDWallet.Polkadot
@@ -45,39 +42,13 @@ namespace HDWallet.Polkadot
             ssPrefixed1.CopyTo(ssPrefixed, 0);
             plainAddr.AsSpan(0, SR25519_PUBLIC_SIZE + 1).CopyTo(ssPrefixed.AsSpan(7));
 
-            var blake2bHashed = HashExtension.Blake2(ssPrefixed, 0, SR25519_PUBLIC_SIZE + 8);
+            var blake2bHashed = BlakeHashExtension.Blake2(ssPrefixed, 0, SR25519_PUBLIC_SIZE + 8);
             plainAddr[1 + PUBLIC_KEY_LENGTH] = blake2bHashed[0];
             plainAddr[2 + PUBLIC_KEY_LENGTH] = blake2bHashed[1];
 
             var addrCh = SimpleBase.Base58.Bitcoin.Encode(plainAddr).ToArray();
 
             return new string(addrCh);
-        }
-    }
-
-    public class HashExtension
-    {
-        public static byte[] XXHash128(byte[] bytes)
-        {
-            return BitConverter.GetBytes(XXHash.XXH64(bytes, 0)).Concat(BitConverter.GetBytes(XXHash.XXH64(bytes, 1))).ToArray();
-        }
-
-        public static byte[] Blake2(byte[] bytes, int size = 128, IReadOnlyList<byte> key = null)
-        {
-            var config = new Blake2Core.Blake2BConfig() { OutputSizeInBits = size, Key = null };
-            return Blake2Core.Blake2B.ComputeHash(bytes, config);
-
-        }
-
-        public static byte[] Blake2Concat(byte[] bytes, int size = 128)
-        {
-            var config = new Blake2Core.Blake2BConfig() { OutputSizeInBits = size, Key = null };
-            return Blake2Core.Blake2B.ComputeHash(bytes, config).Concat(bytes).ToArray();
-        }
-
-        internal static byte[] Blake2(byte[] ssPrefixed, int start, int count)
-        {
-            return Blake2Core.Blake2B.ComputeHash(ssPrefixed, start, count);
         }
     }
 }

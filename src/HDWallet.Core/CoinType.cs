@@ -10,6 +10,7 @@ namespace HDWallet.Core
         Kusama = 434,
         Cardano = 1815,
         Tezos = 1729,
-        Avalanche = 9000
+        Avalanche = 9000,
+        FileCoin = 461
     }
 }
