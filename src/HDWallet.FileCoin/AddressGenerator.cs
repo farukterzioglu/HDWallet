@@ -1,9 +1,15 @@
 using System;
 using System.Text;
 using HDWallet.Core;
+using NBitcoin;
 
 namespace HDWallet.FileCoin
 {
+    public class Config
+    {
+        public ushort Size;
+    }
+    
     public enum Network
     {
         Mainnet = 0,
@@ -36,7 +42,6 @@ namespace HDWallet.FileCoin
         public Network CurrentNetwork = Network.Mainnet;
 
         const string encodeStd = "abcdefghijklmnopqrstuvwxyz234567";
-
 
         public static Address NewSecp256k1Address(byte[] pubKeyBytes)
         {
@@ -116,10 +121,12 @@ namespace HDWallet.FileCoin
 
         string EncodeToString(byte[] ingest)
         {
-            var alphabet = new SimpleBase.Base32Alphabet("abcdefghijklmnopqrstuvwxyz234567");
+            var alphabet = new SimpleBase.Base32Alphabet(encodeStd);
             var encoder = new SimpleBase.Base32(alphabet);
             var addrCh = encoder.Encode(ingest, padding: false);
-            // var addrCh = SimpleBase.Base32.Rfc4648.Encode(ingest, ).ToArray();
+
+            // TODO: Use Base32.FileCoin
+            // var addrCh = SimpleBase.Base32.Rfc4648.Encode(ingest, padding: false);
             return addrCh;
         }
 
@@ -148,16 +155,12 @@ namespace HDWallet.FileCoin
         // )
     }
 
-    public class Config
-    {
-        public ushort Size;
-    }
-
     public class AddressGenerator : IAddressGenerator
     {
         string IAddressGenerator.GenerateAddress(byte[] pubKeyBytes)
         {
-            return Address.NewSecp256k1Address(pubKeyBytes).ToString();
+            var pubKey = new PubKey(pubKeyBytes);
+            return Address.NewSecp256k1Address(pubKey.Decompress().ToBytes()).ToString();
         }
     }
 }
