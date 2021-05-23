@@ -11,7 +11,26 @@ namespace HDWallet.FileCoin
         {
             var pubKey = new PubKey(pubKeyBytes);
             var decompPubKeyBytes = pubKey.Decompress().ToBytes();
-            return Address.NewSecp256k1Address(decompPubKeyBytes).ToString();
+            return Address.WithNetwork(Network.Mainnet).NewSecp256k1Address(decompPubKeyBytes).ToString();
+        }
+
+        public string GenerateAddress(byte[] pubKeyBytes, Network network, Protocol protocol)
+        {   
+            var pubKey = new PubKey(pubKeyBytes);
+            var decompPubKeyBytes = pubKey.Decompress().ToBytes();
+
+            var address = Address.WithNetwork(network);
+
+            switch (protocol)
+            {
+                case Protocol.SECP256K1:
+                    address = address.NewSecp256k1Address(decompPubKeyBytes);
+                    break;
+                default:
+                    throw new NotSupportedException();
+            }
+
+            return address.ToString();
         }
     }
 }

@@ -37,27 +37,37 @@ namespace HDWallet.FileCoin
         static Config ChecksumHashConfig = new Config() { Size = 4 };
         static Config PayloadHashConfig = new Config() { Size = 20 };
 
-        public Network CurrentNetwork = Network.Mainnet;
+        public Network CurrentNetwork { get; }
 
         const string encodeStd = "abcdefghijklmnopqrstuvwxyz234567";
 
-        public static Address NewSecp256k1Address(byte[] pubKeyBytes)
+        public Address (Network network) 
         {
-            return NewAddress(Protocol.SECP256K1, addressHash(pubKeyBytes));
+            this.CurrentNetwork = network;
         }
 
-        static byte[] addressHash(byte[] ingest) 
+        public static Address WithNetwork(Network network) 
+        {
+            return new Address(network);
+        }
+
+        public Address NewSecp256k1Address(byte[] pubKeyBytes)
+        {
+            return this.NewAddress(Protocol.SECP256K1, addressHash(pubKeyBytes));
+        }
+
+        byte[] addressHash(byte[] ingest) 
         {
             return hash(ingest, PayloadHashConfig);
         }
 
-        static byte[] hash (byte[] ingest, Config config)
+        byte[] hash (byte[] ingest, Config config)
         {
             var blake2bHashed = BlakeHashExtension.Blake2(ingest, size: config.Size * 8);
             return blake2bHashed;
         }
 
-        static Address NewAddress(Protocol protocol, byte[] payload)
+        Address NewAddress(Protocol protocol, byte[] payload)
         {
             switch (protocol)
             {
@@ -71,11 +81,10 @@ namespace HDWallet.FileCoin
                     throw new Exception("ErrUnknownProtocol");
             }
 
-            return new Address()
-            {
-                Payload = payload,
-                Protocol = protocol
-            };
+            this.Protocol = protocol;
+            this.Payload = payload;
+
+            return this;
         }
 
         string encode(Network network, Address addr)

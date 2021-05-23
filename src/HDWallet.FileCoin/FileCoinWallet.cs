@@ -14,5 +14,10 @@ namespace HDWallet.FileCoin
         {
             return new AddressGenerator();
         }
+
+        public string GetAddress(Network network = Network.Mainnet, Protocol protocol = Protocol.SECP256K1)
+        {
+            return new AddressGenerator().GenerateAddress(base.PublicKey.ToBytes(), network, protocol);
+        }
     }
 }

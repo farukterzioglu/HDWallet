@@ -27,7 +27,7 @@ namespace HDWallet.FileCoin.Tests
         [Test]
         public void ShouldGenerateWalletFromPrivateKey()
         {
-            var priv = "3074e388727396185b22a9615ddee4368c40be3ea10db8449cdfca405633f801"; // MHTjiHJzlhhbIqlhXd7kNoxAvj6hDbhEnN/KQFYz+AE=
+            var priv = "3074e388727396185b22a9615ddee4368c40be3ea10db8449cdfca405633f801";
 
             Wallet wallet = new FileCoinWallet(priv);
             Assert.AreEqual("f16xffbfk6zhpdeeogrjucbn4degf5bs6tyw7vzqq", wallet.Address);
@@ -36,8 +36,10 @@ namespace HDWallet.FileCoin.Tests
         [Test]
         public void ShouldGenerateWalletForTestNet()
         {
-            var wallet = new FileCoinWallet("6f5139852a78fdb4bd790a46fbb34a98cabb1a946a724917efa94a2a41d82d7d");
-
+            var wallet = new FileCoinWallet("3074e388727396185b22a9615ddee4368c40be3ea10db8449cdfca405633f801");
+            var testNetAddress = wallet.GetAddress(Network.Testnet);
+            Assert.AreEqual("f16xffbfk6zhpdeeogrjucbn4degf5bs6tyw7vzqq", wallet.Address);
+            Assert.AreEqual("t16xffbfk6zhpdeeogrjucbn4degf5bs6tyw7vzqq", testNetAddress);
         }
 
         [Test]
@@ -47,6 +49,7 @@ namespace HDWallet.FileCoin.Tests
             var account0 = avaxHDWallet.GetAccount(0);
             FileCoinWallet wallet0 = account0.GetExternalWallet(0);
             Assert.AreEqual("f1gdrlcunry4lagktmexhudtfxmndtlm7wijcu35a", wallet0.Address);
+            Assert.AreEqual("t1vwa6kfpfmhlihikvdmd7mji3tkzwau744326twa", wallet0.GetAddress(Network.Testnet));
             
             FileCoinWallet wallet1 = account0.GetExternalWallet(1);
             Assert.AreEqual("f1fer5pooes55ght6k2msg2iqdj5yzunwvtos7zsq", wallet1.Address);
