@@ -49,7 +49,7 @@ namespace HDWallet.FileCoin.Tests
             var account0 = avaxHDWallet.GetAccount(0);
             FileCoinWallet wallet0 = account0.GetExternalWallet(0);
             Assert.AreEqual("f1gdrlcunry4lagktmexhudtfxmndtlm7wijcu35a", wallet0.Address);
-            Assert.AreEqual("t1vwa6kfpfmhlihikvdmd7mji3tkzwau744326twa", wallet0.GetAddress(Network.Testnet));
+            Assert.AreEqual("t1gdrlcunry4lagktmexhudtfxmndtlm7wijcu35a", wallet0.GetAddress(Network.Testnet));
             
             FileCoinWallet wallet1 = account0.GetExternalWallet(1);
             Assert.AreEqual("f1fer5pooes55ght6k2msg2iqdj5yzunwvtos7zsq", wallet1.Address);
