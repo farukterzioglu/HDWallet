@@ -2,11 +2,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HDWallet.Secp256k1\HDWallet.Secp256k1.csproj" />
-    <PackageReference Include="SimpleBase" Version="2.1.0" />
+    <PackageReference Include="SimpleBase" Version="3.1.0" />
   </ItemGroup>
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
 
     <Title>HDWallet.FileCoin</Title>
     <Description></Description>

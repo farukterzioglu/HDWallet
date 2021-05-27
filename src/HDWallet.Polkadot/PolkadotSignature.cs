@@ -1,4 +1,3 @@
-using System;
 using HDWallet.Core;
 
 namespace HDWallet.Polkadot
