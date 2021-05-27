@@ -128,12 +128,7 @@ namespace HDWallet.FileCoin
 
         string EncodeToString(byte[] ingest)
         {
-            var alphabet = new SimpleBase.Base32Alphabet(encodeStd);
-            var encoder = new SimpleBase.Base32(alphabet);
-            var addrCh = encoder.Encode(ingest, padding: false);
-
-            // TODO: Use Base32.FileCoin
-            // var addrCh = SimpleBase.Base32.Rfc4648.Encode(ingest, padding: false);
+            var addrCh = SimpleBase.Base32.FileCoin.Encode(ingest, padding: false);
             return addrCh;
         }
 

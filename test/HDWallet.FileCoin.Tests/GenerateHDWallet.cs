@@ -23,7 +23,7 @@ namespace HDWallet.FileCoin.Tests
             Assert.AreEqual("efdeb7af4fddd16982be22789ebf0842963df505e79fd4bb723d77179a1938ae", depositWallet0.PrivateKey.ToHex());
             Assert.AreEqual(account0wallet0.PrivateKey, depositWallet0.PrivateKey);
 
-            Assert.AreEqual("02495816397ce56afd5345ba60ae6eb52d3f27f586df536ebc2632b8698be5387c", depositWallet0.PublicKey);
+            Assert.AreEqual("02495816397ce56afd5345ba60ae6eb52d3f27f586df536ebc2632b8698be5387c", depositWallet0.PublicKey.ToHex());
             Assert.AreEqual(account0wallet0.PublicKey, depositWallet0.PublicKey);
         }
 
