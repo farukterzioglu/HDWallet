@@ -19,24 +19,24 @@ namespace HDWallet.Api
             _hDWallet= hDWallet();
         }
 
-        protected ActionResult<string> DepositWallet(uint accountNumber, uint addressIndex)
+        protected ActionResult<string> DepositWallet(uint accountNumber, uint index)
         {
             if(_hDWallet == null) 
             {
                 return BadRequest("Wallet wasn't initialized with Mnemonic! Hd Wallet is not available.");
             }
 
-            var wallet = _hDWallet.GetAccount(accountNumber).GetExternalWallet(addressIndex);
+            var wallet = _hDWallet.GetAccount(accountNumber).GetExternalWallet(index);
             return wallet.Address;
         }
-        protected ActionResult<string> ChangeWallet(uint accountNumber, uint addressIndex)
+        protected ActionResult<string> ChangeWallet(uint accountNumber, uint index)
         {
             if(_hDWallet == null) 
             {
                 return BadRequest("Wallet wasn't initialized with Mnemonic! Hd Wallet is not available.");
             }
 
-            var wallet = _hDWallet.GetAccount(accountNumber).GetInternalWallet(addressIndex);
+            var wallet = _hDWallet.GetAccount(accountNumber).GetInternalWallet(index);
             return wallet.Address;
         }
     }

@@ -19,25 +19,25 @@ namespace HDWallet.Api
             _accountHDWallet = accountHDWallet();
         }
 
-        protected ActionResult<string> DepositWallet(uint addressIndex)
+        protected ActionResult<string> DepositWallet(uint index)
         {
             if(_accountHDWallet == null) 
             {
                 return BadRequest("Wallet wasn't initialized with master key! Use hd wallet.");
             }
 
-            var wallet = _accountHDWallet.Account.GetExternalWallet(addressIndex);
+            var wallet = _accountHDWallet.Account.GetExternalWallet(index);
             return wallet.Address;
         }
 
-        protected ActionResult<string> ChangeWallet(uint addressIndex)
+        protected ActionResult<string> ChangeWallet(uint index)
         {
             if(_accountHDWallet == null) 
             {
                 return BadRequest("Wallet wasn't initialized with master key! Use hd wallet.");
             }
 
-            var wallet = _accountHDWallet.Account.GetInternalWallet(addressIndex);
+            var wallet = _accountHDWallet.Account.GetInternalWallet(index);
             return wallet.Address;
         }
     }

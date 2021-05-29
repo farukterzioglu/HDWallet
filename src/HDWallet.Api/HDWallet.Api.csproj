@@ -20,6 +20,7 @@
     <ProjectReference Include="..\HDWallet.Secp256k1\HDWallet.Secp256k1.csproj" />
     <ProjectReference Include="..\HDWallet.Avalanche\HDWallet.Avalanche.csproj" />
     <ProjectReference Include="..\HDWallet.Polkadot\HDWallet.Polkadot.csproj" />
+    <ProjectReference Include="..\HDWallet.FileCoin\HDWallet.FileCoin.csproj" />
   </ItemGroup>
 
 </Project>
