@@ -16,15 +16,9 @@ namespace HDWallet.Api.V1.Controllers.Avalanche
             Func<IHDWallet<AvalancheWallet>> hDWallet) : base(logger, hDWallet) {}
 
         [HttpGet("/Avalanche/{account}/external/{index}")]
-        public ActionResult<string> GetDeposit(uint account, uint index)
-        {
-            return base.DepositWallet(account, index);
-        }
+        public ActionResult<string> GetDeposit(uint account, uint index) => base.DepositWallet(account, index);
 
         [HttpGet("/Avalanche/{account}/internal/{index}")]
-        public ActionResult<string> GetChange(uint account, uint index)
-        {
-            return base.ChangeWallet(account, index);
-        }
+        public ActionResult<string> GetChange(uint account, uint index) => base.ChangeWallet(account, index);
     }
 }
