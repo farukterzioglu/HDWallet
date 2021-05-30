@@ -1,8 +1,8 @@
-using NUnit.Framework;
 using HDWallet.Core;
 using HDWallet.Secp256k1.Sample;
+using NUnit.Framework;
 
-namespace HDWallet.Tests
+namespace HDWallet.Secp256k1.Tests
 {
     public class GeneratePrivateKey
     {

@@ -1,6 +1,4 @@
 using NUnit.Framework;
-using NBitcoin;
-using System;
 using HDWallet.Core;
 
 namespace HDWallet.Tron.Tests

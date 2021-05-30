@@ -1,5 +1,4 @@
 using HDWallet.Core;
-using HDWallet.Secp256k1.Sample;
 using NUnit.Framework;
 
 namespace HDWallet.Tron.Tests

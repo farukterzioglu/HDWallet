@@ -1,10 +1,7 @@
-using System;
 using HDWallet.Core;
-using HDWallet.Ed25519.Sample;
-using HDWallet.Polkadot;
 using NUnit.Framework;
 
-namespace HDWallet.Cardano.Tests
+namespace HDWallet.Polkadot.Tests
 {
     public class GeneratePolkadotWallet
     {

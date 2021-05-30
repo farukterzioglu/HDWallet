@@ -8,9 +8,9 @@
 
   <ItemGroup>
     <PackageReference Include="Blake2Core" Version="1.0.0" />
-    <PackageReference Include="nunit" Version="3.12.0" />
-    <PackageReference Include="NUnit3TestAdapter" Version="3.15.1" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
+    <PackageReference Include="nunit" Version="3.13.2" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.10.0" />
     <PackageReference Include="Extensions.Data.xxHash.core20" Version="1.0.2.1" />
     <PackageReference Include="SimpleBase" Version="2.1.0" />
   </ItemGroup>

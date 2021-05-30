@@ -2,7 +2,6 @@ using NUnit.Framework;
 using System;
 using NBitcoin.Secp256k1;
 using NBitcoin.DataEncoders;
-using System.Text;
 using Nethereum.Util;
 using HDWallet.Core;
 

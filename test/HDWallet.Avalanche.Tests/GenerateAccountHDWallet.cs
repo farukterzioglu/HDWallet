@@ -1,6 +1,5 @@
 using System;
 using HDWallet.Core;
-using HDWallet.Secp256k1;
 using NUnit.Framework;
 
 namespace HDWallet.Avalanche.Tests
