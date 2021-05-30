@@ -54,6 +54,9 @@ namespace HDWallet.Api
             services.AddSwaggerGen(
                 options =>
                 {
+                    // add a custom document filter which sets visible routes
+                    options.DocumentFilter<SwaggerDocumentFilter>();
+
                     // add a custom operation filter which sets default values
                     options.OperationFilter<SwaggerDefaultValues>();
 
