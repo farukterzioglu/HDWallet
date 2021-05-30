@@ -25,4 +25,4 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Test
-      run: dotnet test --no-restore --verbosity normal --filter "FullyQualifiedName!=dotnetstandard_bip32_unittest"
+      run: dotnet test --no-restore --verbosity normal HDWallet.sln
