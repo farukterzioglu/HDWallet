@@ -3,7 +3,7 @@
 
 ### HD Wallet
 
-A generic HD wallet for Elliptic Curve (Secp256k1) and Edwards-curve (Ed25519) based crypto currencies like Bitcoin, Ethereum, Cosmos, Tezos, Tron, Cardano, Polkadot, Avalanche and more.  
+A generic HD wallet for Elliptic Curve (Secp256k1) and Edwards-curve (Ed25519) based crypto currencies like Bitcoin, Ethereum, Cosmos, Tezos, Tron, Cardano, Polkadot, Avalanche, FileCoin and more.  
 HD wallets can be generated from mnemonic (w/ or w/o passphrase) or from extended private key (xprv) and non-hd wallets can be generated directly from private key.  
 
 HD wallets can derive sub accounts, and from that accounts external (deposit) wallets or internal (change) wallets can be derived. Using generated wallets, addresses can be retrived by implementing address generators for related crypto currency. 
@@ -22,7 +22,7 @@ By using HDWallet.Ed25519 project, any Edwards-curve (Ed25519) based crypto curr
 
 #### Supported crypto currencies
 ##### Secp256k1  
-Tron, Avalanche,  
+Tron, Avalanche, FileCoin  
 [WIP] : Bitcoin, Ethereum, Cosmos, Tezos
 
 ##### Ed25519  
