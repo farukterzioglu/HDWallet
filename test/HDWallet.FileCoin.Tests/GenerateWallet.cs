@@ -74,5 +74,30 @@ namespace HDWallet.FileCoin.Tests
                 actual: pubKey.Decompress().ToHex()
             );
         }
+
+        // BASE64
+        // HEX
+        // ADDRESS
+
+        // MHTjiHJzlhhbIqlhXd7kNoxAvj6hDbhEnN/KQFYz+AE=
+        // 3074e388727396185b22a9615ddee4368c40be3ea10db8449cdfca405633f801
+        // f16xffbfk6zhpdeeogrjucbn4degf5bs6tyw7vzqq
+
+        // 6ECPCno3PrdpMbm6bRUtaTs7BW5vvp1EHPbleBlp0sI=
+        // e8408f0a7a373eb76931b9ba6d152d693b3b056e6fbe9d441cf6e5781969d2c2
+        // f1ku6kt26cl5uco6xo2f3bmorax54z4a3quwe66vy
+        [Test]
+        public void ShouldGenerateFromPrivateKey()
+        {
+            // MHTjiHJzlhhbIqlhXd7kNoxAvj6hDbhEnN/KQFYz+AE=
+            var priv = "3074e388727396185b22a9615ddee4368c40be3ea10db8449cdfca405633f801";
+            FileCoinWallet wallet = new FileCoinWallet(priv);
+            Assert.AreEqual("f16xffbfk6zhpdeeogrjucbn4degf5bs6tyw7vzqq", wallet.GetAddress());
+
+            // 6ECPCno3PrdpMbm6bRUtaTs7BW5vvp1EHPbleBlp0sI=
+            priv = "e8408f0a7a373eb76931b9ba6d152d693b3b056e6fbe9d441cf6e5781969d2c2";
+            wallet = new FileCoinWallet(priv);
+            Assert.AreEqual("f1ku6kt26cl5uco6xo2f3bmorax54z4a3quwe66vy", wallet.GetAddress());
+        }
     }
 }
