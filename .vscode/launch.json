@@ -32,9 +32,9 @@
             "stopAtEntry": false,
             "console": "internalConsole",
             "env": {
-                "Mnemonic": "wire sort once settle balcony bright awkward pottery derive noodle absorb combine quick account cluster dash material yard people layer fold royal add learn",
-                "_AccountHDKey":"xprv9xyvwx1jBEBKwjZtXYogBwDyfXTyTa3Af6urV2dU843CyBxLu9J5GLQL4vMWvaW4q3skqAtarUvdGmBoWQZnU2RBLnmJdCM4FnbMa72xWNy",
-                "_AccountNumber": "0"
+                "_Mnemonic": "wire sort once settle balcony bright awkward pottery derive noodle absorb combine quick account cluster dash material yard people layer fold royal add learn",
+                "AccountHDKey":"xprv9xyvwx1jBEBKwjZtXYogBwDyfXTyTa3Af6urV2dU843CyBxLu9J5GLQL4vMWvaW4q3skqAtarUvdGmBoWQZnU2RBLnmJdCM4FnbMa72xWNy",
+                "AccountNumber": "0"
             },
             "launchBrowser": {
                 "enabled": true,

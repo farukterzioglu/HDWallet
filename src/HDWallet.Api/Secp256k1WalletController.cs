@@ -2,6 +2,7 @@ using System;
 using HDWallet.Core;
 using HDWallet.Secp256k1;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace HDWallet.Api
@@ -13,10 +14,10 @@ namespace HDWallet.Api
 
         public Secp256k1WalletController(
             ILogger<Secp256k1WalletController<TWallet>> logger,
-            Func<IAccountHDWallet<TWallet>> accountHDWallet)
+            IServiceProvider prov)
         {
             _logger = logger;
-            _accountHDWallet = accountHDWallet();
+            _accountHDWallet = prov.GetService<IAccountHDWallet<TWallet>>();
         }
 
         protected ActionResult<string> DepositWallet(uint index)

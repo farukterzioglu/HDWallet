@@ -13,12 +13,12 @@ namespace HDWallet.Api.V1.Controllers.Avalanche
     {
         public AvalancheWalletController(
             ILogger<AvalancheWalletController> logger,
-            Func<IAccountHDWallet<AvalancheWallet>> accountHDWallet) : base(logger, accountHDWallet) {}
+            IServiceProvider prov) : base(logger, prov) {}
 
         [HttpGet("/Avalanche/external/{index}")]
         public ActionResult<string> GetAccountDeposit(uint index) => base.DepositWallet(index);
 
         [HttpGet("/Avalanche/internal/{index}")]
-        public ActionResult<string> GetAccountChange(uint index) => base.Accepted(index);
+        public ActionResult<string> GetAccountChange(uint index) => base.ChangeWallet(index);
     }
 }

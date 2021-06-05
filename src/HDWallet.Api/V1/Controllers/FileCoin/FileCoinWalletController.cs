@@ -13,12 +13,12 @@ namespace HDWallet.Api.V1.Controllers.FileCoin
     {
         public FileCoinWalletController(
             ILogger<FileCoinWalletController> logger,
-            Func<IAccountHDWallet<FileCoinWallet>> accountHDWallet) : base(logger, accountHDWallet) {}
+            IServiceProvider prov) : base(logger, prov) {}
 
         [HttpGet("/FileCoin/external/{index}")]
         public ActionResult<string> GetAccountDeposit(uint index) => base.DepositWallet(index);
 
         [HttpGet("/FileCoin/internal/{index}")]
-        public ActionResult<string> GetAccountChange(uint index) => base.Accepted(index);
+        public ActionResult<string> GetAccountChange(uint index) => base.ChangeWallet(index);
     }
 }

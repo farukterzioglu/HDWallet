@@ -13,7 +13,7 @@ namespace HDWallet.Api.V1.Controllers.Tron
     {
         public TronHDWalletController(
             ILogger<TronHDWalletController> logger,
-            Func<IHDWallet<TronWallet>> hDWallet) : base(logger, hDWallet) {}
+            IServiceProvider prov) : base(logger, prov) {}
 
         [HttpGet("/Tron/{account}/external/{index}")]
         public ActionResult<string> GetDeposit(uint account, uint index) => base.DepositWallet(account, index);

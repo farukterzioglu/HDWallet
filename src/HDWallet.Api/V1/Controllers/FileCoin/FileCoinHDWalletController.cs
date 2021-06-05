@@ -13,7 +13,7 @@ namespace HDWallet.Api.V1.Controllers.FileCoin
     {
         public FileCoinHDWalletController(
             ILogger<FileCoinHDWalletController> logger,
-            Func<IHDWallet<FileCoinWallet>> hDWallet) : base(logger, hDWallet) {}
+            IServiceProvider prov) : base(logger, prov) {}
 
         [HttpGet("/FileCoin/{account}/external/{index}")]
         public ActionResult<string> GetDeposit(uint account, uint index) => base.DepositWallet(account, index);

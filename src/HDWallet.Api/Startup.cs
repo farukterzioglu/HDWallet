@@ -55,7 +55,8 @@ namespace HDWallet.Api
                 options =>
                 {
                     // add a custom document filter which sets visible routes
-                    options.DocumentFilter<SwaggerDocumentFilter>();
+                    // TODO:Activate this
+                    // options.DocumentFilter<SwaggerDocumentFilter>();
 
                     // add a custom operation filter which sets default values
                     options.OperationFilter<SwaggerDefaultValues>();
@@ -128,19 +129,17 @@ namespace HDWallet.Api
         public static IServiceCollection AddSecp256k1Coin<TWallet, THDwallet>(this IServiceCollection services, Settings settings) 
             where TWallet : Secp256k1.Wallet, new() where THDwallet : HDWallet<TWallet>
         {
-            IAccountHDWallet<TWallet> accountHDWallet = null;
             if(string.IsNullOrWhiteSpace(settings.AccountHDKey) == false)
             {
-                accountHDWallet = new AccountHDWallet<TWallet>(settings.AccountHDKey, settings.AccountNumber);
+                IAccountHDWallet<TWallet> accountHDWallet = new AccountHDWallet<TWallet>(settings.AccountHDKey, settings.AccountNumber);
+                services.AddSingleton<IAccountHDWallet<TWallet>>(accountHDWallet);
             }
-            services.AddSingleton<Func<IAccountHDWallet<TWallet>>>( () => accountHDWallet);
             
-            IHDWallet<TWallet> hdWallet = null;
             if(string.IsNullOrWhiteSpace(settings.Mnemonic) == false) 
             {
-                hdWallet = (THDwallet)Activator.CreateInstance(typeof(THDwallet), new object[] { settings.Mnemonic, settings.Passphrase });
+                IHDWallet<TWallet> hdWallet = (THDwallet)Activator.CreateInstance(typeof(THDwallet), new object[] { settings.Mnemonic, settings.Passphrase });
+                services.AddSingleton<IHDWallet<TWallet>>(hdWallet);
             }
-            services.AddSingleton<Func<IHDWallet<TWallet>>>( () => hdWallet);
 
             return services;
         }
@@ -156,12 +155,11 @@ namespace HDWallet.Api
             // }
             // services.AddSingleton<Func<IAccountHDWallet<TWallet>>>( () => accountHDWallet);
             
-            IHDWallet<TWallet> hdWallet = null;
             if(string.IsNullOrWhiteSpace(settings.Mnemonic) == false) 
             {
-                hdWallet = (THDwallet)Activator.CreateInstance(typeof(THDwallet), new object[] { settings.Mnemonic, settings.Passphrase });
+                IHDWallet<TWallet> hdWallet = (THDwallet)Activator.CreateInstance(typeof(THDwallet), new object[] { settings.Mnemonic, settings.Passphrase });
+                services.AddSingleton<IHDWallet<TWallet>>(hdWallet);
             }
-            services.AddSingleton<Func<IHDWallet<TWallet>>>( () => hdWallet);
 
             return services;
         }
