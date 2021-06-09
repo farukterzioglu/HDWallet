@@ -20,8 +20,8 @@ namespace HDWallet.Cardano.Tests
         [Test]
         public void ShouldGenerateFromPrivateKey()
         {
-            var privateKey = "f5e5767cf153319517630f226876b86c8160cc583bc013744c6bf255f5cc0ee5";
-            var publicKey = "278117fc144c72340f67d0f2316e8386ceffbf2b2428c9c51fef7c597f1d426e";
+            var privateKey = "8e99d556c33b20039a17051a75cd86bb26bf907799730385d691ffb965ed03da";
+            var publicKey = "03b01d779db39718cc37baf21d596720785c008c6ad49fc404b5396ece75161426";
             base.ShouldGenerateFromPrivateKey<BitcoinWallet>(privateKey, publicKey);
         }
     }
