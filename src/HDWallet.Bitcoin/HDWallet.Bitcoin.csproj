@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\HDWallet.Core\HDWallet.Core.csproj" />
+    <ProjectReference Include="..\HDWallet.Secp256k1\HDWallet.Secp256k1.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+
+    <Title></Title>
+    <Description></Description>
+    <Version>0.0.1</Version>
+
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/farukterzioglu/HDWallet</RepositoryUrl> 
+    <PackageProjectUrl>https://github.com/farukterzioglu/HDWallet</PackageProjectUrl>
+    
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageTags>HDWallet;Bitcoin;Blockchain;Secp256k1</PackageTags>
+    <PackageId>HDWallet.Bitcoin</PackageId>
+    
+    <Authors>Faruk Terzioglu</Authors>
+    <Company></Company>
+
+  </PropertyGroup>
+
+</Project>

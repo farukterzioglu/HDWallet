@@ -11,12 +11,18 @@ namespace HDWallet.Secp256k1
         public HDWallet(string words, string seedPassword, CoinPath path) : base(words, seedPassword)
         {
             var masterKeyPath = new KeyPath(path.ToString());
-            _masterKey = new ExtKey(BIP39Seed).Derive(masterKeyPath);
+            _masterKey = new ExtKey(base.BIP39Seed).Derive(masterKeyPath);
+        }
+
+        public HDWallet(string seed, CoinPath path) : base(seed)
+        {
+            var masterKeyPath = new KeyPath(path.ToString());
+            _masterKey = new ExtKey(base.BIP39Seed).Derive(masterKeyPath);
         }
 
         TWallet IHDWallet<TWallet>.GetMasterWallet()
         {
-            var masterKey = new ExtKey(BIP39Seed);
+            var masterKey = new ExtKey(base.BIP39Seed);
 
             var privateKey = masterKey.PrivateKey;
             return new TWallet() {

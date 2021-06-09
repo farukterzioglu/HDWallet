@@ -7,5 +7,6 @@ namespace HDWallet.Secp256k1.Sample
         private static readonly HDWallet.Core.CoinPath _path = Purpose.Create(PurposeNumber.BIP44).Coin(CoinType.Bitcoin);
 
         public BitcoinHDWallet(string words, string seedPassword = "") : base(words, seedPassword, _path) {}
+        public BitcoinHDWallet(string seed) : base(seed, _path) {}
     }
 }
