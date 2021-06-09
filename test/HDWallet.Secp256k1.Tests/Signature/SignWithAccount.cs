@@ -15,7 +15,7 @@ namespace HDWallet.Tests.Signature
         [Test]
         public void Test1()
         {
-            IHDWallet<BitcoinWallet> bitcoinHDWallet = new BitcoinHDWallet("conduct stadium ask orange vast impose depend assume income sail chunk tomorrow life grape dutch", "");
+            IHDWallet<Secp256k1Wallet> bitcoinHDWallet = new Secp256k1HDWallet("conduct stadium ask orange vast impose depend assume income sail chunk tomorrow life grape dutch", "");
             var depositWallet0 = bitcoinHDWallet.GetAccount(0).GetExternalWallet(0);
 
             var messageBytes = Encoders.Hex.DecodeData("159817a085f113d099d3d93c051410e9bfe043cc5c20e43aa9a083bf73660145");

@@ -16,7 +16,7 @@ namespace HDWallet.Tests
         {
             string words = "push wrong tribe amazing again cousin hill belt silent found sketch monitor";
             
-            IHDWallet<BitcoinWallet> wallet = new BitcoinHDWallet(words);
+            IHDWallet<Secp256k1Wallet> wallet = new Secp256k1HDWallet(words);
             var account = wallet.GetMasterWallet();
 
             var privateKeyHex = account.PrivateKey.ToHex();

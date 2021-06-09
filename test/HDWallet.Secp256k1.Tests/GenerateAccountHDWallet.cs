@@ -15,7 +15,7 @@ namespace HDWallet.Secp256k1.Tests
             // Checked from https://iancoleman.io/bip39
             var accountExtendedPrivateKey = "xprv9xyvwx1jBEBKwjZtXYogBwDyfXTyTa3Af6urV2dU843CyBxLu9J5GLQL4vMWvaW4q3skqAtarUvdGmBoWQZnU2RBLnmJdCM4FnbMa72xWNy";
 
-            IAccountHDWallet<BitcoinWallet> accountHDWallet = new AccountHDWallet<BitcoinWallet>(accountExtendedPrivateKey, 0);
+            IAccountHDWallet<Secp256k1Wallet> accountHDWallet = new AccountHDWallet<Secp256k1Wallet>(accountExtendedPrivateKey, 0);
             
             // m/44'/0'/0'/0/0
             var depositWallet0 = accountHDWallet.Account.GetExternalWallet(0);
