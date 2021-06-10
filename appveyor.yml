@@ -1,4 +1,5 @@
-shallow_clone: true
+before_build:
+  - git submodule update --init --recursive
 test:
   assemblies:
     except:
