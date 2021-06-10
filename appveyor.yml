@@ -1,4 +1,5 @@
 shallow_clone: true
-# run tests with .NET CLI
-test_script:
-  - dotnet test HDWallet.sln --no-restore
+test:
+  assemblies:
+    except:
+      - dotnetstandard-bip32-unittest.dll
