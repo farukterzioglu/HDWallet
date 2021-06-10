@@ -1,5 +1,4 @@
 using System;
-using System.Text;
 using HDWallet.Core;
 using HDWallet.Secp256k1;
 using NBitcoin;

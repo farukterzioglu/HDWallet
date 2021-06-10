@@ -7,7 +7,7 @@ using NBitcoin.DataEncoders;
 using NBitcoin.Secp256k1;
 using NUnit.Framework;
 
-namespace HDWallet.Tests.Signature
+namespace HDWallet.Secp256k1.Tests.Signature
 {
     public class SignWithPrivateKey
     {

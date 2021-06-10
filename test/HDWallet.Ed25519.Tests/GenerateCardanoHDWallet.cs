@@ -1,4 +1,3 @@
-using System;
 using HDWallet.Core;
 using HDWallet.Ed25519.Sample;
 using NUnit.Framework;

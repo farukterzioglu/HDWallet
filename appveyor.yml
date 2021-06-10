@@ -1,0 +1,11 @@
+image: Previous Ubuntu
+before_build:
+  - git submodule update --init --recursive
+  - dotnet restore HDWallet.sln
+build:
+  project: HDWallet.sln
+  verbosity: minimal
+test:
+  assemblies:
+    except:
+      - dotnetstandard-bip32-unittest.dll

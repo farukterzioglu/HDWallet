@@ -1,6 +1,5 @@
 using HDWallet.Core;
 using HDWallet.Secp256k1.Sample;
-using NBitcoin;
 using NUnit.Framework;
 
 namespace HDWallet.Secp256k1.Tests
