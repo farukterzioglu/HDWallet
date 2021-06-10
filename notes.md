@@ -60,3 +60,6 @@ https://github.com/satoshilabs/slips/blob/master/slip-0044.md
 dotnet nuget locals all --clear
 
 https://www.c-sharpcorner.com/article/maintaine-multiple-versions-of-api-code-base-using/
+
+Open Source JavaScript Client-Side Bitcoin Wallet Generator  
+https://www.bitaddress.org/bitaddress.org-v3.3.0-SHA256-dec17c07685e1870960903d8f58090475b25af946fe95a734f88408cef4aa194.html  
