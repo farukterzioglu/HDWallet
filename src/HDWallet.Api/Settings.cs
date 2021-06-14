@@ -11,7 +11,9 @@ namespace HDWallet.Api
         public string AccountHDKey { get; set; }
         
         public uint AccountNumber { get; set; }
-        
+
+        public string[] SelectedCoinEndpoints { get; set; }
+
         public void Validate() 
         {
             if(string.IsNullOrWhiteSpace(this.Mnemonic) && string.IsNullOrWhiteSpace(this.AccountHDKey))
