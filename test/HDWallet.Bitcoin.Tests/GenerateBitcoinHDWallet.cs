@@ -24,8 +24,8 @@ namespace HDWallet.Cardano.Tests
 
             // TODO: Assert the address
             // Assert.AreEqual(expected: "5G6tXDeie2KaUgGrwkBfzApKSCm9sE5QvBm1bi1vmBZ4gcCN", actual: address);
-            Assert.AreEqual(expected: "03b01d779db39718cc37baf21d596720785c008c6ad49fc404b5396ece75161426", actual: publicKey.ToHex());
-            Assert.AreEqual(expected: "8e99d556c33b20039a17051a75cd86bb26bf907799730385d691ffb965ed03da", actual: privateKey.ToHex());
+            Assert.AreEqual(expected: "0354b36b66431bbcf41607901d1a55e083cedbc3446b9849e06bcff81d0a3b517d", actual: publicKey.ToHex());
+            Assert.AreEqual(expected: "cdcbe9ad36e694b5686ec4ad937a4fdf7eba7ced829e2452f66aeff0363e5114", actual: privateKey.ToHex());
             
             // Console.WriteLine($"\nAddress: {address}");
             Console.WriteLine($"Public key: {publicKey.ToHex()}");
@@ -45,8 +45,8 @@ namespace HDWallet.Cardano.Tests
 
             // TODO: Assert the address
             // Assert.AreEqual(expected: "5G6tXDeie2KaUgGrwkBfzApKSCm9sE5QvBm1bi1vmBZ4gcCN", actual: address);
-            Assert.AreEqual(expected: "03b01d779db39718cc37baf21d596720785c008c6ad49fc404b5396ece75161426", actual: publicKey.ToHex());
-            Assert.AreEqual(expected: "8e99d556c33b20039a17051a75cd86bb26bf907799730385d691ffb965ed03da", actual: privateKey.ToHex());
+            Assert.AreEqual(expected: "0354b36b66431bbcf41607901d1a55e083cedbc3446b9849e06bcff81d0a3b517d", actual: publicKey.ToHex());
+            Assert.AreEqual(expected: "cdcbe9ad36e694b5686ec4ad937a4fdf7eba7ced829e2452f66aeff0363e5114", actual: privateKey.ToHex());
         }
     }
 }

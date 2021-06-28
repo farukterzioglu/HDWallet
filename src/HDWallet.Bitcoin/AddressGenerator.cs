@@ -1,6 +1,5 @@
-using System;
-using System.Linq;
 using HDWallet.Core;
+using NBitcoin;
 
 namespace HDWallet.Bitcoin
 {
@@ -12,17 +11,20 @@ namespace HDWallet.Bitcoin
     {
         string IAddressGenerator.GenerateAddress(byte[] pubKeyBytes)
         {
-            return GetAddressFrom(pubKeyBytes, AddressType.Mainnet);
+            return GetAddressFrom(pubKeyBytes, NetworkType.Mainnet);
         }
 
-        public string GenerateAddress(byte[] pubKeyBytes, AddressType addressType)
+        public string GenerateAddress(byte[] pubKeyBytes, NetworkType networkType)
         {
-            return GetAddressFrom(pubKeyBytes, addressType);
+            return GetAddressFrom(pubKeyBytes, networkType);
         }
 
-        public static string GetAddressFrom(byte[] bytes, AddressType addressType)
+        private string GetAddressFrom(byte[] bytes, NetworkType networkType)
         {
-            throw new NotImplementedException();
+            var pubKey = new PubKey(bytes);
+            var network = networkType == NetworkType.Mainnet ? Network.Main : Network.TestNet;
+            var address = pubKey.WitHash.GetAddress(network);
+            return address.ToString();
         }
     }
 }
