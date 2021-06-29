@@ -35,25 +35,29 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HDWallet.Core", "src\HDWall
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HDWallet.Ed25519", "src\HDWallet.Ed25519\HDWallet.Ed25519.csproj", "{545D3A5F-5086-46B2-AAEC-B635B37B1507}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HDWallet.Avalanche", "src\HDWallet.Avalanche\HDWallet.Avalanche.csproj", "{7E9717DB-199F-479F-84C2-CC916B84DE81}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HDWallet.Avalanche", "src\HDWallet.Avalanche\HDWallet.Avalanche.csproj", "{7E9717DB-199F-479F-84C2-CC916B84DE81}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HDWallet.Avalanche.Tests", "test\HDWallet.Avalanche.Tests\HDWallet.Avalanche.Tests.csproj", "{5D900FEE-0AF8-4609-8D7E-F82A28551E11}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HDWallet.Avalanche.Tests", "test\HDWallet.Avalanche.Tests\HDWallet.Avalanche.Tests.csproj", "{5D900FEE-0AF8-4609-8D7E-F82A28551E11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HDWallet.Api", "src\HDWallet.Api\HDWallet.Api.csproj", "{CC033F42-03D7-4792-ABC4-D166AA107049}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HDWallet.Api", "src\HDWallet.Api\HDWallet.Api.csproj", "{CC033F42-03D7-4792-ABC4-D166AA107049}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HDWallet.FileCoin", "src\HDWallet.FileCoin\HDWallet.FileCoin.csproj", "{D6F69194-247D-4E25-8913-FF11172BDF4C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HDWallet.FileCoin", "src\HDWallet.FileCoin\HDWallet.FileCoin.csproj", "{D6F69194-247D-4E25-8913-FF11172BDF4C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HDWallet.FileCoin.Tests", "test\HDWallet.FileCoin.Tests\HDWallet.FileCoin.Tests.csproj", "{B90758A8-986C-4B39-A419-2ED406463219}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HDWallet.FileCoin.Tests", "test\HDWallet.FileCoin.Tests\HDWallet.FileCoin.Tests.csproj", "{B90758A8-986C-4B39-A419-2ED406463219}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencies", "{99AF9A4C-BC59-4F93-9B50-5DF1493E4BBD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dotnetstandard-bip32", "dotnetstandard-bip32", "{60C95507-501B-4BA4-B2AF-804539AB3CEB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnetstandard-bip32", "src\Dependencies\dotnetstandard-bip32\dotnetstandard-bip32\dotnetstandard-bip32.csproj", "{9AED1DE9-9FA2-4BDF-9121-4E05A168CF08}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dotnetstandard-bip32", "src\Dependencies\dotnetstandard-bip32\dotnetstandard-bip32\dotnetstandard-bip32.csproj", "{9AED1DE9-9FA2-4BDF-9121-4E05A168CF08}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HDWallet.Bitcoin", "src\HDWallet.Bitcoin\HDWallet.Bitcoin.csproj", "{898BD586-8721-454E-A7D7-DAB5D2AD14ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HDWallet.Bitcoin", "src\HDWallet.Bitcoin\HDWallet.Bitcoin.csproj", "{898BD586-8721-454E-A7D7-DAB5D2AD14ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HDWallet.Bitcoin.Tests", "test\HDWallet.Bitcoin.Tests\HDWallet.Bitcoin.Tests.csproj", "{467190A6-100E-44AD-B09F-C74104C53551}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HDWallet.Bitcoin.Tests", "test\HDWallet.Bitcoin.Tests\HDWallet.Bitcoin.Tests.csproj", "{467190A6-100E-44AD-B09F-C74104C53551}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HDWallet.Ethereum", "src\HDWallet.Ethereum\HDWallet.Ethereum.csproj", "{10250074-AD9C-411C-AA35-185A8B13F921}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HDWallet.Ethereum.Tests", "test\HDWallet.Ethereum.Tests\HDWallet.Ethereum.Tests.csproj", "{0ED3FC86-FF90-422F-BCBF-96BAF57E0BBE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -329,6 +333,30 @@ Global
 		{467190A6-100E-44AD-B09F-C74104C53551}.Release|x64.Build.0 = Release|Any CPU
 		{467190A6-100E-44AD-B09F-C74104C53551}.Release|x86.ActiveCfg = Release|Any CPU
 		{467190A6-100E-44AD-B09F-C74104C53551}.Release|x86.Build.0 = Release|Any CPU
+		{10250074-AD9C-411C-AA35-185A8B13F921}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10250074-AD9C-411C-AA35-185A8B13F921}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10250074-AD9C-411C-AA35-185A8B13F921}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{10250074-AD9C-411C-AA35-185A8B13F921}.Debug|x64.Build.0 = Debug|Any CPU
+		{10250074-AD9C-411C-AA35-185A8B13F921}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{10250074-AD9C-411C-AA35-185A8B13F921}.Debug|x86.Build.0 = Debug|Any CPU
+		{10250074-AD9C-411C-AA35-185A8B13F921}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10250074-AD9C-411C-AA35-185A8B13F921}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10250074-AD9C-411C-AA35-185A8B13F921}.Release|x64.ActiveCfg = Release|Any CPU
+		{10250074-AD9C-411C-AA35-185A8B13F921}.Release|x64.Build.0 = Release|Any CPU
+		{10250074-AD9C-411C-AA35-185A8B13F921}.Release|x86.ActiveCfg = Release|Any CPU
+		{10250074-AD9C-411C-AA35-185A8B13F921}.Release|x86.Build.0 = Release|Any CPU
+		{0ED3FC86-FF90-422F-BCBF-96BAF57E0BBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0ED3FC86-FF90-422F-BCBF-96BAF57E0BBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0ED3FC86-FF90-422F-BCBF-96BAF57E0BBE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0ED3FC86-FF90-422F-BCBF-96BAF57E0BBE}.Debug|x64.Build.0 = Debug|Any CPU
+		{0ED3FC86-FF90-422F-BCBF-96BAF57E0BBE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0ED3FC86-FF90-422F-BCBF-96BAF57E0BBE}.Debug|x86.Build.0 = Debug|Any CPU
+		{0ED3FC86-FF90-422F-BCBF-96BAF57E0BBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0ED3FC86-FF90-422F-BCBF-96BAF57E0BBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0ED3FC86-FF90-422F-BCBF-96BAF57E0BBE}.Release|x64.ActiveCfg = Release|Any CPU
+		{0ED3FC86-FF90-422F-BCBF-96BAF57E0BBE}.Release|x64.Build.0 = Release|Any CPU
+		{0ED3FC86-FF90-422F-BCBF-96BAF57E0BBE}.Release|x86.ActiveCfg = Release|Any CPU
+		{0ED3FC86-FF90-422F-BCBF-96BAF57E0BBE}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -358,6 +386,8 @@ Global
 		{9AED1DE9-9FA2-4BDF-9121-4E05A168CF08} = {60C95507-501B-4BA4-B2AF-804539AB3CEB}
 		{898BD586-8721-454E-A7D7-DAB5D2AD14ED} = {587DF704-BD3F-41FF-A468-289BB83BBEF7}
 		{467190A6-100E-44AD-B09F-C74104C53551} = {73CF8F5A-07F9-477C-8F47-507158E4C68C}
+		{10250074-AD9C-411C-AA35-185A8B13F921} = {587DF704-BD3F-41FF-A468-289BB83BBEF7}
+		{0ED3FC86-FF90-422F-BCBF-96BAF57E0BBE} = {73CF8F5A-07F9-477C-8F47-507158E4C68C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A8055563-076B-434F-9578-B8CAA10E458E}
