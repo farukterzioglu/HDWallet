@@ -10,8 +10,6 @@ namespace HDWallet.Ethereum
         //Referenced By: https://github.com/MetacoSA/NBitcoin/issues/565
         public string GenerateAddress(byte[] pubKeyBytes)
         {
-            var dd = EthECKey.GenerateKey().GetPubKey();
-
             var ETH_publickKey = new PubKey(pubKeyBytes);
             byte[] byte_ETH_publicKey = ETH_publickKey.Decompress().ToBytes();
 
