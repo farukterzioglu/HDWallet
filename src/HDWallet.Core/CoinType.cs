@@ -11,6 +11,7 @@ namespace HDWallet.Core
         Cardano = 1815,
         Tezos = 1729,
         Avalanche = 9000,
-        FileCoin = 461
+        FileCoin = 461,
+        Solana = 501
     }
 }
