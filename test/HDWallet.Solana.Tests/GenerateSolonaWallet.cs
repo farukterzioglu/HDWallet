@@ -42,7 +42,6 @@ namespace HDWallet.Solana.Tests
         {
         }
 
-        // Maybe correct
         [Test]
         public void ShouldGenerateFromPrivateKey()
         {
@@ -51,6 +50,7 @@ namespace HDWallet.Solana.Tests
             Assert.AreEqual(expected: "3fD58whN2KJaN9T4r5uE3ELFmzRW1dQNuszrmC6gnhx1", actual: wallet.Address);
 
             Console.WriteLine(wallet.Address);
+            Console.WriteLine(wallet.PublicKey.ToHexString());
             Console.WriteLine($"[{string.Join(", ", wallet.ExpandedPrivateKey)}]");
         }
 
@@ -67,10 +67,9 @@ namespace HDWallet.Solana.Tests
         [Test]
         public void ShouldGenerateAddressFromPubkeyBytes()
         {
-            var pubkey = "023fd9492685cf839427bfae951ef37d60b253b4b7bf7626abc9ec82bb69aa3d9a";
-            var addrCh = SimpleBase.Base58.Bitcoin.Encode(pubkey.FromHexToByteArray());
-            Console.WriteLine(addrCh);
-            // CK3UH5tLou7koGtaZtHGkGQyL9bNi3ejobJFuzL543sQ
+            var pubkey = "278117fc144c72340f67d0f2316e8386ceffbf2b2428c9c51fef7c597f1d426e";
+            var actualAddress = SimpleBase.Base58.Bitcoin.Encode(pubkey.FromHexToByteArray());
+            Assert.AreEqual("3fD58whN2KJaN9T4r5uE3ELFmzRW1dQNuszrmC6gnhx1", actualAddress);
         }
 
         [Test]
@@ -85,6 +84,7 @@ namespace HDWallet.Solana.Tests
             Console.WriteLine(wallet.PublicKey.ToHexString());
             Console.WriteLine(wallet.PrivateKey.ToHexString());
             Console.WriteLine(wallet.ExpandedPrivateKey.ToHexString());
+            Console.WriteLine($"[{string.Join(", ", wallet.ExpandedPrivateKey)}]");
         }
     }
 }
