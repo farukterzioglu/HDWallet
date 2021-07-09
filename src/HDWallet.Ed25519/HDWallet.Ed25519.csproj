@@ -21,15 +21,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+      <PackageReference Include="dotnetstandard-bip32" Version="1.0.0" />
       <PackageReference Include="Ed25519" Version="1.0.0" />
       <PackageReference Include="Nethereum.Web3" Version="3.8.0" />
       <PackageReference Include="NBitcoin.Secp256k1" Version="1.0.1" />
       <PackageReference Include="NBitcoin" Version="5.0.27" />
       <PackageReference Include="HDWallet.Core" Version="0.1.5" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Dependencies\dotnetstandard-bip32\dotnetstandard-bip32\dotnetstandard-bip32.csproj" />
   </ItemGroup>
 
 </Project>

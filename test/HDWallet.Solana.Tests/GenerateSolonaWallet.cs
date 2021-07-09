@@ -1,40 +1,9 @@
 using System;
 using HDWallet.Core;
-using HDWallet.Ed25519;
 using NUnit.Framework;
 
 namespace HDWallet.Solana.Tests
 {
-    public class SolanaHdWallet : HdWalletEd25519<SolanaWallet>, IHDWallet<SolanaWallet>
-    {
-        private static readonly HDWallet.Core.CoinPath _path = Purpose.Create(PurposeNumber.BIP44).Coin(CoinType.Solana);
-
-        public SolanaHdWallet(string seed) : base(seed, _path) {}
-        public SolanaHdWallet(string words, string seedPassword) : base(words, seedPassword, _path) {}
-    }
-    
-    public class SolanaAddressGenerator : IAddressGenerator
-    {
-        string IAddressGenerator.GenerateAddress(byte[] pubKeyBytes)
-        {
-            var addrCh = SimpleBase.Base58.Bitcoin.Encode(pubKeyBytes);
-            return addrCh;
-        }
-    }
-
-    public class SolanaWallet : Wallet, IWallet
-    {
-        public SolanaWallet(){}
-
-        public SolanaWallet(string privateKey) : base(privateKey) {}
-        public SolanaWallet(byte[] privateKey) : base(privateKey) {}
-
-        protected override IAddressGenerator GetAddressGenerator()
-        {
-            return new SolanaAddressGenerator();
-        }
-    }
-
     public class Tests
     {
         [SetUp]

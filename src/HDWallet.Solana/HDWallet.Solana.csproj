@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+
+    <Title></Title>
+    <Description></Description>
+    <Version>0.4.1</Version>
+
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/farukterzioglu/HDWallet</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/farukterzioglu/HDWallet</PackageProjectUrl>
+
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageTags>HDWallet;Polkadot;Blockchain;Ed25519</PackageTags>
+    <PackageId>HDWallet.Polkadot</PackageId>
+
+    <Authors>Emre Pehlivan</Authors>
+    <Company></Company>
+
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SimpleBase" Version="2.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HDWallet.Core\HDWallet.Core.csproj" />
+    <ProjectReference Include="..\HDWallet.Ed25519\HDWallet.Ed25519.csproj" />
+  </ItemGroup>
+
+</Project>
