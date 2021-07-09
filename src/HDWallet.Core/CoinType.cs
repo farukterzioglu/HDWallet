@@ -5,6 +5,7 @@ namespace HDWallet.Core
         Bitcoin = 0,
         BitcoinTestnet = 1,
         CoinType1 = 1,
+        Ethereum = 60,
         Tron = 195,
         Polkadot = 354,
         Kusama = 434,

@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <PackageTags>HDWallet;Ethereum</PackageTags>
+    <PackageId>HDWallet.Ethereum</PackageId>
+
+    <Authors>Turgut Kanceltik</Authors>
+    <Company></Company>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Base58Check" Version="0.2.0" />
+    <PackageReference Include="Konscious.Security.Cryptography.Blake2" Version="1.0.9" />
+    <PackageReference Include="Nethereum.HdWallet" Version="3.8.0" />
+    <PackageReference Include="Nethereum.Web3" Version="3.8.0" />
+    <PackageReference Include="NBitcoin" Version="5.0.33" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HDWallet.Core\HDWallet.Core.csproj" />
+    <ProjectReference Include="..\HDWallet.Secp256k1\HDWallet.Secp256k1.csproj" />
+  </ItemGroup>
+</Project>
