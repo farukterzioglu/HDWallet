@@ -5,15 +5,15 @@
 
     <Title></Title>
     <Description></Description>
-    <Version>0.4.1</Version>
+    <Version>0.0.1</Version>
 
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/farukterzioglu/HDWallet</RepositoryUrl>
     <PackageProjectUrl>https://github.com/farukterzioglu/HDWallet</PackageProjectUrl>
 
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageTags>HDWallet;Polkadot;Blockchain;Ed25519</PackageTags>
-    <PackageId>HDWallet.Polkadot</PackageId>
+    <PackageTags>HDWallet;Solana;Blockchain;Ed25519</PackageTags>
+    <PackageId>HDWallet.Solana</PackageId>
 
     <Authors>Emre Pehlivan</Authors>
     <Company></Company>
