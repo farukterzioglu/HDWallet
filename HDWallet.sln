@@ -59,6 +59,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HDWallet.Ethereum", "src\HD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HDWallet.Ethereum.Tests", "test\HDWallet.Ethereum.Tests\HDWallet.Ethereum.Tests.csproj", "{0ED3FC86-FF90-422F-BCBF-96BAF57E0BBE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HDWallet.Solana.Tests", "test\HDWallet.Solana.Tests\HDWallet.Solana.Tests.csproj", "{54013C36-4B3C-460F-A04A-D1C5D7C5FE55}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -357,6 +359,18 @@ Global
 		{0ED3FC86-FF90-422F-BCBF-96BAF57E0BBE}.Release|x64.Build.0 = Release|Any CPU
 		{0ED3FC86-FF90-422F-BCBF-96BAF57E0BBE}.Release|x86.ActiveCfg = Release|Any CPU
 		{0ED3FC86-FF90-422F-BCBF-96BAF57E0BBE}.Release|x86.Build.0 = Release|Any CPU
+		{54013C36-4B3C-460F-A04A-D1C5D7C5FE55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54013C36-4B3C-460F-A04A-D1C5D7C5FE55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54013C36-4B3C-460F-A04A-D1C5D7C5FE55}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{54013C36-4B3C-460F-A04A-D1C5D7C5FE55}.Debug|x64.Build.0 = Debug|Any CPU
+		{54013C36-4B3C-460F-A04A-D1C5D7C5FE55}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{54013C36-4B3C-460F-A04A-D1C5D7C5FE55}.Debug|x86.Build.0 = Debug|Any CPU
+		{54013C36-4B3C-460F-A04A-D1C5D7C5FE55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54013C36-4B3C-460F-A04A-D1C5D7C5FE55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54013C36-4B3C-460F-A04A-D1C5D7C5FE55}.Release|x64.ActiveCfg = Release|Any CPU
+		{54013C36-4B3C-460F-A04A-D1C5D7C5FE55}.Release|x64.Build.0 = Release|Any CPU
+		{54013C36-4B3C-460F-A04A-D1C5D7C5FE55}.Release|x86.ActiveCfg = Release|Any CPU
+		{54013C36-4B3C-460F-A04A-D1C5D7C5FE55}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -388,6 +402,7 @@ Global
 		{467190A6-100E-44AD-B09F-C74104C53551} = {73CF8F5A-07F9-477C-8F47-507158E4C68C}
 		{10250074-AD9C-411C-AA35-185A8B13F921} = {587DF704-BD3F-41FF-A468-289BB83BBEF7}
 		{0ED3FC86-FF90-422F-BCBF-96BAF57E0BBE} = {73CF8F5A-07F9-477C-8F47-507158E4C68C}
+		{54013C36-4B3C-460F-A04A-D1C5D7C5FE55} = {73CF8F5A-07F9-477C-8F47-507158E4C68C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A8055563-076B-434F-9578-B8CAA10E458E}
