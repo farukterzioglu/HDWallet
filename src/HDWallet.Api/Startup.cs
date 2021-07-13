@@ -1,24 +1,19 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using HDWallet.Avalanche;
 using HDWallet.Core;
 using HDWallet.Secp256k1;
 using HDWallet.Tron;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Microsoft.Extensions.PlatformAbstractions;
 using HDWallet.Polkadot;
@@ -34,7 +29,7 @@ namespace HDWallet.Api
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        private IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -66,6 +61,7 @@ namespace HDWallet.Api
 
             var settings = new Settings();
             Configuration.Bind(settings);
+            settings = OverrideSettingsWithArguments(settings);
             settings.Validate();
             services.AddSingleton<Settings>(settings);
 
@@ -110,6 +106,31 @@ namespace HDWallet.Api
             {
                 endpoints.MapControllers();
             });
+        }
+
+        private Settings OverrideSettingsWithArguments(Settings settings)
+        {
+            // add or override selected coins for swagger with program arguments
+            var argCoins = Environment.GetCommandLineArgs().FirstOrDefault(arg => arg.StartsWith("--coins="));
+            if (string.IsNullOrWhiteSpace(argCoins) || argCoins.Length == "--coins=".Length)
+            {
+                return settings;
+            }
+
+            var selectedCoins = argCoins["--coins=".Length..]?.Split(",", StringSplitOptions.RemoveEmptyEntries);
+            if (selectedCoins == null || selectedCoins.Length < 1)
+            {
+                return settings;
+            }
+
+            selectedCoins = Helper.GetEndpointFromCoinArgument(selectedCoins);
+            if (selectedCoins == null || selectedCoins.Length < 1)
+            {
+                return settings;
+            }
+
+            settings.SelectedCoinEndpoints = selectedCoins;
+            return settings;
         }
 
         static string XmlCommentsFilePath

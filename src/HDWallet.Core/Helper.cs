@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -42,6 +43,20 @@ namespace HDWallet.Core
             }
             return bytes;
         }
-        
+
+        public static string[] GetEndpointFromCoinArgument(string[] coinArgs)
+        {
+	        var endpointFilter = new List<string>();
+	        foreach (var arg in coinArgs)
+	        {
+		        var filter = CoinArguments.EndpointList.FirstOrDefault(coin => coin.Argument == arg);
+		        if (filter == null)
+		        {
+			        continue;
+		        }
+		        endpointFilter.Add(filter.EndpointFilter);
+	        }
+	        return endpointFilter.ToArray();
+        }
     }
 }
